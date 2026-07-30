@@ -1,0 +1,2 @@
+当前目录是obsidian的库目录，按照要求整理文献为obsidian笔记形式。文献库在D:\3D\Projects\Papers
+阅读docs中的文档

@@ -1,0 +1,227 @@
+{
+  "main": {
+    "id": "2ad941686f94c740",
+    "type": "split",
+    "children": [
+      {
+        "id": "a1da444f5739f67d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "894d3a9325d7ebcc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1e173e71590d7a3e",
+    "type": "split",
+    "children": [
+      {
+        "id": "4499cb29dc3f0061",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "71c017498fb30241",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "da725b95959a9ce2",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "8bf342b802d4ea8b",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 270.5
+  },
+  "right": {
+    "id": "04125d8898576adc",
+    "type": "split",
+    "children": [
+      {
+        "id": "66d8d4d14c9e73f8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b98e61702c31a6df",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "fe09451abf35e42c",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "8242723753defc2c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "52aae44eb53bb6f4",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "0d9bf3b389dcb355",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "894d3a9325d7ebcc",
+  "lastOpenFiles": [
+    "Literature/Multi-fidelity aerodynamic data analysis by using composite neural network.md",
+    "Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization.md",
+    "Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN.md",
+    "Literature/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design.md",
+    "Literature/High-dimensional efficient global optimization using both random and supervised embeddings.md",
+    "Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs.md",
+    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图9.png",
+    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图8.png",
+    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图7.png",
+    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图6.png",
+    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图4.png",
+    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图3.png",
+    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图1.png",
+    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings",
+    "Literature/SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates.md",
+    "Literature/assets/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs/论文中图9.png",
+    "Literature/assets/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs/论文中图8.png",
+    "Literature/assets/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs/论文中图7.png",
+    "Literature/assets/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs",
+    "Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning.md",
+    "Literature/Aerodynamic shape optimization of airfoils across rarefied to continuum regimes using deep reinforcement learning.md",
+    "Literature/assets/crossaero",
+    "Literature/Deformation-driven shape correspondence via shape recognition.md",
+    "docs/literature-organization.md",
+    "Literature/An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization.md",
+    "Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models.md",
+    "Literature/assets/ewa-conservative-mf",
+    "tmp/pdfs/ewa-conservative-mf",
+    "Literature/assets/multi-fidelity-composite-neural-network",
+    "tmp/pdfs/composite-neural-network",
+    "Literature/assets/advanced-uav-deep-learning-surrogate-models",
+    "Literature/assets/mfcnn-transfer-learning",
+    "Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method.md",
+    "OFAT.md",
+    "Literature/assets/ucav-adaptive-co-kriging",
+    "Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization.md",
+    "Literature/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework.md",
+    "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
+    "docs/pdf-figure-extraction.md",
+    "AGENTS.md",
+    "3D shape correspondence.md"
+  ]
+}
