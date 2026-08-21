@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning.md",
+                "file": "Literature/Global aerodynamic design optimization based on data dimensionality reduction.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning"
+              "title": "Global aerodynamic design optimization based on data dimensionality reduction"
             }
           }
         ]
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 270.5
+    "width": 270.5,
+    "collapsed": true
   },
   "right": {
     "id": "04125d8898576adc",
@@ -182,26 +183,33 @@
   },
   "active": "894d3a9325d7ebcc",
   "lastOpenFiles": [
+    "Literature/Aerodynamic Design via Control Theory.md",
+    "Literature/assets/Global aerodynamic design optimization based on data dimensionality reduction/论文中图7_新优化系统流程图.png",
+    "Literature/assets/Global aerodynamic design optimization based on data dimensionality reduction/论文中图30_ONERA_M6激波对比.png",
+    "Literature/assets/Global aerodynamic design optimization based on data dimensionality reduction/论文中图28_ONERA_M6优化收敛.png",
+    "Literature/assets/Global aerodynamic design optimization based on data dimensionality reduction/论文中图20_RAE2822优化收敛.png",
+    "Literature/assets/Global aerodynamic design optimization based on data dimensionality reduction/论文中图12_相似性度量加速残差收敛.png",
+    "Literature/assets/Global aerodynamic design optimization based on data dimensionality reduction/论文中图10_前10个POD模态.png",
+    "Literature/assets/Global aerodynamic design optimization based on data dimensionality reduction",
+    "Literature/Global aerodynamic design optimization based on data dimensionality reduction.md",
+    "Literature/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models.md",
+    "Literature/assets/Aerodynamic Design via Control Theory/论文中图2.png",
+    "Literature/assets/Aerodynamic Design via Control Theory/论文中图1.png",
+    "Literature/assets/Aerodynamic Design via Control Theory",
+    "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
+    "Literature/assets/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models/论文中图8_TCN去噪模块.png",
+    "Literature/assets/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models/论文中图7_条件反向去噪流程.png",
+    "Literature/assets/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models",
+    "Literature/High-dimensional efficient global optimization using both random and supervised embeddings.md",
+    "Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs.md",
+    "Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning.md",
     "Literature/Multi-fidelity aerodynamic data analysis by using composite neural network.md",
     "Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization.md",
     "Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN.md",
     "Literature/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design.md",
-    "Literature/High-dimensional efficient global optimization using both random and supervised embeddings.md",
-    "Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs.md",
-    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图9.png",
-    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图8.png",
-    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图7.png",
-    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图6.png",
-    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图4.png",
-    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图3.png",
-    "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings/论文中图1.png",
     "Literature/assets/High-dimensional efficient global optimization using both random and supervised embeddings",
     "Literature/SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates.md",
-    "Literature/assets/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs/论文中图9.png",
-    "Literature/assets/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs/论文中图8.png",
-    "Literature/assets/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs/论文中图7.png",
     "Literature/assets/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs",
-    "Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning.md",
     "Literature/Aerodynamic shape optimization of airfoils across rarefied to continuum regimes using deep reinforcement learning.md",
     "Literature/assets/crossaero",
     "Literature/Deformation-driven shape correspondence via shape recognition.md",
@@ -212,14 +220,10 @@
     "tmp/pdfs/ewa-conservative-mf",
     "Literature/assets/multi-fidelity-composite-neural-network",
     "tmp/pdfs/composite-neural-network",
-    "Literature/assets/advanced-uav-deep-learning-surrogate-models",
-    "Literature/assets/mfcnn-transfer-learning",
     "Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method.md",
     "OFAT.md",
-    "Literature/assets/ucav-adaptive-co-kriging",
     "Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization.md",
     "Literature/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework.md",
-    "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
     "docs/pdf-figure-extraction.md",
     "AGENTS.md",
     "3D shape correspondence.md"
