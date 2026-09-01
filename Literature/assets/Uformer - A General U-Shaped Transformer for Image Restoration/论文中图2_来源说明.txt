@@ -1,0 +1,4 @@
+该图为论文 Figure 2 的完整裁切版本，图像源来自公开论文评述页面缓存：
+https://assets.getliner.com/web/pseo/represent_1140a957-c6c4-4e05-8418-5a29776271dd.jpg
+
+由于当前会话中上传 PDF 的二进制文件没有挂载到可写沙箱，无法直接从原 PDF 导出 PNG；因此本包使用本地 SVG 外壳加载该公开的完整 Figure 2 图像。正文内容、图号和结构均以论文主文为准。
