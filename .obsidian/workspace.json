@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Literature/Scalable Diffusion Models with Transformers.md",
+                "file": "Literature/Transformer架构创新论文关联与项目设计参考.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Scalable Diffusion Models with Transformers"
+              "title": "Transformer架构创新论文关联与项目设计参考"
             }
           }
         ]
@@ -184,6 +184,15 @@
   },
   "active": "894d3a9325d7ebcc",
   "lastOpenFiles": [
+    "Literature/transformer/Perceiver IO.md",
+    "Literature/transformer/Scalable Diffusion Models with Transformers.md",
+    "Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks.md",
+    "Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model.md",
+    "Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles.md",
+    "Literature/transformer/Transolver.md",
+    "Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration.md",
+    "Literature/transformer/Unisolver.md",
+    "Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness.md",
     "Literature/Perceiver IO.md",
     "Literature/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model.md",
     "Literature/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles.md",
@@ -218,17 +227,8 @@
     "Literature/assets/Star-Transformer/Figure2.png",
     "Literature/assets/Star-Transformer/Figure1.png",
     "Literature/assets/Star-Transformer",
-    "Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization.md",
     "Literature/assets/ucav-adaptive-co-kriging/co-kriging-overview-p003.png",
     "Literature/assets/ucav-adaptive-co-kriging",
-    "Literature/assets/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design",
-    "Literature/High-dimensional efficient global optimization using both random and supervised embeddings.md",
-    "Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs.md",
-    "Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs.md",
-    "Literature/PaDGAN 与 PcDGAN：关系、差异与选择.md",
-    "Literature/Global aerodynamic design optimization based on data dimensionality reduction.md",
-    "Literature/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models.md",
-    "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
-    "Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning.md"
+    "Literature/assets/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design"
   ]
 }

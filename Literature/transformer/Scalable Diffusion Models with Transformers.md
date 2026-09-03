@@ -18,6 +18,9 @@ tags:
 > [!abstract] 原文摘要翻译
 > 本文探索了一类基于 Transformer 架构的新型扩散模型。作者训练图像的潜空间扩散模型，用一个作用于潜变量 patch 的 Transformer 替换常用的 U-Net 主干网络，并以一次前向传播的计算复杂度（Gflops）为尺度分析 Diffusion Transformer（DiT）的可扩展性。实验发现，无论通过增加 Transformer 的深度/宽度，还是通过增加输入 token 数，只要 DiT 的 Gflops 提升，其 Fréchet Inception Distance（FID，越低越好）都稳定下降。除具有良好的规模扩展性质外，最大的 DiT-XL/2 在 ImageNet 512×512 与 256×256 类别条件生成基准上超过此前的扩散模型，其中在 256×256 上达到 FID 2.27。
 
+> [!note] Obsidian 公式兼容性
+> 本笔记的行内公式统一使用单美元符号包围，独立公式统一使用双美元符号包围，以确保 Obsidian MathJax 正常识别。
+
 # 核心结论
 
 这篇论文最重要的结论不是“Transformer 也能做扩散”，而是：
@@ -65,17 +68,14 @@ z_0
 - **扩散去噪主干完全由 Transformer 替代 U-Net**；
 - Transformer 处理的不是原始像素，而是 VAE 潜变量切成的 patch token。
 
-![[assets/Scalable Diffusion Models with Transformers/论文中图3_DiT架构_重绘.png]]
-
-**论文中图3（按原图结构重绘）**展示了完整 DiT 管线及三类条件注入 block；论文最终使用 adaLN-Zero。
 
 # 3. 扩散模型基础
 
 ## 3.1 前向加噪
 
-Gaussian diffusion 的前向过程逐渐把真实样本 \(x_0\) 变成高斯噪声：
+Gaussian diffusion 的前向过程逐渐把真实样本 $x_0$ 变成高斯噪声：
 
-\[
+$$
 q(x_t|x_0)
 =
 \mathcal N
@@ -83,11 +83,11 @@ q(x_t|x_0)
 x_t;\sqrt{\bar{\alpha}_t}x_0,
 (1-\bar{\alpha}_t)I
 \right)
-\]
+$$
 
-利用重参数化，可以直接从 \(x_0\) 得到任意时刻的 \(x_t\)：
+利用重参数化，可以直接从 $x_0$ 得到任意时刻的 $x_t$：
 
-\[
+$$
 x_t
 =
 \sqrt{\bar{\alpha}_t}x_0
@@ -95,13 +95,13 @@ x_t
 \sqrt{1-\bar{\alpha}_t}\epsilon_t,
 \qquad
 \epsilon_t\sim\mathcal N(0,I)
-\]
+$$
 
 ## 3.2 反向过程
 
 模型学习：
 
-\[
+$$
 p_\theta(x_{t-1}|x_t)
 =
 \mathcal N
@@ -109,52 +109,52 @@ p_\theta(x_{t-1}|x_t)
 \mu_\theta(x_t),
 \Sigma_\theta(x_t)
 \right)
-\]
+$$
 
-通常把均值预测改写为噪声预测网络 \(\epsilon_\theta\)，用简单均方误差训练：
+通常把均值预测改写为噪声预测网络 $\epsilon_\theta$，用简单均方误差训练：
 
-\[
+$$
 L_{\mathrm{simple}}
 =
 \left\|
 \epsilon_\theta(x_t)-\epsilon_t
 \right\|_2^2
-\]
+$$
 
 本文沿用 Improved DDPM / ADM 的做法：
 
-- \(\epsilon_\theta\) 用 \(L_{\mathrm{simple}}\) 训练；
-- 反向过程的协方差 \(\Sigma_\theta\) 仍使用完整变分目标中的 KL 项训练。
+- $\epsilon_\theta$ 用 $L_{\mathrm{simple}}$ 训练；
+- 反向过程的协方差 $\Sigma_\theta$ 仍使用完整变分目标中的 KL 项训练。
 
 因此 DiT 最终同时输出：
 
-- 噪声预测 \(\hat\epsilon\)
-- 对角协方差预测 \(\hat\Sigma\)
+- 噪声预测 $\hat\epsilon$
+- 对角协方差预测 $\hat\Sigma$
 
 # 4. 为什么在潜空间中做扩散
 
 直接在高分辨率像素空间上运行 Transformer 会产生极长序列和很大的计算量。本文沿用 LDM 的两阶段思路：
 
-\[
+$$
 z=E(x),\qquad x=D(z)
-\]
+$$
 
 其中：
 
-- \(E\)：预训练 VAE 编码器；
-- \(D\)：预训练 VAE 解码器；
+- $E$：预训练 VAE 编码器；
+- $D$：预训练 VAE 解码器；
 - 训练 DiT 时 VAE **冻结**；
-- DiT 学的是 \(z\) 的扩散分布，而不是 \(x\) 的像素分布。
+- DiT 学的是 $z$ 的扩散分布，而不是 $x$ 的像素分布。
 
 论文直接使用 Stable Diffusion 的预训练 VAE，其下采样倍率为 8：
 
-\[
+$$
 256\times256\times3
 \rightarrow
 32\times32\times4
-\]
+$$
 
-因此 256×256 图像对应的 DiT 空间输入为 \(32\times32\times4\)。
+因此 256×256 图像对应的 DiT 空间输入为 $32\times32\times4$。
 
 > [!important]
 > DiT 并不是“完全取消卷积”。论文取消的是 **扩散模型去噪主干中的 U-Net**；图像压缩/解码仍使用现成的卷积 VAE。
@@ -163,31 +163,28 @@ z=E(x),\qquad x=D(z)
 
 设潜变量空间尺寸为：
 
-\[
+$$
 I\times I\times C
-\]
+$$
 
-选择 patch 大小 \(p\times p\)，每个 patch 经线性映射得到一个 \(d\) 维 token，则 token 数：
+选择 patch 大小 $p\times p$，每个 patch 经线性映射得到一个 $d$ 维 token，则 token 数：
 
-\[
+$$
 T=\left(\frac{I}{p}\right)^2
-\]
+$$
 
 随后添加标准 ViT 的正弦-余弦位置编码。
 
-![[assets/Scalable Diffusion Models with Transformers/论文中图4_Patchify_重绘.png]]
 
-**论文中图4（按原图结构重绘）**强调：patch size 是 DiT 的一个核心 scaling 旋钮。
+对于 256×256 图像，VAE latent 的 $I=32$：
 
-对于 256×256 图像，VAE latent 的 \(I=32\)：
-
-| patch size \(p\) | token 数 \(T=(32/p)^2\) |
+| patch size $p$ | token 数 $T=(32/p)^2$ |
 |---:|---:|
 | 8 | 16 |
 | 4 | 64 |
 | 2 | 256 |
 
-当 \(p\) 减半时，token 数增加到 4 倍，因此 Transformer 计算量显著增加；但 patch size 的变化对参数量几乎没有影响。
+当 $p$ 减半时，token 数增加到 4 倍，因此 Transformer 计算量显著增加；但 patch size 的变化对参数量几乎没有影响。
 
 这给论文提供了一个非常干净的实验变量：
 
@@ -195,10 +192,10 @@ T=\left(\frac{I}{p}\right)^2
 
 # 6. 条件信息：timestep 与 class label
 
-DiT 是类别条件扩散模型。每次前向传播除了输入带噪 latent \(z_t\)，还输入：
+DiT 是类别条件扩散模型。每次前向传播除了输入带噪 latent $z_t$，还输入：
 
-- diffusion timestep \(t\)
-- ImageNet class label \(c\)
+- diffusion timestep $t$
+- ImageNet class label $c$
 
 二者先分别映射到与 hidden dimension 相同的向量，然后组合为条件表示。
 
@@ -228,7 +225,7 @@ DiT 是类别条件扩散模型。每次前向传播除了输入带噪 latent \(
 
 ## 6.2 Cross-attention conditioning
 
-将 \(t\) 和 \(c\) 的 embedding 组成长度为 2 的条件序列，在 self-attention 后增加 multi-head cross-attention：
+将 $t$ 和 $c$ 的 embedding 组成长度为 2 的条件序列，在 self-attention 后增加 multi-head cross-attention：
 
 ```text
 image tokens
@@ -241,35 +238,108 @@ image tokens
 
 ## 6.3 adaLN：Adaptive Layer Normalization
 
-标准 Layer Normalization（LayerNorm）通常学习固定的逐维仿射参数。adaLN 则让这些 scale/shift 参数由条件信息动态产生：
+你的理解可以作为 adaLN 的核心直觉：**用一个可学习的条件映射网络，把条件向量映射成 scale 和 shift，再直接调制每个 token 的 LayerNorm 输出。**
 
-\[
-(\gamma,\beta)=f(t,c)
-\]
+不过“两个参数”更准确地说是 **两组逐维参数向量**，而不是两个标量。设 token 序列为：
 
-对每个 token 的归一化结果做条件调制：
+$$
+X\in\mathbb{R}^{T\times d}
+$$
 
-\[
-\operatorname{adaLN}(x;c)
+其中 $T$ 为 token 数，$d$ 为 hidden dimension。先做 Layer Normalization：
+
+$$
+\tilde X=\operatorname{LN}(X)
+$$
+
+将 diffusion timestep embedding 与 class embedding 合并为条件向量：
+
+$$
+c=t_{\mathrm{emb}}+y_{\mathrm{emb}}
+$$
+
+再用可学习的条件映射网络产生 shift 与 scale：
+
+$$
+[\beta(c),\gamma(c)]=f_{\mathrm{cond}}(c)
+$$
+
+其中：
+
+$$
+\beta(c),\gamma(c)\in\mathbb{R}^{d}
+$$
+
+然后对所有 token 的归一化结果逐 hidden-channel 调制：
+
+$$
+\operatorname{adaLN}(X;c)
 =
-\gamma(c)\odot \operatorname{LN}(x)+\beta(c)
-\]
+\tilde X\odot\left(1+\gamma(c)\right)+\beta(c)
+$$
 
-因此 \(t\) 和类别信息不必成为 token，也不需要 cross-attention，而是直接改变每一层中 hidden feature 的归一化后表示。
+这里 $\beta$ 是 shift，$\gamma$ 是 scale。$\beta,\gamma$ 在 token 维上广播，所以同一样本中的所有 token 使用同一组条件向量，但每个 hidden channel 都可以有不同的 scale/shift；不同样本因为条件 $c$ 不同，会得到不同的调制向量。
 
-论文指出：
+因此 adaLN 可以概括为：
 
-- adaLN 新增 Gflops 最少；
-- 它对所有 token 使用同一组条件调制函数；
-- 计算效率优于 cross-attention。
+```text
+条件 c
+  ↓
+可学习条件映射网络
+  ↓
+scale γ(c), shift β(c)
+  ↓
+LayerNorm(token)
+  ↓
+逐 hidden-channel affine modulation
+  ↓
+Attention / MLP
+```
+
+> [!important] 与普通 LayerNorm 的区别
+> 普通 LayerNorm 的仿射参数在训练完成后是固定参数；adaLN 的仿射参数由当前样本的条件动态生成，因此归一化后的 token 表示会随 timestep、类别等条件改变。
+
+论文正文的表述是：不直接学习固定的逐维 scale/shift，而是从 timestep 与 class label embedding 的和回归这些参数。论文还指出，adaLN 在比较的条件注入方案中新增 Gflops 最少，并且它对所有 token 应用同一条件函数。
+
+### 6.3.1 DiT 官方实现中的具体形式
+
+论文层面可以概括成“条件 $\rightarrow$ scale/shift”。作者官方 PyTorch 实现更具体：DiT block 的条件调制器是 `SiLU + Linear`，而不是一个很深的 MLP。输入为：
+
+$$
+c=t_{\mathrm{emb}}+y_{\mathrm{emb}}
+$$
+
+对于 **adaLN-Zero**，该条件调制器一次输出六组 $d$ 维向量：
+
+$$
+\left[
+\beta_{\mathrm{msa}},
+\gamma_{\mathrm{msa}},
+\alpha_{\mathrm{msa}},
+\beta_{\mathrm{mlp}},
+\gamma_{\mathrm{mlp}},
+\alpha_{\mathrm{mlp}}
+\right]
+=
+f_{\mathrm{cond}}(c)
+$$
+
+其中两组 $\beta,\gamma$ 分别调制 Multi-Head Self-Attention（MSA，多头自注意力）和 MLP 前的 LayerNorm 输出；两组 $\alpha$ 则分别门控两条残差分支。
+
+官方实现中的 LayerNorm 使用 `elementwise_affine=False`，即关闭 LayerNorm 自己固定的逐维 affine 参数。因此，条件网络产生的 scale/shift 就成为主要的仿射调制来源。
+
+换句话说：
+
+- **vanilla adaLN**：condition-to-affine mapping；
+- **adaLN-Zero**：condition-to-affine mapping + condition-to-residual-gate mapping。
 
 # 7. 核心创新：adaLN-Zero
 
-adaLN-Zero 在 adaLN 基础上进一步加入残差分支的逐维门控参数 \(\alpha\)。
+adaLN-Zero 在 adaLN 基础上进一步加入残差分支的逐维门控参数 $\alpha$。
 
 概念上，一个 block 可以写成：
 
-\[
+$$
 h
 =
 x+
@@ -278,9 +348,9 @@ x+
 \left(
 \operatorname{adaLN}_1(x;c)
 \right)
-\]
+$$
 
-\[
+$$
 x'
 =
 h+
@@ -289,49 +359,52 @@ h+
 \left(
 \operatorname{adaLN}_2(h;c)
 \right)
-\]
+$$
 
 其中：
 
 - MSA = Multi-Head Self-Attention（多头自注意力）
 - MLP = Multi-Layer Perceptron（多层感知机 / pointwise feed-forward）
-- \(\gamma_1,\beta_1,\alpha_1\) 控制注意力支路
-- \(\gamma_2,\beta_2,\alpha_2\) 控制前馈支路
+- $\gamma_1,\beta_1,\alpha_1$ 控制注意力支路
+- $\gamma_2,\beta_2,\alpha_2$ 控制前馈支路
 
-作者把生成 \(\alpha\) 的输出初始化为 0，使训练开始时：
+作者把生成 $\alpha$ 的输出初始化为 0，使训练开始时：
 
-\[
+$$
 x' \approx x
-\]
+$$
 
 即整个 DiT block 初始接近恒等映射。这借鉴了 ResNet 和 diffusion U-Net 中“将残差分支末端初始化为 0”的稳定训练策略。
 
 ## 7.1 官方代码实现补充
 
+> [!note] 来源区分
+> 本小节的结构思想来自论文；`SiLU + Linear`、`elementwise_affine=False`、六路参数输出与具体 zero initialization 细节来自作者官方 PyTorch 实现。
+
 论文正文只给出结构层面的描述。联网核查作者官方实现后，具体形式为：
 
-\[
+$$
 c=t_{\mathrm{emb}}+y_{\mathrm{emb}}
-\]
+$$
 
-一个 `SiLU + Linear(d, 6d)` 从条件向量产生六组 \(d\) 维参数：
+一个 `SiLU + Linear(d, 6d)` 从条件向量产生六组 $d$ 维参数：
 
-\[
+$$
 (\beta_{\text{msa}},\gamma_{\text{msa}},\alpha_{\text{msa}},
 \beta_{\text{mlp}},\gamma_{\text{mlp}},\alpha_{\text{mlp}})
-\]
+$$
 
 官方实现的调制函数是：
 
-\[
+$$
 \operatorname{modulate}(x,\beta,\gamma)
 =
 x\odot(1+\gamma)+\beta
-\]
+$$
 
 因此 block 的实际结构可写为：
 
-\[
+$$
 x
 \leftarrow
 x+
@@ -342,9 +415,9 @@ x+
 \operatorname{LN}(x)\odot(1+\gamma_{\text{msa}})
 +\beta_{\text{msa}}
 \right)
-\]
+$$
 
-\[
+$$
 x
 \leftarrow
 x+
@@ -355,18 +428,18 @@ x+
 \operatorname{LN}(x)\odot(1+\gamma_{\text{mlp}})
 +\beta_{\text{mlp}}
 \right)
-\]
+$$
 
-官方代码进一步把各 DiT block 中产生调制参数的线性层初始化为 0，所以训练起点不只 residual gate 为 0，而是整个 adaLN 调制层初始输出均为 0。
+官方代码把每个 DiT block 的 `adaLN_modulation` 最后一层 Linear 的权重和 bias 都初始化为 0，因此训练开始时六组调制向量均为 0。此时两条 residual gate 为 0，残差更新为 0，所以整个 block 初始表现为恒等映射；同时 scale/shift 也从零调制开始。
 
 > [!note] 概念来源
 > adaLN 的“条件生成逐通道 affine 参数”与 FiLM（Feature-wise Linear Modulation，特征维线性调制）的思想直接相通。FiLM 的核心就是由条件输入产生 feature-wise scale 与 shift；DiT 则把这种条件仿射调制放在 Transformer 的 LayerNorm 之后，并额外加入 residual gate。
 
 # 8. Transformer 主干尺寸
 
-作者沿用 ViT 的 scaling 方式，同时增加深度 \(N\)、隐藏维度 \(d\) 与 attention head 数。
+作者沿用 ViT 的 scaling 方式，同时增加深度 $N$、隐藏维度 $d$ 与 attention head 数。
 
-| 模型 | Block 数 \(N\) | hidden size \(d\) | heads | Gflops（\(I=32,p=4\)） |
+| 模型 | Block 数 $N$ | hidden size $d$ | heads | Gflops（$I=32,p=4$） |
 |---|---:|---:|---:|---:|
 | DiT-S | 12 | 384 | 6 | 1.4 |
 | DiT-B | 12 | 768 | 12 | 5.6 |
@@ -375,13 +448,13 @@ x+
 
 完整设计空间为：
 
-\[
+$$
 \text{model size}\in\{S,B,L,XL\}
-\]
+$$
 
-\[
+$$
 p\in\{8,4,2\}
-\]
+$$
 
 从而形成 **12 个规模不同的 DiT 模型**。
 
@@ -400,32 +473,32 @@ p\in\{8,4,2\}
 2. 对每个 token 做线性映射；
 3. 每个 token 输出：
 
-\[
+$$
 p\times p\times 2C
-\]
+$$
 
-其中 \(2C\) 对应：
+其中 $2C$ 对应：
 
-- \(C\) 个噪声预测通道；
-- \(C\) 个协方差预测通道。
+- $C$ 个噪声预测通道；
+- $C$ 个协方差预测通道。
 
 4. 最后执行 unpatchify / reshape，恢复空间布局。
 
-因此若输入 latent 是 \(32\times32\times4\)，最终得到：
+因此若输入 latent 是 $32\times32\times4$，最终得到：
 
-- \(\hat\epsilon:32\times32\times4\)
-- \(\hat\Sigma:32\times32\times4\)
+- $\hat\epsilon:32\times32\times4$
+- $\hat\Sigma:32\times32\times4$
 
 # 10. Classifier-Free Guidance（CFG）
 
 类别条件模型在训练时随机丢弃 class condition，并用一个可学习的 null embedding 代替，使同一模型同时学会：
 
-- conditional prediction：\(\epsilon_\theta(x_t,c)\)
-- unconditional prediction：\(\epsilon_\theta(x_t,\varnothing)\)
+- conditional prediction：$\epsilon_\theta(x_t,c)$
+- unconditional prediction：$\epsilon_\theta(x_t,\varnothing)$
 
 采样时组合二者：
 
-\[
+$$
 \hat{\epsilon}_\theta(x_t,c)
 =
 \epsilon_\theta(x_t,\varnothing)
@@ -436,13 +509,13 @@ s
 -
 \epsilon_\theta(x_t,\varnothing)
 \right]
-\]
+$$
 
-其中 \(s>1\) 是 guidance scale。
+其中 $s>1$ 是 guidance scale。
 
 直观上：
 
-- \(s\) 较大：更强地朝条件类别移动，通常提高样本保真度/精确率；
+- $s$ 较大：更强地朝条件类别移动，通常提高样本保真度/精确率；
 - 但可能牺牲多样性/召回率。
 
 本文的结果也清楚显示这一 trade-off。
@@ -462,8 +535,8 @@ s
 使用 Stable Diffusion 的预训练 VAE：
 
 - 下采样倍率：8
-- 256×256 RGB → \(32\times32\times4\)
-- 512×512 RGB → \(64\times64\times4\)
+- 256×256 RGB → $32\times32\times4$
+- 512×512 RGB → $64\times64\times4$
 
 VAE 在 DiT 训练过程中冻结。
 
@@ -472,7 +545,7 @@ VAE 在 DiT 训练过程中冻结。
 所有模型统一使用：
 
 - AdamW
-- learning rate：\(1\times10^{-4}\)
+- learning rate：$1\times10^{-4}$
 - constant learning rate
 - weight decay：0
 - batch size：256
@@ -488,9 +561,9 @@ VAE 在 DiT 训练过程中冻结。
 
 沿用 ADM：
 
-- \(t_{\max}=1000\)
+- $t_{\max}=1000$
 - linear variance schedule
-- variance 从 \(1\times10^{-4}\) 到 \(2\times10^{-2}\)
+- variance 从 $1\times10^{-4}$ 到 $2\times10^{-2}$
 - 使用 ADM 的 covariance parameterization
 - timestep 与 label embedding 方法也沿用 ADM
 
@@ -522,7 +595,7 @@ VAE 在 DiT 训练过程中冻结。
 
 | 条件注入 | 约 Gflops | 主要特点 |
 |---|---:|---|
-| In-context | 119.4 | 把 \(t,c\) 作为 token |
+| In-context | 119.4 | 把 $t,c$ 作为 token |
 | Cross-attention | 137.6 | 额外 cross-attention |
 | adaLN | 118.6 | 条件生成 LayerNorm scale/shift |
 | adaLN-Zero | 118.6 | adaLN + residual gate + zero initialization |
@@ -540,9 +613,9 @@ VAE 在 DiT 训练过程中冻结。
 
 作者训练 12 个模型：
 
-\[
+$$
 \{S,B,L,XL\}\times\{p=8,4,2\}
-\]
+$$
 
 并从两个方向增加计算量。
 
@@ -558,7 +631,7 @@ VAE 在 DiT 训练过程中冻结。
 
 ## 13.2 固定模型尺寸，减小 patch size
 
-例如固定 XL，只把 \(p\) 从 8 → 4 → 2。
+例如固定 XL，只把 $p$ 从 8 → 4 → 2。
 
 此时：
 
@@ -575,9 +648,9 @@ VAE 在 DiT 训练过程中冻结。
 
 论文图8把 12 个模型在 400K step 时的 FID-50K 对 forward Gflops 作图，得到相关系数：
 
-\[
+$$
 \rho\approx -0.93
-\]
+$$
 
 即 Gflops 越高，FID 越低。
 
@@ -592,7 +665,7 @@ VAE 在 DiT 训练过程中冻结。
 
 作者进一步估计总训练计算量：
 
-\[
+$$
 \text{training compute}
 \approx
 \text{model Gflops}
@@ -601,7 +674,7 @@ VAE 在 DiT 训练过程中冻结。
 \times
 \text{training steps}
 \times 3
-\]
+$$
 
 其中乘 3 是近似认为 backward pass 约为 forward pass 的两倍。
 
@@ -636,23 +709,23 @@ VAE 在 DiT 训练过程中冻结。
 
 512×512 图像经 VAE 后：
 
-\[
+$$
 64\times64\times4
-\]
+$$
 
 DiT-XL/2 的 patch size 为 2，因此：
 
-\[
+$$
 T=(64/2)^2=1024
-\]
+$$
 
 即每次前向传播处理 **1024 个 latent tokens**。
 
 模型 forward compute：
 
-\[
+$$
 524.6\ \text{Gflops}
-\]
+$$
 
 训练 3M iterations，超参数与 256 模型保持一致。
 
@@ -678,9 +751,9 @@ T=(64/2)^2=1024
 
 他们对 12 个 DiT 使用：
 
-\[
+$$
 [16,32,64,128,256,1000]
-\]
+$$
 
 个 sampling steps。
 
@@ -758,13 +831,13 @@ DiT-XL/2 在当时的 class-conditional ImageNet 256/512 生成任务上达到�
 
 FiLM（Feature-wise Linear Modulation）提出了一般性的条件调制：
 
-\[
+$$
 \operatorname{FiLM}(F|c)
 =
 \gamma(c)\odot F+\beta(c)
-\]
+$$
 
-即条件 \(c\) 不一定需要和主特征做 attention，而可以直接产生每个 feature channel 的 affine 参数。
+即条件 $c$ 不一定需要和主特征做 attention，而可以直接产生每个 feature channel 的 affine 参数。
 
 DiT 的 adaLN 可以理解为：
 
@@ -779,7 +852,7 @@ LayerNorm(x)
 Attention / MLP
 ```
 
-adaLN-Zero 又进一步加入 residual gate \(\alpha\)。
+adaLN-Zero 又进一步加入 residual gate $\alpha$。
 
 联网核查来源：Perez et al., *FiLM: Visual Reasoning with a General Conditioning Layer*, AAAI 2018, DOI 10.1609/aaai.v32i1.11671；以及 DiT 作者官方 `models.py`。
 
@@ -789,15 +862,15 @@ adaLN-Zero 又进一步加入 residual gate \(\alpha\)。
 
 adaLN-Zero 让：
 
-\[
+$$
 \alpha_{\text{msa}}=\alpha_{\text{mlp}}=0
-\]
+$$
 
 使初始 block 近似：
 
-\[
+$$
 f(x)=x
-\]
+$$
 
 因此深层网络从“恒等映射 + 逐渐学会残差修正”的状态开始。
 
@@ -812,11 +885,11 @@ f(x)=x
 
 Classifier-Free Guidance 不需要额外分类器。它让一个模型同时学 conditional 与 unconditional score，然后在采样时沿：
 
-\[
+$$
 \epsilon_\theta(x_t,c)
 -
 \epsilon_\theta(x_t,\varnothing)
-\]
+$$
 
 这个“条件方向”外推。
 
@@ -903,14 +976,14 @@ ImageNet 256/512 达到当时扩散模型 SOTA
 
 > [!summary]
 > - 输入不是 RGB，而是冻结 VAE 产生的 latent。
-> - 256×256 图像对应 \(32\times32\times4\) latent。
-> - Patchify 后 token 数 \(T=(I/p)^2\)。
+> - 256×256 图像对应 $32\times32\times4$ latent。
+> - Patchify 后 token 数 $T=(I/p)^2$。
 > - timestep embedding 与 class embedding 相加形成条件向量。
 > - 最优 DiT block 使用 adaLN-Zero。
 > - 条件向量在每个 block 中生成两套 scale、shift、gate。
 > - residual gate zero initialization 使 block 初始近似 identity。
-> - 输出层把每个 token 映射为 \(p\times p\times2C\)，再 unpatchify。
-> - \(2C\) 分别对应 noise 与 learned covariance。
+> - 输出层把每个 token 映射为 $p\times p\times2C$，再 unpatchify。
+> - $2C$ 分别对应 noise 与 learned covariance。
 > - 模型设计空间为 S/B/L/XL × patch 8/4/2。
 > - Gflops 比参数量更能解释性能 scaling。
 > - 增大 model compute 比单纯增加 sampling steps 更有效。
