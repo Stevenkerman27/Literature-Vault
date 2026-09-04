@@ -64,6 +64,9 @@ z_0
 
 也就是说：
 
+> [!important] Patchify 的对象
+> DiT Patchify 的对象是 **VAE 编码后的 latent feature map，而不是原始 RGB 像素**。例如 256×256×3 图像先经 VAE Encoder 变成 32×32×4 latent，再把这个 latent 切成 patch tokens。
+
 - **VAE 仍是卷积网络**，负责图像空间和低分辨率潜空间之间的压缩/解码；
 - **扩散去噪主干完全由 Transformer 替代 U-Net**；
 - Transformer 处理的不是原始像素，而是 VAE 潜变量切成的 patch token。
@@ -203,113 +206,699 @@ DiT 是类别条件扩散模型。每次前向传播除了输入带噪 latent $z
 
 ## 6.1 In-context conditioning
 
-将 timestep embedding 和 class embedding 作为两个额外 token，直接拼接到图像 token 序列：
+In-context conditioning 是四种条件注入方式中最接近“把条件也当作普通 token”的方法。
+
+设 Patchify 后得到 $T$ 个 latent tokens：
+
+$$
+X=[x_1,x_2,\ldots,x_T],
+\qquad
+x_i\in\mathbb{R}^{d}
+$$
+
+timestep $t$ 和 class label $c$ 分别被嵌入为：
+
+$$
+e_t,e_c\in\mathbb{R}^{d}
+$$
+
+然后直接拼到 token 序列：
+
+$$
+Z=
+[x_1,x_2,\ldots,x_T,e_t,e_c]
+\in
+\mathbb{R}^{(T+2)\times d}
+$$
+
+接下来不需要额外的条件模块，直接使用标准 Transformer Self-Attention：
+
+$$
+Q=ZW_Q,\qquad
+K=ZW_K,\qquad
+V=ZW_V
+$$
+
+$$
+\operatorname{SelfAttn}(Z)
+=
+\operatorname{softmax}
+\left(
+\frac{QK^\top}{\sqrt{d_k}}
+\right)V
+$$
+
+因此 image token、timestep token、class token 都处于**同一个 self-attention 图**中。理论上同时存在：
+
+| Query 来源 | Key/Value 来源 | 含义 |
+|---|---|---|
+| image token | image token | 图像 token 之间交互 |
+| image token | condition token | 图像 token 读取条件 |
+| condition token | image token | 条件 token 读取图像 |
+| condition token | condition token | 条件之间交互 |
+
+也就是说，条件 token 与 latent token 在结构上没有角色区分。论文对此的描述是：把 $t$、$c$ 当作两个额外 token，并“treat them no differently from the image tokens”。
+
+最后一个 DiT block 后，把两个条件 token 删除，只保留原来的 $T$ 个 latent tokens 用于输出噪声和协方差预测。
+
+### 6.1.1 直观理解
+
+可以把 in-context conditioning 理解为：
 
 ```text
-[z₁, z₂, ..., z_T, token_t, token_c]
+latent token 1 ─┐
+latent token 2 ─┤
+...             ├─ 拼成同一个序列 ─→ Self-Attention ─→ ...
+latent token T ─┤
+timestep token ─┤
+class token ────┘
 ```
 
-然后完全使用标准 ViT block。
+其优点是几乎不改变标准 ViT block，只增加两个 token，因此新增计算量很小。
 
-最后一个 block 后再删除两个条件 token。
+缺点是：**模型没有显式区分“主体 token”和“条件 token”的角色**，条件信息需要通过同一套 self-attention 权重间接传播到 latent tokens。论文实验中该方法表现最差。
 
-**优点：**
-
-- 几乎不改 Transformer；
-- 新增计算量很小。
-
-**缺点：**
-
-- 实验性能最差；
-- 条件需要通过 self-attention 间接影响图像 token。
+---
 
 ## 6.2 Cross-attention conditioning
 
-将 $t$ 和 $c$ 的 embedding 组成长度为 2 的条件序列，在 self-attention 后增加 multi-head cross-attention：
+Cross-attention conditioning 与 in-context conditioning 的本质区别是：
 
-```text
-image tokens
-   ↓ self-attention
-   ↓ cross-attention ← [t, c]
-   ↓ MLP
-```
+> **条件仍然被表示成 token，但条件 token 不再与 latent tokens 拼成同一个序列，而是作为独立的 Key/Value memory；latent tokens 作为 Query 主动读取条件。**
 
-这是更显式的条件交互，但会给模型增加约 **15% Gflops**，是论文比较的方法中额外计算量最大的。
-
-## 6.3 adaLN：Adaptive Layer Normalization
-
-你的理解可以作为 adaLN 的核心直觉：**用一个可学习的条件映射网络，把条件向量映射成 scale 和 shift，再直接调制每个 token 的 LayerNorm 输出。**
-
-不过“两个参数”更准确地说是 **两组逐维参数向量**，而不是两个标量。设 token 序列为：
+设 latent token 序列为：
 
 $$
 X\in\mathbb{R}^{T\times d}
 $$
 
-其中 $T$ 为 token 数，$d$ 为 hidden dimension。先做 Layer Normalization：
+条件序列为：
+
+$$
+C=[e_t,e_c]
+\in
+\mathbb{R}^{2\times d}
+$$
+
+其中 $e_t$ 是 timestep embedding，$e_c$ 是 class embedding。
+
+DiT 的 cross-attention block 先对 latent tokens 做普通 self-attention：
+
+$$
+X_1
+=
+X+
+\operatorname{SelfAttn}
+\left(
+\operatorname{LN}(X)
+\right)
+$$
+
+这一层只负责 latent token 之间的信息交换。
+
+随后插入额外的 Multi-Head Cross-Attention（多头交叉注意力）：
+
+$$
+Q=X_1W_Q
+$$
+
+$$
+K=CW_K,\qquad
+V=CW_V
+$$
+
+然后：
+
+$$
+\operatorname{CrossAttn}(X_1,C)
+=
+\operatorname{softmax}
+\left(
+\frac{QK^\top}{\sqrt{d_k}}
+\right)V
+$$
+
+并通过残差连接更新 latent tokens：
+
+$$
+X_2
+=
+X_1+
+\operatorname{CrossAttn}(X_1,C)
+$$
+
+随后再进入 MLP。
+
+### 6.2.1 Cross-attention 中究竟“谁看谁”
+
+这里最重要的是：
+
+$$
+Q\leftarrow \text{latent tokens}
+$$
+
+$$
+K,V\leftarrow \text{condition tokens}
+$$
+
+所以是：
+
+```text
+latent token ── Query ─────┐
+                           ├─ Cross-Attention → conditioned latent token
+[timestep, class] ─ K,V ───┘
+```
+
+每个 latent token 都会计算自己对 timestep token 和 class token 的注意力权重。
+
+如果某个 latent token $x_i$ 的 Query 为 $q_i$，两个条件 token 的 Key 分别为 $k_t,k_c$，那么该 token 对条件的注意力权重为：
+
+$$
+[a_{i,t},a_{i,c}]
+=
+\operatorname{softmax}
+\left(
+\frac{
+[q_i^\top k_t,\ q_i^\top k_c]
+}{
+\sqrt{d_k}
+}
+\right)
+$$
+
+最终读取的条件信息是：
+
+$$
+r_i
+=
+a_{i,t}v_t
++
+a_{i,c}v_c
+$$
+
+因此不同 latent token 可以学习不同的条件读取比例：
+
+```text
+token 1：更关注 timestep
+token 2：更关注 class
+token 3：两者接近
+...
+```
+
+这里的交互是**非对称的**：
+
+- latent token 可以读取 condition；
+- condition token 在这个 cross-attention 层中不会反过来读取 latent tokens。
+
+### 6.2.2 与 in-context conditioning 的本质区别
+
+两者都把 timestep/class 表示成 $d$ 维 token，但 attention 拓扑不同。
+
+| 维度 | In-context | Cross-attention |
+|---|---|---|
+| 条件是否表示为 token | 是 | 是 |
+| 是否和 latent token 拼成一个序列 | 是 | 否 |
+| latent-latent 交互 | 同一次 self-attention | 独立 self-attention |
+| latent-condition 交互 | 同一次 self-attention | 独立 cross-attention |
+| condition-latent 交互 | 有 | cross-attention 中没有 |
+| Query | 联合序列所有 token | latent tokens |
+| Key/Value | 联合序列所有 token | condition tokens |
+| 条件角色 | 序列中的普通成员 | 外部 memory / information source |
+| 结构修改 | 几乎不需要 | 需要额外 cross-attention layer |
+| 论文新增计算量 | 很小 | 约 +15% Gflops |
+
+因此可以把二者分别理解为：
+
+```text
+In-context：
+“把条件请进同一个会议室，大家互相交流。”
+
+Cross-attention：
+“latent tokens 先内部交流，再主动去查阅一份独立条件资料。”
+```
+
+论文中条件只有两个 token：timestep 和 class label。因此 cross-attention 的表达能力很强，但相对这个简单条件也比较“重”，论文测得约增加 15% Gflops，而且性能仍不如 adaLN-Zero。
+
+---
+
+## 6.3 adaLN：Adaptive Layer Normalization
+
+Adaptive Layer Normalization（adaLN，自适应层归一化）的思路与前两种完全不同：
+
+> **它不让 latent token 去 attend 条件，而是让条件直接生成一组动态的 scale/shift 参数，改变每一层 token feature 的归一化后表示。**
+
+可以把它理解为：
+
+```text
+条件
+  ↓
+可学习条件映射网络
+  ↓
+生成 scale / shift
+  ↓
+直接调制所有 token 的 LayerNorm 输出
+```
+
+### 6.3.1 什么是 hidden dimension / hidden feature
+
+设 Transformer 中共有 $T$ 个 token，每个 token 的 embedding dimension 为 $d$：
+
+$$
+X\in\mathbb{R}^{T\times d}
+$$
+
+例如取一个很小的演示：
+
+$$
+T=3,\qquad d=4
+$$
+
+那么：
+
+$$
+X=
+\begin{bmatrix}
+x_{11} & x_{12} & x_{13} & x_{14}\\
+x_{21} & x_{22} & x_{23} & x_{24}\\
+x_{31} & x_{32} & x_{33} & x_{34}
+\end{bmatrix}
+$$
+
+每一行对应一个 token：
+
+$$
+x_i\in\mathbb{R}^{4}
+$$
+
+每一列对应 token embedding 的一个 hidden feature dimension：
+
+```text
+              hidden dim 1   dim 2   dim 3   dim 4
+token 1             x11       x12     x13     x14
+token 2             x21       x22     x23     x24
+token 3             x31       x32     x33     x34
+```
+
+这里的 hidden dimension 不是 RGB channel，也不是 VAE latent 的 4 个输入 channel；它是 Patchify 后线性投影得到的 Transformer 内部特征维度。
+
+例如 DiT-XL 的 hidden size 为：
+
+$$
+d=1152
+$$
+
+所以每一个 latent patch token 实际是一个 1152 维向量。每一维都是网络学习出来的 latent feature，并没有预先规定“第 1 维代表边缘、第 2 维代表颜色”之类的明确语义。
+
+### 6.3.2 LayerNorm 先对每一个 token 独立归一化
+
+Transformer 的 LayerNorm 是对**每个 token 自己的 $d$ 个 hidden features**做归一化。
+
+对于第 $i$ 个 token：
+
+$$
+x_i=[x_{i1},x_{i2},\ldots,x_{id}]
+$$
+
+计算：
+
+$$
+\mu_i
+=
+\frac{1}{d}
+\sum_{j=1}^{d}x_{ij}
+$$
+
+$$
+\sigma_i^2
+=
+\frac{1}{d}
+\sum_{j=1}^{d}
+(x_{ij}-\mu_i)^2
+$$
+
+得到：
+
+$$
+\tilde x_{ij}
+=
+\frac{x_{ij}-\mu_i}
+{\sqrt{\sigma_i^2+\epsilon}}
+$$
+
+因此：
 
 $$
 \tilde X=\operatorname{LN}(X)
+\in\mathbb{R}^{T\times d}
 $$
 
-将 diffusion timestep embedding 与 class embedding 合并为条件向量：
+不同 token 的均值和方差分别计算，不会把整个 token 序列混在一起做归一化。
+
+### 6.3.3 条件如何产生 scale 和 shift
+
+DiT 将 timestep embedding 与 class embedding 相加：
 
 $$
 c=t_{\mathrm{emb}}+y_{\mathrm{emb}}
 $$
 
-再用可学习的条件映射网络产生 shift 与 scale：
+然后通过可学习条件映射网络：
 
 $$
-[\beta(c),\gamma(c)]=f_{\mathrm{cond}}(c)
+[\beta(c),\gamma(c)]
+=
+f_{\mathrm{cond}}(c)
 $$
 
-其中：
+得到：
 
 $$
-\beta(c),\gamma(c)\in\mathbb{R}^{d}
+\beta(c),\gamma(c)
+\in\mathbb{R}^{d}
 $$
 
-然后对所有 token 的归一化结果逐 hidden-channel 调制：
+这里：
+
+- $\beta$：shift 向量；
+- $\gamma$：scale 向量。
+
+注意：它们不是两个标量，而是**两个长度均为 $d$ 的向量**。
+
+例如 $d=4$ 时：
+
+$$
+\gamma=
+[0.5,-0.2,1.0,0.1]
+$$
+
+$$
+\beta=
+[1.0,0.0,-0.5,2.0]
+$$
+
+adaLN 的调制形式为：
 
 $$
 \operatorname{adaLN}(X;c)
 =
-\tilde X\odot\left(1+\gamma(c)\right)+\beta(c)
+\operatorname{LN}(X)
+\odot
+(1+\gamma)
++
+\beta
 $$
 
-这里 $\beta$ 是 shift，$\gamma$ 是 scale。$\beta,\gamma$ 在 token 维上广播，所以同一样本中的所有 token 使用同一组条件向量，但每个 hidden channel 都可以有不同的 scale/shift；不同样本因为条件 $c$ 不同，会得到不同的调制向量。
+### 6.3.4 为什么“所有 token 共享一组 $\beta,\gamma$”，同时“每个 hidden feature 又有自己的 scale/shift”
 
-因此 adaLN 可以概括为：
+这两个说法不矛盾，因为它们描述的是两个不同维度。
+
+设：
+
+$$
+\gamma=
+[\gamma_1,\gamma_2,\gamma_3,\gamma_4]
+$$
+
+$$
+\beta=
+[\beta_1,\beta_2,\beta_3,\beta_4]
+$$
+
+它们沿 token 维进行 broadcast：
+
+$$
+1+\gamma
+\rightarrow
+\begin{bmatrix}
+1+\gamma_1 & 1+\gamma_2 & 1+\gamma_3 & 1+\gamma_4\\
+1+\gamma_1 & 1+\gamma_2 & 1+\gamma_3 & 1+\gamma_4\\
+1+\gamma_1 & 1+\gamma_2 & 1+\gamma_3 & 1+\gamma_4
+\end{bmatrix}
+$$
+
+$$
+\beta
+\rightarrow
+\begin{bmatrix}
+\beta_1 & \beta_2 & \beta_3 & \beta_4\\
+\beta_1 & \beta_2 & \beta_3 & \beta_4\\
+\beta_1 & \beta_2 & \beta_3 & \beta_4
+\end{bmatrix}
+$$
+
+因此对任意 token $i$、hidden feature $j$：
+
+$$
+x'_{ij}
+=
+(1+\gamma_j)\tilde x_{ij}
++
+\beta_j
+$$
+
+可以总结为：
+
+$$
+\boxed{
+\text{token 维共享，hidden-feature 维独立}
+}
+$$
+
+也就是说：
+
+- token 1、token 2、token 3 都用同一个 $\gamma_1$ 调节各自的第 1 hidden feature；
+- 都用同一个 $\gamma_2$ 调节各自的第 2 hidden feature；
+- 以此类推。
+
+但因为不同 token 原本的 $\tilde x_{ij}$ 不同，所以接受同一套 affine modulation 后，它们仍然会得到不同的表示。
+
+### 6.3.5 三个 token 的完整数值演示
+
+假设 LayerNorm 后有 3 个 token：
+
+$$
+\tilde X=
+\begin{bmatrix}
+0.2 & -1.0 & 0.5 & 1.5\\
+-0.4 & 0.8 & -1.2 & 0.3\\
+1.1 & -0.2 & 0.0 & -0.9
+\end{bmatrix}
+$$
+
+条件网络根据当前 timestep 和 class 生成：
+
+$$
+\gamma=
+[1.0,-0.5,0.0,2.0]
+$$
+
+$$
+\beta=
+[0.1,1.0,-0.2,0.0]
+$$
+
+于是：
+
+$$
+1+\gamma
+=
+[2.0,0.5,1.0,3.0]
+$$
+
+对于 token 1：
+
+$$
+\tilde x_1
+=
+[0.2,-1.0,0.5,1.5]
+$$
+
+先 scale：
+
+$$
+[0.2,-1.0,0.5,1.5]
+\odot
+[2.0,0.5,1.0,3.0]
+=
+[0.4,-0.5,0.5,4.5]
+$$
+
+再 shift：
+
+$$
+x'_1
+=
+[0.5,0.5,0.3,4.5]
+$$
+
+对于 token 2：
+
+$$
+[-0.4,0.8,-1.2,0.3]
+\odot
+[2.0,0.5,1.0,3.0]
+=
+[-0.8,0.4,-1.2,0.9]
+$$
+
+加上 $\beta$：
+
+$$
+x'_2
+=
+[-0.7,1.4,-1.4,0.9]
+$$
+
+对于 token 3：
+
+$$
+[1.1,-0.2,0.0,-0.9]
+\odot
+[2.0,0.5,1.0,3.0]
+=
+[2.2,-0.1,0.0,-2.7]
+$$
+
+再加 shift：
+
+$$
+x'_3
+=
+[2.3,0.9,-0.2,-2.7]
+$$
+
+最终：
+
+$$
+X'
+=
+\begin{bmatrix}
+0.5 & 0.5 & 0.3 & 4.5\\
+-0.7 & 1.4 & -1.4 & 0.9\\
+2.3 & 0.9 & -0.2 & -2.7
+\end{bmatrix}
+$$
+
+这个例子清楚说明：
+
+1. 三个 token 使用**完全同一组** $\gamma,\beta$；
+2. 第 1 hidden feature 始终使用 scale $2.0$ 和 shift $0.1$；
+3. 第 2 hidden feature 始终使用 scale $0.5$ 和 shift $1.0$；
+4. 但由于每个 token 的原始 feature 值不同，调制后仍然保持不同 token 表示。
+
+因此 adaLN 并不是“把所有 token 变得一样”，而是：
+
+> **根据条件，对整段 token 序列施加同一套 feature-wise 变换规则。**
+
+### 6.3.6 不同条件会产生不同的 feature-wise 变换
+
+假设同一 noisy latent 在两个不同 timestep 下：
 
 ```text
-条件 c
-  ↓
-可学习条件映射网络
-  ↓
-scale γ(c), shift β(c)
-  ↓
-LayerNorm(token)
-  ↓
-逐 hidden-channel affine modulation
-  ↓
-Attention / MLP
+较早时间步：噪声很强
+较晚时间步：latent 已经比较干净
 ```
 
-> [!important] 与普通 LayerNorm 的区别
-> 普通 LayerNorm 的仿射参数在训练完成后是固定参数；adaLN 的仿射参数由当前样本的条件动态生成，因此归一化后的 token 表示会随 timestep、类别等条件改变。
-
-论文正文的表述是：不直接学习固定的逐维 scale/shift，而是从 timestep 与 class label embedding 的和回归这些参数。论文还指出，adaLN 在比较的条件注入方案中新增 Gflops 最少，并且它对所有 token 应用同一条件函数。
-
-### 6.3.1 DiT 官方实现中的具体形式
-
-论文层面可以概括成“条件 $\rightarrow$ scale/shift”。作者官方 PyTorch 实现更具体：DiT block 的条件调制器是 `SiLU + Linear`，而不是一个很深的 MLP。输入为：
+条件向量不同：
 
 $$
-c=t_{\mathrm{emb}}+y_{\mathrm{emb}}
+c_{\mathrm{early}}
+\neq
+c_{\mathrm{late}}
 $$
 
-对于 **adaLN-Zero**，该条件调制器一次输出六组 $d$ 维向量：
+于是条件网络产生不同的：
+
+$$
+\gamma_{\mathrm{early}},
+\beta_{\mathrm{early}}
+$$
+
+和：
+
+$$
+\gamma_{\mathrm{late}},
+\beta_{\mathrm{late}}
+$$
+
+这意味着 Transformer 即使面对相似 token feature，也会因为当前去噪阶段不同而改变内部 feature 的放大、压缩和偏移方式。
+
+class label 同理：
+
+```text
+dog class
+   ↓
+一组 γ, β
+
+airplane class
+   ↓
+另一组 γ, β
+```
+
+因此 timestep 和 class 不需要直接成为 latent token 的内容，而是可以直接控制 Transformer 每一层“如何解释和处理”这些 token features。
+
+### 6.3.7 adaLN 与 Cross-Attention 的 conditioning 哲学不同
+
+两者不是简单的“不同实现方式”，而是两类非常不同的信息注入机制。
+
+Cross-attention：
+
+$$
+\text{latent token}
+\rightarrow
+\text{主动读取 condition token}
+$$
+
+条件改变的是**token 间的信息读取内容**。
+
+adaLN：
+
+$$
+\text{condition}
+\rightarrow
+(\gamma,\beta)
+\rightarrow
+\text{改变每层 feature transformation}
+$$
+
+条件改变的是**网络内部 feature 的变换规则**。
+
+因此可以概括：
+
+```text
+Cross-Attention：
+“我现在需要从条件里读取什么信息？”
+
+adaLN：
+“在当前条件下，我应该怎样缩放/平移内部特征？”
+```
+
+论文实验中，adaLN 的额外 Gflops 最低，而且它是比较方案中唯一“对所有 token 应用同一条件调制函数”的机制。
+
+### 6.3.8 DiT 官方实现中的具体形式
+
+> [!note] 来源区分
+> 以下 `SiLU + Linear`、`elementwise_affine=False` 和六路参数输出属于作者官方 PyTorch 实现细节；论文正文主要给出结构层面的 adaLN / adaLN-Zero 描述。
+
+论文层面可以概括成：
+
+$$
+\text{condition}
+\rightarrow
+\text{scale / shift}
+$$
+
+作者官方 PyTorch 实现中，DiT block 使用：
+
+```text
+SiLU
+  ↓
+Linear(d, 6d)
+```
+
+作为条件调制器。
+
+对于 adaLN-Zero，一次输出六组 $d$ 维向量：
 
 $$
 \left[
@@ -324,14 +913,31 @@ $$
 f_{\mathrm{cond}}(c)
 $$
 
-其中两组 $\beta,\gamma$ 分别调制 Multi-Head Self-Attention（MSA，多头自注意力）和 MLP 前的 LayerNorm 输出；两组 $\alpha$ 则分别门控两条残差分支。
+其中：
 
-官方实现中的 LayerNorm 使用 `elementwise_affine=False`，即关闭 LayerNorm 自己固定的逐维 affine 参数。因此，条件网络产生的 scale/shift 就成为主要的仿射调制来源。
+- $\beta_{\mathrm{msa}},\gamma_{\mathrm{msa}}$：调制 Multi-Head Self-Attention 前的 LayerNorm；
+- $\alpha_{\mathrm{msa}}$：门控 Attention residual；
+- $\beta_{\mathrm{mlp}},\gamma_{\mathrm{mlp}}$：调制 MLP 前的 LayerNorm；
+- $\alpha_{\mathrm{mlp}}$：门控 MLP residual。
 
-换句话说：
+官方实现的 LayerNorm 使用：
 
-- **vanilla adaLN**：condition-to-affine mapping；
-- **adaLN-Zero**：condition-to-affine mapping + condition-to-residual-gate mapping。
+```text
+elementwise_affine=False
+```
+
+也就是关闭 LayerNorm 自身固定的逐维 affine 参数，让条件网络产生的 scale/shift 成为主要调制来源。
+
+因此：
+
+```text
+vanilla adaLN
+= condition-to-affine mapping
+
+adaLN-Zero
+= condition-to-affine mapping
++ condition-to-residual-gate mapping
+```
 
 # 7. 核心创新：adaLN-Zero
 
