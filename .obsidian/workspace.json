@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Literature/transformer/Transolver.md",
+                "file": "Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Transolver"
+              "title": "Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design"
             }
           }
         ]
@@ -184,13 +184,13 @@
   },
   "active": "894d3a9325d7ebcc",
   "lastOpenFiles": [
-    "Literature/transformer/Transformer架构创新论文关联与项目设计参考.md",
     "Literature/transformer/Perceiver IO.md",
+    "Literature/transformer/Transolver.md",
+    "Literature/transformer/Transformer架构创新论文关联与项目设计参考.md",
     "Literature/transformer/Scalable Diffusion Models with Transformers.md",
     "Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks.md",
     "Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model.md",
     "Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles.md",
-    "Literature/transformer/Transolver.md",
     "Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration.md",
     "Literature/transformer/Unisolver.md",
     "Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness.md",
