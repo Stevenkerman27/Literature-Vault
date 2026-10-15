@@ -135,3 +135,18 @@ source: "D:\\3D\\Projects\\Papers\\storage\\34A6W6N6\\Lee 等 - Aerodynamic Desi
 | CoT | Chain-of-Thought | 将中间推理步骤显式展开的提示/推理方式。 |
 | $C_L$ | Lift Coefficient | 升力系数。 |
 | $C_D$ | Drag Coefficient | 阻力系数。 |
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]]
+
+**重点关联**：
+
+- **工作流互补**：[[Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 多学科优化算法与优化脚本自动生成和执行。
+- **流程与知识互补**：[[Literature/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design|DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design]] — 工程求解器执行与领域规则/检索分别提供动作和证据。
+- **工作流互补**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 可自动执行的设计流程与优化系统的数值搜索模块。

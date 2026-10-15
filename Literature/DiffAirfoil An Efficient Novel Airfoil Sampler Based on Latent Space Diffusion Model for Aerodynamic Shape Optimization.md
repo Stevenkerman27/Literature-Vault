@@ -108,3 +108,20 @@ $$g_\Phi(z_t,t)+\nabla_{z_t}\|c(z_t)-\hat C\|^2.$$
 - 自动参数化前作：[[Automatic Parameterization for Aerodynamic Shape Optimization via Deep Geometric Learning]]、[[Latent Representation of CFD Meshes and Application to 2D Airfoil Aerodynamics]]
 - 生成与优化主题：[[Diffusion model]]、[[Generative design]]、[[Airfoil design]]、[[Surrogate-based optimization]]
 - 对比思路：[[Generative Adversarial Networks]]、[[Data-driven surrogate model for aerodynamic design using separable shape tensor method]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **方法比较**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — DPP 推动性能与多样性；潜空间扩散侧重生成流形与条件去噪。
+- **方法比较**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 连续条件质量驱动的 GAN 与去噪阶段条件引导是不同路径。
+- **方法比较**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — 二者均使用扩散，但一个用于潜空间翼型采样，一个为图像 DiT。
+- **几何表示比较**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — Grassmann 基底优化与学习潜空间扩散两种参数化。
+- **翼型生成比较**：[[Literature/Aerodynamic shape optimization of airfoils across rarefied to continuum regimes using deep reinforcement learning|Aerodynamic shape optimization of airfoils across rarefied to continuum regimes using deep reinforcement learning]] — DRL 的跨 Kn 设计策略与潜空间扩散采样目标不同。

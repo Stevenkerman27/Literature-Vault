@@ -138,3 +138,17 @@ DR-RAG 在顺序问答的 Recall@10 同样最高：Llama-3 为 65.63%，GPT-4o-m
 - 主题：[[Retrieval-augmented generation]]、[[Knowledge graph]]、[[Rule-based reasoning]]、[[Digital twin]]、[[Aviation digital model design]]、[[Engineering design automation]]
 - 方法脉络：[[RuleRAG Rule-guided retrieval-augmented generation with language models for question answering]]、[[GNN-RAG Graph neural retrieval for large language model reasoning]]、[[Graph Retrieval-Augmented Generation]]
 - 可结合的工程问题：将 [[Digital twin]] 产生的仿真数据以版本化三元组写入 [[Knowledge graph]]，再以规则检索约束 [[Retrieval-augmented generation]] 的设计建议。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]]
+
+**重点关联**：
+
+- **流程与知识互补**：[[Literature/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework|Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework]] — 工程求解器执行与领域规则/检索分别提供动作和证据。
+- **需求知识补充**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 概念生成与航空知识/规则检索是不同模块。

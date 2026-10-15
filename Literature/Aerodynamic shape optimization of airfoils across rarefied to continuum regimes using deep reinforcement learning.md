@@ -94,3 +94,17 @@ $$
 - [[DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]]：扩散模型的形状生成可与 CrossAero 的工况条件化思想对照；本文以物理求解器奖励而非离线数据生成训练信号。
 - [[SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]]：代理模型优化通过近似降低评估成本，CrossAero 则直接以策略复用和迁移学习降低重复优化成本。
 - [[Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]]：两者都使用迁移学习；本文从简单流域策略迁移到跨流域任务，而该文在不同保真度数据间迁移。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]] · [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]] · [[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]
+
+**重点关联**：
+
+- **翼型生成比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — DRL 的跨 Kn 设计策略与潜空间扩散采样目标不同。
+- **优化范式对照**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 策略学习设计与代理模型加点优化两条途径。

@@ -181,3 +181,18 @@ $$
 - [[Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]]：同样用低保真趋势与高保真校正建立代理；该文重点在自适应补充高保真气动样本，本文重点在将代理不确定度转为约束安全裕度。
 - [[Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]]：两者都将多保真信息用于有限预算决策；贝叶斯优化主动决定下一次评价位置，EWA 则在既有代理上控制约束可行性风险。
 - [[Multi-fidelity aerodynamic data analysis by using composite neural network]]：该文以神经网络实现多保真数据融合，本文使用 IHK 并显式把预测不确定度用于保守优化；两者可组合为“神经网络趋势模型 + 校准不确定度/保守约束”的工程工作流，但后者需要另行验证不确定度是否可信。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]] · [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]
+
+**重点关联**：
+
+- **物理约束互补**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 全局力预测精度与保守可行性评估是不同保障。
+- **约束可靠性互补**：[[Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method|Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]] — 从多保真拟合进一步考虑优化阶段的保守裕度。
+- **决策互补**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 选在哪里补点与约束裕度校准回答不同问题。

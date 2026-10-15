@@ -460,3 +460,16 @@ $$
 
 - 论文的 DOI、卷期与页码通过 Springer Nature 条目核对。
 - 伴随方法的概念补充参考了作者后续讲义 *Aerodynamic Shape Optimization Using the Adjoint Method*；补充内容用于帮助具有机器学习背景的读者理解，不替代本文原始推导。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]
+
+**重点关联**：
+
+- **优化范式对照**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 梯度伴随优化与昂贵黑箱代理优化的前提不同。

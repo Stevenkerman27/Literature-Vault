@@ -392,3 +392,19 @@ VAE 的离散潜空间近似、归一化流的后置分类器和扩散模型的�
 [^suave]: SUAVE 官方仓库：<https://github.com/suavecode/SUAVE>。官方说明其为多保真飞机概念设计环境，用于对采用先进技术的未来飞机形成可信的概念级设计结论。
 [^far25]: 美国联邦法规 14 CFR Part 25, Subpart B：<https://www.ecfr.gov/current/title-14/chapter-I/subchapter-C/part-25/subpart-B>。其中 §25.121 给出单发失效起飞和进近爬升梯度要求。
 [^frechet]: Dowson, D. C. & Landau, B. V., “The Fréchet distance between multivariate normal distributions”: <https://doi.org/10.1016/0047-259X(82)90077-X>。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]] · [[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]]
+
+**重点关联**：
+
+- **问题对照**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 飞机概念生成比较主体实验未实现给定需求的硬条件逆设计。
+- **整机任务对照**：[[Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 多目标任务定制与无条件概念分布建模不同。
+- **离散连续构型对照**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 整机配置变量与 CAD 拓扑/几何表达都需处理混合变量。
+- **需求知识补充**：[[Literature/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design|DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design]] — 概念生成与航空知识/规则检索是不同模块。

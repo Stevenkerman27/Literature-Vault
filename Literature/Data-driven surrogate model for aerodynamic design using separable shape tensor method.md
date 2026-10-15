@@ -85,3 +85,19 @@ LAS 表示是 Grassmann 流形上的点，不应直接以欧氏直线做 PCA 插
 
 - 基础方法：[[Separable shape tensors for aerodynamic design]]
 - 主题：[[Aerodynamic shape optimization]]、[[Surrogate-based optimization]]、[[Grassmann manifold]]、[[Principal geodesic analysis]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]] · [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]
+
+**重点关联**：
+
+- **几何降维对照**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 线性 POD 基底与 Grassmann/仿射解耦参数化。
+- **降维目标对照**：[[Literature/High-dimensional efficient global optimization using both random and supervised embeddings|High-dimensional efficient global optimization using both random and supervised embeddings]] — 光滑形状流形与高维最优值搜索空间的目标不同。
+- **几何表示比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — Grassmann 基底优化与学习潜空间扩散两种参数化。
+- **形状方法对照**：[[Literature/Deformation-driven shape correspondence via shape recognition|Deformation-driven shape correspondence via shape recognition]] — 部件对应的合理变形评分与连续形状流形参数化。

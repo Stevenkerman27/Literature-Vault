@@ -425,3 +425,16 @@ Reddy 等研究的是**利用环境中的热上升气流进行 soaring**，重�
 
 - Novati, G. & Koumoutsakos, P. (2019), *Remember and Forget for Experience Replay*, ICML / PMLR 97：用于补充 RACER 与 ReF-ER 的关系。
 - Munos, R., Stepleton, T., Harutyunyan, A. & Bellemare, M. G. (2016), *Safe and Efficient Off-Policy Reinforcement Learning*, NeurIPS：用于补充 Retrace 的设计目的与直觉。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]
+
+**重点关联**：
+
+- **控制任务比较**：[[Literature/Learning to soar in turbulent environments|Learning to soar in turbulent environments]] — 热气流翱翔与固定目标栖停的奖励、动力学不同。

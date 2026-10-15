@@ -122,3 +122,18 @@ NSGA-II 使用种群规模 50、迭代 200 代。它先按帕累托支配关系�
 - [[Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]]：同属无人作战飞机的多学科代理建模；后者通过协同克里金显式耦合高低保真数据，本文依赖单一数据源训练 DNN。
 - [[Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]]：二者都以神经网络降低优化调用成本；该文使用迁移学习融合多保真 CFD，因而能进一步处理高精度样本稀缺的问题。
 - [[Data-driven surrogate model for aerodynamic design using separable shape tensor method]]：可将其紧凑的形状表示与本文的任务级多学科代理组合，以降低高维构型描述给训练数据带来的负担。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]] · [[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]
+
+**重点关联**：
+
+- **系统应用**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 通用 SBO 与 UAV 多学科代理优化流程。
+- **整机任务对照**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 多目标任务定制与无条件概念分布建模不同。
+- **工作流互补**：[[Literature/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework|Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework]] — 多学科优化算法与优化脚本自动生成和执行。

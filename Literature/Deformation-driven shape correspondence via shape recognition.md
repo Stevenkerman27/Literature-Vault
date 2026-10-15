@@ -108,3 +108,17 @@ source: "D:\\3D\\Projects\\Papers\\storage\\MWTUMR63\\Zhu 等 - 2017 - Deformati
 - 前作：[[Deformation-driven topology-varying 3D shape correspondence]]（GeoTopo，2015）
 - 数据集：[[ShapeNet]]
 - 主题：[[3D shape correspondence]]、[[data-driven shape analysis]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **几何语义对照**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 构造序列解耦与跨形状部件对应探索不同几何结构层级。
+- **形状方法对照**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — 部件对应的合理变形评分与连续形状流形参数化。
