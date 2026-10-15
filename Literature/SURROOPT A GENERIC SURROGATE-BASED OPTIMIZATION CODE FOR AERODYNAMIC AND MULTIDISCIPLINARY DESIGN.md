@@ -134,3 +134,21 @@ RAE 2822 的优化目标为最小阻力，约束为 $C_l\ge0.824$、$C_m\ge-0.09
 - 主题：[[Surrogate-based optimization]]、[[Aerodynamic shape optimization]]、[[Multidisciplinary design optimization]]、[[Kriging]]、[[Expected improvement]]
 - 后续的几何表示与 SBO 结合：[[Data-driven surrogate model for aerodynamic design using separable shape tensor method]]
 - 核心前作脉络：[[Efficient Global Optimization of Expensive Black-Box Functions]]、[[Recent Advances in Surrogate-Based Optimization]]、[[Metamodeling in Multidisciplinary Design Optimization How Far Have We Really Come]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]
+
+**重点关联**：
+
+- **互补模块**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — 生成候选分布与代理优化闭环处理不同环节。
+- **优化闭环**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 多保真代理可服务于 surrogate optimization 外环。
+- **优化策略对照**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 贝叶斯多保真策略与代理优化系统的样本选择环节对照。
+- **优化范式对照**：[[Literature/Aerodynamic Design via Control Theory|Aerodynamic Design via Control Theory]] — 梯度伴随优化与昂贵黑箱代理优化的前提不同。
+- **系统应用**：[[Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 通用 SBO 与 UAV 多学科代理优化流程。
+- **搜索降维**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 优化算法闭环与设计空间降维可以互补。

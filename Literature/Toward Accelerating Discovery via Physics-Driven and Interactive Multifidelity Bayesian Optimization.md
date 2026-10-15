@@ -110,3 +110,19 @@ iMFBO 在每轮更新后监视当前最优值。若连续若干步没有改进�
 - 主题：[[Bayesian optimization]]、[[Multi-fidelity modeling]]、[[Physics-informed machine learning]]、[[Human-in-the-loop optimization]]、[[Autonomous experimentation]]
 - 气动优化实现：[[SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]]、[[Data-driven surrogate model for aerodynamic design using separable shape tensor method]]
 - 生成式设计与代理模型：[[DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]
+
+**重点关联**：
+
+- **主动加点互补**：[[Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method|Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]] — 已有响应建模与新样本/保真度选择形成流程互补。
+- **决策互补**：[[Literature/An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization|An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization]] — 选在哪里补点与约束裕度校准回答不同问题。
+- **优化策略对照**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 贝叶斯多保真策略与代理优化系统的样本选择环节对照。
+- **高维优化策略**：[[Literature/High-dimensional efficient global optimization using both random and supervised embeddings|High-dimensional efficient global optimization using both random and supervised embeddings]] — 嵌入降低 BO 维数与多保真采样降低评估成本。

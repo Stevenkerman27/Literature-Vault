@@ -459,3 +459,18 @@ Perceiver IO 保留这条 encoder + latent processor 主线，关键增量是：
 1. **Latent 不是降采样后的图像网格。** 它没有被规定与输入位置一一对应；空间/序列信息主要由输入位置特征和输出 query 来提供。
 2. **Output query 决定输出索引维度。** 想输出 1 个类别就给 1 个 query，想输出每个像素的光流就给每个像素一个 query，想同时做 8 个任务就给 8 个 task queries。
 3. **深度主要花在 $N$ 个 latent 上。** 这才是 Perceiver IO 相比“每层都在完整 token/pixel 序列上做 attention”的 Transformer 最重要的结构差异。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]
+
+**重点关联**：
+
+- **架构类比**：[[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model]] — latent 压缩 + output query；不意味着直接代码继承。
+- **算子比较**：[[Literature/transformer/Transolver|Transolver]] — 固定 bottleneck/query 与按物理状态动态聚合 slice 不同。
+- **专题索引**：[[Literature/transformer/Transformer架构创新论文关联与项目设计参考|Transformer架构创新论文关联与项目设计参考]] — 既有架构创新综述中更详细的 query/latent 分析。

@@ -285,3 +285,20 @@ Miyato & Koyama 的 projection discriminator 不简单把标签拼到判别器�
 
 - [[PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]]
 - [[PaDGAN 与 PcDGAN：关系、差异与选择]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **方法承接**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — PaDGAN 的性能-多样性 DPP 被扩展为连续条件下的多解逆设计。
+- **方法比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — 连续条件质量驱动的 GAN 与去噪阶段条件引导是不同路径。
+- **问题对照**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 飞机概念生成比较主体实验未实现给定需求的硬条件逆设计。
+- **表示比较**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 连续性能条件生成与离散 CAD 拓扑/几何码本分层。
+- **专题详解**：[[Literature/PaDGAN 与 PcDGAN：关系、差异与选择|PaDGAN 与 PcDGAN：关系、差异与选择]] — 两篇间的训练目标、质量语义与连续条件处理对照。

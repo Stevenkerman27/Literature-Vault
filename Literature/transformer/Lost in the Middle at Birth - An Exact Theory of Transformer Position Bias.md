@@ -763,3 +763,17 @@ Jacobian 衡量局部一阶敏感度，并不直接等于模型能否从中间�
 4. **中部两头不占**：既没有早期 token 的组合路径优势，也没有最后 token 的纯残差锚点，只能依赖被 Softmax 前缀平均稀释的 hybrid paths，于是形成 U 形谷底；标准训练能在其上学习局部尖峰，但通常不会自然填平整个谷底。
 
 这就是本文所谓 **“Lost in the Middle at Birth”**：模型还没学会任何东西之前，中间位置就已经处在更不利的信息与梯度路由几何中。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]
+
+**重点关联**：
+
+- **理论互补**：[[Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness|How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness]] — token 关系预编码与因果路由位置偏差是不同的表征问题。
+- **架构对照**：[[Literature/transformer/Star-Transformer|Star-Transformer]] — 稀疏信息路由与因果注意力的位置偏差不可混淆。

@@ -229,3 +229,17 @@ PcDGAN
 
 - [[PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]]
 - [[PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **专题详解**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 两篇间的训练目标、质量语义与连续条件处理对照。
+- **专题详解**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — 对比 DPP 在优化型与条件逆设计中的作用。

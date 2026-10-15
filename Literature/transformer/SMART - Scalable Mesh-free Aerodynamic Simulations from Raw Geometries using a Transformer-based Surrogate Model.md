@@ -998,3 +998,19 @@ SMART 可以看成给 latent bottleneck 加了三种空气动力学特化：
 3. **真实 coarse geometry 初始化 latent tokens 是决定性设计，远胜于纯 learnable tokens。**
 4. **decoder 每层读取对应 encoder intermediate latent geometry 的 cross-layer coupling 是第二个决定性设计。**
 5. **随机 subsampling + query-independent chunked decoding 使“16k 点训练、5000万点推理”成为可能。**
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]
+
+**重点关联**：
+
+- **方法比较**：[[Literature/transformer/Transolver|Transolver]] — 不规则网格物理 slice 与原始几何 latent / 任意 query。
+- **架构类比**：[[Literature/transformer/Perceiver IO|Perceiver IO]] — latent 压缩 + output query；不意味着直接代码继承。
+- **方法比较**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — mesh-free 物理查询与统一翼面网格训练/迁移。
+- **预测器用途类比**：[[Literature/Efficient navigation in vortical flows based on reinforcement learning and flow field prediction|Efficient navigation in vortical flows based on reinforcement learning and flow field prediction]] — 前视环境预测用于决策与场代理用于查询是不同任务。

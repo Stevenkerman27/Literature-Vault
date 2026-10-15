@@ -346,3 +346,17 @@ GRU 是带更新门和重置门的循环单元，用较少门控结构控制历�
 ## 阅读结论
 
 SeqXY2SeqZ 最有价值的地方不是某个新的循环单元，而是对三维输出空间的重参数化：把体素网格从三维密集数组变成二维坐标索引的一维区间集合。该表示在 2020 年隐式函数快速发展的背景下，提供了一条不同路线——不追求任意三维点上的连续场，而是利用轴向截面的稀疏区间结构，以较低内存和较少查询获得高 IoU。其代价是离散体素精度、自回归串行性以及对管化方向和最大序列长度的潜在敏感性。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **表示比较**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 两者都用序列表达工程几何，但 token 语义不同。
+- **表示原则**：[[Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness|How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness]] — 稀疏占用段编码与 token 关系复杂度的取舍。

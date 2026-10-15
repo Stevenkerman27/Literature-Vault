@@ -773,3 +773,18 @@ J/K 的结果说明：**把多个容易的局部预测步骤合并成一个更�
 > 5. side information 必须纳入账本；  
 > 6. 以每个原始 fact 的 held-out predictive codelength 比较；  
 > 7. 不从“可逆”“token 更少”“包含领域先验”直接推出表示更好。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **表示原则**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — token 接口是否预先固定关系会影响上下文建模。
+- **表示原则**：[[Literature/SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates|SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates]] — 稀疏占用段编码与 token 关系复杂度的取舍。
+- **理论互补**：[[Literature/transformer/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias|Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias]] — token 关系预编码与因果路由位置偏差是不同的表征问题。

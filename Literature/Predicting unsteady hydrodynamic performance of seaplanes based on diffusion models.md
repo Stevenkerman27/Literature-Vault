@@ -394,3 +394,17 @@ TCN 和噪声步编码分别可追溯到以下基础工作：
 - [[非定常载荷预测]]
 - [[工程设计空间探索]]
 - [[不确定性量化]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]] · [[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **方法比较**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — 扩散生成思想一致，去噪网络和输出对象分别为图像 latent 与水动力时间序列。
+- **输出类型对照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 非定常水动力时间序列生成与稳态翼面气动场预测。
