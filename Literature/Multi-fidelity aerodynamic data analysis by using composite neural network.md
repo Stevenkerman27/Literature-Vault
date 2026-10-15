@@ -124,3 +124,17 @@ $$
 - [[Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]]：两者都把廉价模型用于补足高保真数据稀缺；协同克里金还给出预测方差与自适应采样机制，复合网络更适合处理大规模非线性数据。
 - [[Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]]：后者面向构型多学科优化，代理训练数据主要来自单类离线物理模型；本文说明若能获得少量飞行试验，低成本模型与实测的分层融合可成为其气动代理的校正层。
 
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]
+
+**重点关联**：
+
+- **多保真比较**：[[Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method|Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]] — Co-Kriging 与复合神经网络的融合机制不同。
+- **多保真比较**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 基于 transfer learning 与基于 composite mapping 的不同方案。

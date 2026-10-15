@@ -481,3 +481,17 @@ WindSeer 使用稀疏、带噪风速测量和已知地形，通过神经网络�
 - Mei et al., *Observability-Based Energy Efficient Path Planning with Background Flow via Deep Reinforcement Learning*: https://doi.org/10.1109/CDC49753.2023.10383428
 - Achermann et al., *WindSeer: real-time volumetric wind prediction over complex terrain aboard a small uncrewed aerial vehicle*: https://doi.org/10.1038/s41467-024-47778-4
 - Sintov & Shapiro, *Time-Based RRT Algorithm for Rendezvous Planning of Two Dynamic Systems*: https://doi.org/10.1109/ICRA.2014.6907855
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]
+
+**重点关联**：
+
+- **方法推进**：[[Literature/Learning efficient navigation in vortical flow fields|Learning efficient navigation in vortical flow fields]] — 局部流速引导与对未来候选动作结果的前视编码。
+- **预测器用途类比**：[[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model]] — 前视环境预测用于决策与场代理用于查询是不同任务。

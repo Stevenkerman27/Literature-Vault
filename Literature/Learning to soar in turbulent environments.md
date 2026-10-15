@@ -328,3 +328,18 @@ OU 过程是一个 stationary Gaussian Markov process（平稳高斯马尔可夫
 - Scholarpedia, *Turbulent Thermal Convection*（Rayleigh–Bénard 对流）：<https://www.scholarpedia.org/article/Turbulent_Thermal_Convection>
 - ScienceDirect, *The Boussinesq approximation for buoyant flows*：<https://www.sciencedirect.com/science/article/pii/S0093641322000842>
 - Encyclopedia of Mathematics, *Ornstein–Uhlenbeck process*：<https://encyclopediaofmath.org/wiki/Ornstein%E2%80%93Uhlenbeck_process>
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]
+
+**重点关联**：
+
+- **研究延展**：[[Literature/Glider soaring via reinforcement learning in the field|Glider soaring via reinforcement learning in the field]] — 仿真热气流学习向真实滑翔机热气流飞行验证演进。
+- **控制任务比较**：[[Literature/Controlled gliding and perching through deep-reinforcement-learning|Controlled gliding and perching through deep-reinforcement-learning]] — 热气流翱翔与固定目标栖停的奖励、动力学不同。
+- **流动感知对照**：[[Literature/Flow Navigation by Smart Microswimmers via Reinforcement Learning|Flow Navigation by Smart Microswimmers via Reinforcement Learning]] — 利用部分流动线索的 RL，运动器物理机制不同。

@@ -352,3 +352,17 @@ Q-learning 是**无模型（model-free）**、基于时序差分（Temporal-Diff
 - Reddy et al., **Learning to soar in turbulent environments**：https://pmc.ncbi.nlm.nih.gov/articles/PMC4995969/
 - Sengupta et al., **Phytoplankton can actively diversify their migration strategy in response to turbulent cues**：https://www.nature.com/articles/nature21415
 - APS 原论文页面（可看到后续 Erratum 记录）：https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.118.158004
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]
+
+**重点关联**：
+
+- **流动感知对照**：[[Literature/Learning to soar in turbulent environments|Learning to soar in turbulent environments]] — 利用部分流动线索的 RL，运动器物理机制不同。
+- **流动导航比较**：[[Literature/Learning efficient navigation in vortical flow fields|Learning efficient navigation in vortical flow fields]] — 微粒 Q-learning 与连续游动器 V-RACER。

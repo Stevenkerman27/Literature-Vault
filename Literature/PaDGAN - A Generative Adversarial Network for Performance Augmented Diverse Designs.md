@@ -242,3 +242,19 @@ GDPP（Generative Determinantal Point Process）也用 DPP 缓解 GAN mode colla
 
 - [[PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]]
 - [[PaDGAN 与 PcDGAN：关系、差异与选择]]
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **方法承接**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — PaDGAN 的性能-多样性 DPP 被扩展为连续条件下的多解逆设计。
+- **方法比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — DPP 推动性能与多样性；潜空间扩散侧重生成流形与条件去噪。
+- **互补模块**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 生成候选分布与代理优化闭环处理不同环节。
+- **专题详解**：[[Literature/PaDGAN 与 PcDGAN：关系、差异与选择|PaDGAN 与 PcDGAN：关系、差异与选择]] — 对比 DPP 在优化型与条件逆设计中的作用。

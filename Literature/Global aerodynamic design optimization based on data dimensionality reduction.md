@@ -300,3 +300,18 @@ POD 方案相对基线减阻约 18.2%，传统方案约 17.3%。截面压力分�
 [^ghisu]: T. Ghisu, G. Parks, J. Jarrett, P. Clarkson, *Accelerating Design Optimization Via Principal Components Analysis*, DOI: 10.2514/6.2008-5855.
 [^toal]: D. J. J. Toal, N. W. Bressloff, A. J. Keane, C. M. E. Holden, *Geometric Filtration Using Proper Orthogonal Decomposition for Aerodynamic Design Optimization*, DOI: 10.2514/1.41420.
 [^qiubai]: Y. Qiu, J. Bai, *Stationary flow fields prediction of variable physical domain based on proper orthogonal decomposition and kriging surrogate model*, DOI: 10.1016/j.cja.2014.12.017.
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]] · [[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]
+
+**重点关联**：
+
+- **搜索降维**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 优化算法闭环与设计空间降维可以互补。
+- **几何降维对照**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — 线性 POD 基底与 Grassmann/仿射解耦参数化。
+- **优化降维对照**：[[Literature/High-dimensional efficient global optimization using both random and supervised embeddings|High-dimensional efficient global optimization using both random and supervised embeddings]] — 物理形状 POD 与高维黑箱随机/监督嵌入不同。

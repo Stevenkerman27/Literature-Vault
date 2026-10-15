@@ -96,3 +96,19 @@ $$
 - [[SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]]：可将本文生成的高效气动代理模型作为代理优化工具的响应模型。
 - [[Data-driven surrogate model for aerodynamic design using separable shape tensor method]]：两者都关注以有限高成本气动样本构建代理模型；本文的关键维度是仿真保真度，后者的关键维度是几何形状表示。
 - [[Kennedy and O'Hagan multifidelity co-Kriging]]：本文使用的自回归多保真高斯过程基础。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]] · [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]
+
+**重点关联**：
+
+- **多保真比较**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 统计相关性联合拟合与低保真预训练再微调。
+- **多保真比较**：[[Literature/Multi-fidelity aerodynamic data analysis by using composite neural network|Multi-fidelity aerodynamic data analysis by using composite neural network]] — Co-Kriging 与复合神经网络的融合机制不同。
+- **约束可靠性互补**：[[Literature/An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization|An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization]] — 从多保真拟合进一步考虑优化阶段的保守裕度。
+- **主动加点互补**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 已有响应建模与新样本/保真度选择形成流程互补。

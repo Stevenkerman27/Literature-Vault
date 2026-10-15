@@ -378,3 +378,18 @@ RL 轨迹总体形态与时间最优路径相近，说明策略网络从大量�
 
 - V-RACER / ReF-ER：Novati, G. & Koumoutsakos, P., *Remember and Forget for Experience Replay*, ICML 2019, PMLR 97:4851–4860。
 - Double gyre 标准方程：Shadden, S. C., Lekien, F. & Marsden, J. E., *Definition and properties of Lagrangian coherent structures from finite-time Lyapunov exponents in two-dimensional aperiodic flows*, Physica D 212, 271–304。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]
+
+**重点关联**：
+
+- **感知问题对照**：[[Literature/Glider soaring via reinforcement learning in the field|Glider soaring via reinforcement learning in the field]] — 热气流状态估计与涡流导航状态选择。
+- **流动导航比较**：[[Literature/Flow Navigation by Smart Microswimmers via Reinforcement Learning|Flow Navigation by Smart Microswimmers via Reinforcement Learning]] — 微粒 Q-learning 与连续游动器 V-RACER。
+- **方法推进**：[[Literature/Efficient navigation in vortical flows based on reinforcement learning and flow field prediction|Efficient navigation in vortical flows based on reinforcement learning and flow field prediction]] — 局部流速引导与对未来候选动作结果的前视编码。

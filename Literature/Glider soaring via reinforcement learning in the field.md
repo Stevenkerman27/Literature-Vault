@@ -489,3 +489,17 @@ GPS / barometer / IMU / airspeed
 ```
 
 **核心认识**：这篇论文真正可迁移的经验不是“RL 能让滑翔机盘旋”，而是 **真实世界强化学习必须把状态估计、物理去偏、奖励时间尺度和样本效率一起设计**。一旦这四件事处理好，复杂且非平稳的真实湍流环境反而可以用一个非常小、非常透明的 MDP 学出有效策略。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]
+
+**重点关联**：
+
+- **研究延展**：[[Literature/Learning to soar in turbulent environments|Learning to soar in turbulent environments]] — 仿真热气流学习向真实滑翔机热气流飞行验证演进。
+- **感知问题对照**：[[Literature/Learning efficient navigation in vortical flow fields|Learning efficient navigation in vortical flow fields]] — 热气流状态估计与涡流导航状态选择。

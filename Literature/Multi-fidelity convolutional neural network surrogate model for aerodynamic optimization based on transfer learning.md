@@ -112,3 +112,19 @@ NACA0012 的优化翼型后半段加厚、上表面中部变平，压力恢复�
 - [[Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]]：同样以多保真 CFD 减少高成本样本；该文用协同克里金显式建模 LF 趋势和 HF 残差，本文则通过神经网络参数迁移隐式融合两种保真度。
 - [[Data-driven surrogate model for aerodynamic design using separable shape tensor method]]：两者都服务于代理优化；后者通过流形表示减少几何设计变量，本文通过 CNN 的图像表示和 LF 预训练提高样本利用率，二者可以组合。
 - [[Multi-fidelity deep neural network surrogate model for aerodynamic shape optimization]]：本文直接延续的神经网络多保真路线；差异在于本文以冻结并微调代替显式线性/非线性映射子网络。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]
+
+**重点关联**：
+
+- **数据策略对照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 预训练/微调思想相近，但模型输出与几何/工况分布不同。
+- **多保真比较**：[[Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method|Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]] — 统计相关性联合拟合与低保真预训练再微调。
+- **多保真比较**：[[Literature/Multi-fidelity aerodynamic data analysis by using composite neural network|Multi-fidelity aerodynamic data analysis by using composite neural network]] — 基于 transfer learning 与基于 composite mapping 的不同方案。
+- **优化闭环**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 多保真代理可服务于 surrogate optimization 外环。

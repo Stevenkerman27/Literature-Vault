@@ -361,3 +361,18 @@ HESBO 使用极稀疏的哈希嵌入：每个原始维度随机映射到一个�
 [^pls]: Helland, I. S. *On the Structure of Partial Least Squares Regression*. Communications in Statistics—Simulation and Computation, 17(2), 1988, 581–607. DOI: 10.1080/03610918808812681.
 [^turbo]: Eriksson, D. et al. *Scalable Global Optimization via Local Bayesian Optimization*. NeurIPS 2019.
 [^hesbo]: Nayebi, A., Munteanu, A., Poloczek, M. *A Framework for Bayesian Optimization in Embedded Subspaces*. ICML 2019, PMLR 97:4752–4761.
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]
+
+**重点关联**：
+
+- **优化降维对照**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 物理形状 POD 与高维黑箱随机/监督嵌入不同。
+- **降维目标对照**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — 光滑形状流形与高维最优值搜索空间的目标不同。
+- **高维优化策略**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 嵌入降低 BO 维数与多保真采样降低评估成本。
