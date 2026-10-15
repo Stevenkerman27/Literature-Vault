@@ -539,3 +539,17 @@ Uformer 主要在效率、层次结构与无需大规模预训练方面与其形
 3. **LeFF 的 depth-wise convolution 不负责跨通道混合。** 跨通道混合主要由前后的 linear / $1\times1$ projection 完成；$3\times3$ depth-wise convolution 主要负责每个通道内部的局部空间混合。
 4. **Uformer 的“较长程依赖”主要来自层次化。** 高分辨率层仍只看局部窗口；随着分辨率下降，同样 $8\times8$ 窗口覆盖原图更大区域。
 5. **skip connection 对图像恢复是信息保真通道。** 编码器中的低层纹理可以直接传给解码器，而不要求 bottleneck 重新编码全部细节，这与图像恢复任务的目标高度一致。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]
+
+**重点关联**：
+
+- **多尺度类比**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 两者可用 U 形层级思想，任务/模块不同。
+- **架构正交**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — 多尺度/局部注意力与条件调制是独立设计维度。

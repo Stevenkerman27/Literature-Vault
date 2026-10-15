@@ -1832,3 +1832,18 @@ $$
 ## 与本项目关联锚点
 
 12. Yang et al., **Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design (AeroTransformer)**, 2026：直接建立在 PDE-Transformer 上，并将 conditioning、U-shaped Transformer 与可微气动力积分用于三维翼面气动预测。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]
+
+**重点关联**：
+
+- **专题索引**：[[Literature/transformer/Transolver|Transolver]] — 既有架构创新综述中更详细的物理注意力分析。
+- **专题索引**：[[Literature/transformer/Perceiver IO|Perceiver IO]] — 既有架构创新综述中更详细的 query/latent 分析。
+- **专题索引**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 既有架构创新综述中更详细的气动场代理组合分析。

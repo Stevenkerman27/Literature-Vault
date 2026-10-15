@@ -980,3 +980,17 @@ Unisolver 的答案分别是：
 - Peebles & Xie, 2023, *Scalable Diffusion Models with Transformers*: https://openaccess.thecvf.com/content/ICCV2023/papers/Peebles_Scalable_Diffusion_Models_with_Transformers_ICCV_2023_paper.pdf
 - Singh, Shukla & Turaga, 2023, *Polynomial Implicit Neural Representations for Large Diverse Datasets*: https://openaccess.thecvf.com/content/CVPR2023/html/Singh_Polynomial_Implicit_Neural_Representations_for_Large_Diverse_Datasets_CVPR_2023_paper.html
 - Unisolver official PMLR page: https://proceedings.mlr.press/v267/zhou25r.html
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/机翼生成器研究对照与证据边界|机翼生成器研究对照与证据边界]]
+
+**重点关联**：
+
+- **条件注入对照**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — adaLN 条件调制与 PDE 域级/点级条件分解可对比。
+- **方法互补**：[[Literature/transformer/Transolver|Transolver]] — 物理注意力组织与 PDE 条件分层解决不同瓶颈。

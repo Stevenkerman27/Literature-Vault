@@ -652,3 +652,21 @@ LoRA: Q and V only, alpha = 2r, r = 4 or 16
 这篇论文最重要的贡献不是某一个 Transformer 模块，而是把三维气动代理模型的经济性问题说清楚并做了相对完整的实验验证：**预训练数据负责“广”，微调数据负责“细”；模型结构必须足够可扩展，才能真正把一次性预训练成本摊到多个下游任务。**
 
 从实验结果看，这一范式在 CRM 局部设计域上确实显著提高了数据效率，而且 zero-shot、scaling、parameter-efficient fine-tuning 等现象都符合基础模型范式的预期。不过当前模型仍是“跨声速机翼基础模型的雏形”，距离任意三维气动构型的统一 foundation model 还有明显的几何表示和数据覆盖问题。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]
+
+**重点关联**：
+
+- **条件机制参照**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — AeroTransformer 的物理工况深层调制可与 DiT 方案对照。
+- **物理代理对照**：[[Literature/transformer/Transolver|Transolver]] — 非结构网格算子与统一表面 patch 主干有不同数据假设。
+- **方法比较**：[[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model]] — mesh-free 物理查询与统一翼面网格训练/迁移。
+- **局部-全局对照**：[[Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles|Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles]] — 复杂车体的局部序列化与规则机翼的多尺度 patch。
+- **多尺度类比**：[[Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration|Uformer - A General U-Shaped Transformer for Image Restoration]] — 两者可用 U 形层级思想，任务/模块不同。
+- **数据策略对照**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 预训练/微调思想相近，但模型输出与几何/工况分布不同。

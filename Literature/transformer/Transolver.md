@@ -1282,3 +1282,21 @@ $$
 - Kovachki et al., *Neural Operator: Learning Maps Between Function Spaces With Applications to PDEs*, JMLR 2023: https://www.jmlr.org/papers/v24/21-1524.html
 - Shuhao Cao, *Choose a Transformer: Fourier or Galerkin*, NeurIPS 2021: https://proceedings.neurips.cc/paper/2021/hash/d0921d442ee91b896ad95059d13df618-Abstract.html
 - Li et al., *Fourier Neural Operator for Parametric Partial Differential Equations*: https://arxiv.org/abs/2010.08895
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]
+
+**重点关联**：
+
+- **方法承接**：[[Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles|Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles]] — SATO 在 Transolver 的 Physics-Attention 上结合局部序列化注意力。
+- **方法比较**：[[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model]] — 不规则网格物理 slice 与原始几何 latent / 任意 query。
+- **物理代理对照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 非结构网格算子与统一表面 patch 主干有不同数据假设。
+- **方法互补**：[[Literature/transformer/Unisolver|Unisolver]] — 物理注意力组织与 PDE 条件分层解决不同瓶颈。
+- **算子比较**：[[Literature/transformer/Perceiver IO|Perceiver IO]] — 固定 bottleneck/query 与按物理状态动态聚合 slice 不同。
+- **全局通信对照**：[[Literature/transformer/Star-Transformer|Star-Transformer]] — 单一 relay node 与多个 physics slice 都降低全连接成本，但归纳偏置不同。

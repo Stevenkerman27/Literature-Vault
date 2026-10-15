@@ -699,3 +699,17 @@ Star-Transformer 是一种非常清晰的“结构稀疏化”方案：它没有
 
 其最重要的思想价值在于：稀疏注意力结构应同时考虑三件事——**连接数量、最大依赖路径长度、任务本身的结构先验**。这比简单地把 dense attention 替换成一个任意 sparse mask 更有普适性。
 
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]
+
+**重点关联**：
+
+- **全局通信对照**：[[Literature/transformer/Transolver|Transolver]] — 单一 relay node 与多个 physics slice 都降低全连接成本，但归纳偏置不同。
+- **架构对照**：[[Literature/transformer/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias|Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias]] — 稀疏信息路由与因果注意力的位置偏差不可混淆。

@@ -598,3 +598,17 @@ SATO 的创新不是重新发明其中任一基础模块，而是把三条已有
 [^transolver]: 外部概念核对：Haixu Wu et al., *Transolver: A Fast Transformer Solver for PDEs on General Geometries*, 2024。其核心 Physics-Attention 将离散域自适应划分为可学习 slices，并在 physics-aware tokens 上执行 attention。
 [^ptv3]: 外部概念核对：Xiaoyang Wu et al., *Point Transformer V3: Simpler Faster Stronger*, CVPR 2024。其点云序列化使用 Z-order、Hilbert 及其 Trans 变体，并以序列化邻域替代精确 KNN 搜索。
 [^ifno]: 外部概念核对：Huaiqian You et al., *Learning deep Implicit Fourier Neural Operators (IFNOs) with applications to heterogeneous material modeling*, Computer Methods in Applied Mechanics and Engineering 398 (2022), 115296。其将深层共享迭代解释为隐式问题的不动点求解过程。
+
+## 跨文献关联导航（2026-10-15 整理）
+
+> [!note] 文献关系标注
+> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。
+
+**总览**：[[Literature/文献关系总览|文献关系总览]]
+
+**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]
+
+**重点关联**：
+
+- **方法承接**：[[Literature/transformer/Transolver|Transolver]] — SATO 在 Transolver 的 Physics-Attention 上结合局部序列化注意力。
+- **局部-全局对照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 复杂车体的局部序列化与规则机翼的多尺度 patch。
