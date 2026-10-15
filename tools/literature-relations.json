@@ -1,0 +1,648 @@
+{
+  "snapshot_branch": "main",
+  "snapshot_commit": "1dc949e7b2ac7c200b53617f2509cbb6054a68cf",
+  "notes": {
+    "concept": "Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs.md",
+    "uav": "Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models.md",
+    "agent": "Literature/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework.md",
+    "adjoint": "Literature/Aerodynamic Design via Control Theory.md",
+    "crossaero": "Literature/Aerodynamic shape optimization of airfoils across rarefied to continuum regimes using deep reinforcement learning.md",
+    "conservative": "Literature/An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization.md",
+    "perching": "Literature/Controlled gliding and perching through deep-reinforcement-learning.md",
+    "drrag": "Literature/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design.md",
+    "tensor": "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
+    "correspondence": "Literature/Deformation-driven shape correspondence via shape recognition.md",
+    "diffairfoil": "Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization.md",
+    "lookahead": "Literature/Efficient navigation in vortical flows based on reinforcement learning and flow field prediction.md",
+    "microswim": "Literature/Flow Navigation by Smart Microswimmers via Reinforcement Learning.md",
+    "cokriging": "Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method.md",
+    "field": "Literature/Glider soaring via reinforcement learning in the field.md",
+    "pod": "Literature/Global aerodynamic design optimization based on data dimensionality reduction.md",
+    "egorse": "Literature/High-dimensional efficient global optimization using both random and supervised embeddings.md",
+    "vortical": "Literature/Learning efficient navigation in vortical flow fields.md",
+    "soaring": "Literature/Learning to soar in turbulent environments.md",
+    "composite": "Literature/Multi-fidelity aerodynamic data analysis by using composite neural network.md",
+    "mfcnn": "Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning.md",
+    "padgan": "Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs.md",
+    "padcomp": "Literature/PaDGAN 与 PcDGAN：关系、差异与选择.md",
+    "pcdgan": "Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design.md",
+    "hydro": "Literature/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models.md",
+    "surroopt": "Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN.md",
+    "seqxyz": "Literature/SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates.md",
+    "mfbo": "Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization.md",
+    "howfar": "Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness.md",
+    "position": "Literature/transformer/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias.md",
+    "perceiver": "Literature/transformer/Perceiver IO.md",
+    "smart": "Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model.md",
+    "dit": "Literature/transformer/Scalable Diffusion Models with Transformers.md",
+    "skexgen": "Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks.md",
+    "sato": "Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles.md",
+    "star": "Literature/transformer/Star-Transformer.md",
+    "aero": "Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design.md",
+    "tfcomp": "Literature/transformer/Transformer架构创新论文关联与项目设计参考.md",
+    "transolver": "Literature/transformer/Transolver.md",
+    "uformer": "Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration.md",
+    "unisolver": "Literature/transformer/Unisolver.md"
+  },
+  "topics": {
+    "index": "Literature/文献关系总览.md",
+    "t_attention": "Literature/Topics/Transformer与物理场算子.md",
+    "t_generation": "Literature/Topics/几何表示与性能条件生成.md",
+    "t_surrogate": "Literature/Topics/气动代理与多保真学习.md",
+    "t_optimization": "Literature/Topics/气动优化与设计空间探索.md",
+    "t_rl": "Literature/Topics/流场导航与强化学习.md",
+    "t_workflow": "Literature/Topics/整机设计与工程智能体.md",
+    "t_project": "Literature/Topics/机翼生成器研究对照与证据边界.md"
+  },
+  "edges": [
+    {
+      "a": "padgan",
+      "b": "pcdgan",
+      "relation": "方法承接",
+      "explanation": "PaDGAN 的性能-多样性 DPP 被扩展为连续条件下的多解逆设计"
+    },
+    {
+      "a": "padgan",
+      "b": "diffairfoil",
+      "relation": "方法比较",
+      "explanation": "DPP 推动性能与多样性；潜空间扩散侧重生成流形与条件去噪"
+    },
+    {
+      "a": "padgan",
+      "b": "surroopt",
+      "relation": "互补模块",
+      "explanation": "生成候选分布与代理优化闭环处理不同环节"
+    },
+    {
+      "a": "pcdgan",
+      "b": "diffairfoil",
+      "relation": "方法比较",
+      "explanation": "连续条件质量驱动的 GAN 与去噪阶段条件引导是不同路径"
+    },
+    {
+      "a": "pcdgan",
+      "b": "concept",
+      "relation": "问题对照",
+      "explanation": "飞机概念生成比较主体实验未实现给定需求的硬条件逆设计"
+    },
+    {
+      "a": "pcdgan",
+      "b": "skexgen",
+      "relation": "表示比较",
+      "explanation": "连续性能条件生成与离散 CAD 拓扑/几何码本分层"
+    },
+    {
+      "a": "pcdgan",
+      "b": "padcomp",
+      "relation": "专题详解",
+      "explanation": "两篇间的训练目标、质量语义与连续条件处理对照"
+    },
+    {
+      "a": "padgan",
+      "b": "padcomp",
+      "relation": "专题详解",
+      "explanation": "对比 DPP 在优化型与条件逆设计中的作用"
+    },
+    {
+      "a": "skexgen",
+      "b": "seqxyz",
+      "relation": "表示比较",
+      "explanation": "两者都用序列表达工程几何，但 token 语义不同"
+    },
+    {
+      "a": "skexgen",
+      "b": "correspondence",
+      "relation": "几何语义对照",
+      "explanation": "构造序列解耦与跨形状部件对应探索不同几何结构层级"
+    },
+    {
+      "a": "skexgen",
+      "b": "howfar",
+      "relation": "表示原则",
+      "explanation": "token 接口是否预先固定关系会影响上下文建模"
+    },
+    {
+      "a": "seqxyz",
+      "b": "howfar",
+      "relation": "表示原则",
+      "explanation": "稀疏占用段编码与 token 关系复杂度的取舍"
+    },
+    {
+      "a": "diffairfoil",
+      "b": "dit",
+      "relation": "方法比较",
+      "explanation": "二者均使用扩散，但一个用于潜空间翼型采样，一个为图像 DiT"
+    },
+    {
+      "a": "dit",
+      "b": "hydro",
+      "relation": "方法比较",
+      "explanation": "扩散生成思想一致，去噪网络和输出对象分别为图像 latent 与水动力时间序列"
+    },
+    {
+      "a": "dit",
+      "b": "unisolver",
+      "relation": "条件注入对照",
+      "explanation": "adaLN 条件调制与 PDE 域级/点级条件分解可对比"
+    },
+    {
+      "a": "dit",
+      "b": "aero",
+      "relation": "条件机制参照",
+      "explanation": "AeroTransformer 的物理工况深层调制可与 DiT 方案对照"
+    },
+    {
+      "a": "transolver",
+      "b": "sato",
+      "relation": "方法承接",
+      "explanation": "SATO 在 Transolver 的 Physics-Attention 上结合局部序列化注意力"
+    },
+    {
+      "a": "transolver",
+      "b": "smart",
+      "relation": "方法比较",
+      "explanation": "不规则网格物理 slice 与原始几何 latent / 任意 query"
+    },
+    {
+      "a": "transolver",
+      "b": "aero",
+      "relation": "物理代理对照",
+      "explanation": "非结构网格算子与统一表面 patch 主干有不同数据假设"
+    },
+    {
+      "a": "transolver",
+      "b": "unisolver",
+      "relation": "方法互补",
+      "explanation": "物理注意力组织与 PDE 条件分层解决不同瓶颈"
+    },
+    {
+      "a": "perceiver",
+      "b": "smart",
+      "relation": "架构类比",
+      "explanation": "latent 压缩 + output query；不意味着直接代码继承"
+    },
+    {
+      "a": "perceiver",
+      "b": "transolver",
+      "relation": "算子比较",
+      "explanation": "固定 bottleneck/query 与按物理状态动态聚合 slice 不同"
+    },
+    {
+      "a": "smart",
+      "b": "aero",
+      "relation": "方法比较",
+      "explanation": "mesh-free 物理查询与统一翼面网格训练/迁移"
+    },
+    {
+      "a": "sato",
+      "b": "aero",
+      "relation": "局部-全局对照",
+      "explanation": "复杂车体的局部序列化与规则机翼的多尺度 patch"
+    },
+    {
+      "a": "star",
+      "b": "transolver",
+      "relation": "全局通信对照",
+      "explanation": "单一 relay node 与多个 physics slice 都降低全连接成本，但归纳偏置不同"
+    },
+    {
+      "a": "uformer",
+      "b": "aero",
+      "relation": "多尺度类比",
+      "explanation": "两者可用 U 形层级思想，任务/模块不同"
+    },
+    {
+      "a": "uformer",
+      "b": "dit",
+      "relation": "架构正交",
+      "explanation": "多尺度/局部注意力与条件调制是独立设计维度"
+    },
+    {
+      "a": "howfar",
+      "b": "position",
+      "relation": "理论互补",
+      "explanation": "token 关系预编码与因果路由位置偏差是不同的表征问题"
+    },
+    {
+      "a": "position",
+      "b": "star",
+      "relation": "架构对照",
+      "explanation": "稀疏信息路由与因果注意力的位置偏差不可混淆"
+    },
+    {
+      "a": "aero",
+      "b": "mfcnn",
+      "relation": "数据策略对照",
+      "explanation": "预训练/微调思想相近，但模型输出与几何/工况分布不同"
+    },
+    {
+      "a": "aero",
+      "b": "conservative",
+      "relation": "物理约束互补",
+      "explanation": "全局力预测精度与保守可行性评估是不同保障"
+    },
+    {
+      "a": "cokriging",
+      "b": "mfcnn",
+      "relation": "多保真比较",
+      "explanation": "统计相关性联合拟合与低保真预训练再微调"
+    },
+    {
+      "a": "cokriging",
+      "b": "composite",
+      "relation": "多保真比较",
+      "explanation": "Co-Kriging 与复合神经网络的融合机制不同"
+    },
+    {
+      "a": "cokriging",
+      "b": "conservative",
+      "relation": "约束可靠性互补",
+      "explanation": "从多保真拟合进一步考虑优化阶段的保守裕度"
+    },
+    {
+      "a": "cokriging",
+      "b": "mfbo",
+      "relation": "主动加点互补",
+      "explanation": "已有响应建模与新样本/保真度选择形成流程互补"
+    },
+    {
+      "a": "mfcnn",
+      "b": "composite",
+      "relation": "多保真比较",
+      "explanation": "基于 transfer learning 与基于 composite mapping 的不同方案"
+    },
+    {
+      "a": "mfcnn",
+      "b": "surroopt",
+      "relation": "优化闭环",
+      "explanation": "多保真代理可服务于 surrogate optimization 外环"
+    },
+    {
+      "a": "mfbo",
+      "b": "conservative",
+      "relation": "决策互补",
+      "explanation": "选在哪里补点与约束裕度校准回答不同问题"
+    },
+    {
+      "a": "mfbo",
+      "b": "surroopt",
+      "relation": "优化策略对照",
+      "explanation": "贝叶斯多保真策略与代理优化系统的样本选择环节对照"
+    },
+    {
+      "a": "surroopt",
+      "b": "adjoint",
+      "relation": "优化范式对照",
+      "explanation": "梯度伴随优化与昂贵黑箱代理优化的前提不同"
+    },
+    {
+      "a": "surroopt",
+      "b": "uav",
+      "relation": "系统应用",
+      "explanation": "通用 SBO 与 UAV 多学科代理优化流程"
+    },
+    {
+      "a": "surroopt",
+      "b": "pod",
+      "relation": "搜索降维",
+      "explanation": "优化算法闭环与设计空间降维可以互补"
+    },
+    {
+      "a": "pod",
+      "b": "tensor",
+      "relation": "几何降维对照",
+      "explanation": "线性 POD 基底与 Grassmann/仿射解耦参数化"
+    },
+    {
+      "a": "pod",
+      "b": "egorse",
+      "relation": "优化降维对照",
+      "explanation": "物理形状 POD 与高维黑箱随机/监督嵌入不同"
+    },
+    {
+      "a": "tensor",
+      "b": "egorse",
+      "relation": "降维目标对照",
+      "explanation": "光滑形状流形与高维最优值搜索空间的目标不同"
+    },
+    {
+      "a": "tensor",
+      "b": "diffairfoil",
+      "relation": "几何表示比较",
+      "explanation": "Grassmann 基底优化与学习潜空间扩散两种参数化"
+    },
+    {
+      "a": "egorse",
+      "b": "mfbo",
+      "relation": "高维优化策略",
+      "explanation": "嵌入降低 BO 维数与多保真采样降低评估成本"
+    },
+    {
+      "a": "uav",
+      "b": "concept",
+      "relation": "整机任务对照",
+      "explanation": "多目标任务定制与无条件概念分布建模不同"
+    },
+    {
+      "a": "uav",
+      "b": "agent",
+      "relation": "工作流互补",
+      "explanation": "多学科优化算法与优化脚本自动生成和执行"
+    },
+    {
+      "a": "agent",
+      "b": "drrag",
+      "relation": "流程与知识互补",
+      "explanation": "工程求解器执行与领域规则/检索分别提供动作和证据"
+    },
+    {
+      "a": "agent",
+      "b": "surroopt",
+      "relation": "工作流互补",
+      "explanation": "可自动执行的设计流程与优化系统的数值搜索模块"
+    },
+    {
+      "a": "concept",
+      "b": "skexgen",
+      "relation": "离散连续构型对照",
+      "explanation": "整机配置变量与 CAD 拓扑/几何表达都需处理混合变量"
+    },
+    {
+      "a": "concept",
+      "b": "drrag",
+      "relation": "需求知识补充",
+      "explanation": "概念生成与航空知识/规则检索是不同模块"
+    },
+    {
+      "a": "crossaero",
+      "b": "diffairfoil",
+      "relation": "翼型生成比较",
+      "explanation": "DRL 的跨 Kn 设计策略与潜空间扩散采样目标不同"
+    },
+    {
+      "a": "crossaero",
+      "b": "surroopt",
+      "relation": "优化范式对照",
+      "explanation": "策略学习设计与代理模型加点优化两条途径"
+    },
+    {
+      "a": "soaring",
+      "b": "field",
+      "relation": "研究延展",
+      "explanation": "仿真热气流学习向真实滑翔机热气流飞行验证演进"
+    },
+    {
+      "a": "soaring",
+      "b": "perching",
+      "relation": "控制任务比较",
+      "explanation": "热气流翱翔与固定目标栖停的奖励、动力学不同"
+    },
+    {
+      "a": "soaring",
+      "b": "microswim",
+      "relation": "流动感知对照",
+      "explanation": "利用部分流动线索的 RL，运动器物理机制不同"
+    },
+    {
+      "a": "field",
+      "b": "vortical",
+      "relation": "感知问题对照",
+      "explanation": "热气流状态估计与涡流导航状态选择"
+    },
+    {
+      "a": "microswim",
+      "b": "vortical",
+      "relation": "流动导航比较",
+      "explanation": "微粒 Q-learning 与连续游动器 V-RACER"
+    },
+    {
+      "a": "vortical",
+      "b": "lookahead",
+      "relation": "方法推进",
+      "explanation": "局部流速引导与对未来候选动作结果的前视编码"
+    },
+    {
+      "a": "lookahead",
+      "b": "smart",
+      "relation": "预测器用途类比",
+      "explanation": "前视环境预测用于决策与场代理用于查询是不同任务"
+    },
+    {
+      "a": "hydro",
+      "b": "aero",
+      "relation": "输出类型对照",
+      "explanation": "非定常水动力时间序列生成与稳态翼面气动场预测"
+    },
+    {
+      "a": "correspondence",
+      "b": "tensor",
+      "relation": "形状方法对照",
+      "explanation": "部件对应的合理变形评分与连续形状流形参数化"
+    },
+    {
+      "a": "tfcomp",
+      "b": "transolver",
+      "relation": "专题索引",
+      "explanation": "既有架构创新综述中更详细的物理注意力分析"
+    },
+    {
+      "a": "tfcomp",
+      "b": "perceiver",
+      "relation": "专题索引",
+      "explanation": "既有架构创新综述中更详细的 query/latent 分析"
+    },
+    {
+      "a": "tfcomp",
+      "b": "aero",
+      "relation": "专题索引",
+      "explanation": "既有架构创新综述中更详细的气动场代理组合分析"
+    }
+  ],
+  "topic_members": {
+    "concept": [
+      "t_generation",
+      "t_workflow"
+    ],
+    "uav": [
+      "t_optimization",
+      "t_workflow",
+      "t_surrogate"
+    ],
+    "agent": [
+      "t_workflow"
+    ],
+    "adjoint": [
+      "t_optimization"
+    ],
+    "crossaero": [
+      "t_generation",
+      "t_optimization",
+      "t_rl"
+    ],
+    "conservative": [
+      "t_surrogate",
+      "t_optimization"
+    ],
+    "perching": [
+      "t_rl"
+    ],
+    "drrag": [
+      "t_workflow"
+    ],
+    "tensor": [
+      "t_generation",
+      "t_optimization"
+    ],
+    "correspondence": [
+      "t_generation"
+    ],
+    "diffairfoil": [
+      "t_generation"
+    ],
+    "lookahead": [
+      "t_rl"
+    ],
+    "microswim": [
+      "t_rl"
+    ],
+    "cokriging": [
+      "t_surrogate",
+      "t_optimization"
+    ],
+    "field": [
+      "t_rl"
+    ],
+    "pod": [
+      "t_optimization",
+      "t_generation"
+    ],
+    "egorse": [
+      "t_optimization"
+    ],
+    "vortical": [
+      "t_rl"
+    ],
+    "soaring": [
+      "t_rl"
+    ],
+    "composite": [
+      "t_surrogate"
+    ],
+    "mfcnn": [
+      "t_surrogate"
+    ],
+    "padgan": [
+      "t_generation"
+    ],
+    "padcomp": [
+      "t_generation"
+    ],
+    "pcdgan": [
+      "t_generation"
+    ],
+    "hydro": [
+      "t_surrogate",
+      "t_generation"
+    ],
+    "surroopt": [
+      "t_optimization"
+    ],
+    "seqxyz": [
+      "t_generation"
+    ],
+    "mfbo": [
+      "t_optimization",
+      "t_surrogate"
+    ],
+    "howfar": [
+      "t_attention",
+      "t_generation"
+    ],
+    "position": [
+      "t_attention"
+    ],
+    "perceiver": [
+      "t_attention"
+    ],
+    "smart": [
+      "t_attention",
+      "t_surrogate"
+    ],
+    "dit": [
+      "t_attention",
+      "t_generation"
+    ],
+    "skexgen": [
+      "t_generation",
+      "t_workflow"
+    ],
+    "sato": [
+      "t_attention",
+      "t_surrogate"
+    ],
+    "star": [
+      "t_attention"
+    ],
+    "aero": [
+      "t_attention",
+      "t_surrogate"
+    ],
+    "tfcomp": [
+      "t_attention"
+    ],
+    "transolver": [
+      "t_attention",
+      "t_surrogate"
+    ],
+    "uformer": [
+      "t_attention"
+    ],
+    "unisolver": [
+      "t_attention",
+      "t_project"
+    ]
+  },
+  "footers": {
+    "concept": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]] · [[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]]\n\n**重点关联**：\n\n- **问题对照**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 飞机概念生成比较主体实验未实现给定需求的硬条件逆设计。\n- **整机任务对照**：[[Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 多目标任务定制与无条件概念分布建模不同。\n- **离散连续构型对照**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 整机配置变量与 CAD 拓扑/几何表达都需处理混合变量。\n- **需求知识补充**：[[Literature/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design|DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design]] — 概念生成与航空知识/规则检索是不同模块。\n",
+    "uav": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]] · [[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]\n\n**重点关联**：\n\n- **系统应用**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 通用 SBO 与 UAV 多学科代理优化流程。\n- **整机任务对照**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 多目标任务定制与无条件概念分布建模不同。\n- **工作流互补**：[[Literature/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework|Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework]] — 多学科优化算法与优化脚本自动生成和执行。\n",
+    "agent": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]]\n\n**重点关联**：\n\n- **工作流互补**：[[Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 多学科优化算法与优化脚本自动生成和执行。\n- **流程与知识互补**：[[Literature/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design|DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design]] — 工程求解器执行与领域规则/检索分别提供动作和证据。\n- **工作流互补**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 可自动执行的设计流程与优化系统的数值搜索模块。\n",
+    "adjoint": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]\n\n**重点关联**：\n\n- **优化范式对照**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 梯度伴随优化与昂贵黑箱代理优化的前提不同。\n",
+    "crossaero": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]] · [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]] · [[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]\n\n**重点关联**：\n\n- **翼型生成比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — DRL 的跨 Kn 设计策略与潜空间扩散采样目标不同。\n- **优化范式对照**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 策略学习设计与代理模型加点优化两条途径。\n",
+    "conservative": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]] · [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]\n\n**重点关联**：\n\n- **物理约束互补**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 全局力预测精度与保守可行性评估是不同保障。\n- **约束可靠性互补**：[[Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method|Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]] — 从多保真拟合进一步考虑优化阶段的保守裕度。\n- **决策互补**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 选在哪里补点与约束裕度校准回答不同问题。\n",
+    "perching": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]\n\n**重点关联**：\n\n- **控制任务比较**：[[Literature/Learning to soar in turbulent environments|Learning to soar in turbulent environments]] — 热气流翱翔与固定目标栖停的奖励、动力学不同。\n",
+    "drrag": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]]\n\n**重点关联**：\n\n- **流程与知识互补**：[[Literature/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework|Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework]] — 工程求解器执行与领域规则/检索分别提供动作和证据。\n- **需求知识补充**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 概念生成与航空知识/规则检索是不同模块。\n",
+    "tensor": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]] · [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]\n\n**重点关联**：\n\n- **几何降维对照**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 线性 POD 基底与 Grassmann/仿射解耦参数化。\n- **降维目标对照**：[[Literature/High-dimensional efficient global optimization using both random and supervised embeddings|High-dimensional efficient global optimization using both random and supervised embeddings]] — 光滑形状流形与高维最优值搜索空间的目标不同。\n- **几何表示比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — Grassmann 基底优化与学习潜空间扩散两种参数化。\n- **形状方法对照**：[[Literature/Deformation-driven shape correspondence via shape recognition|Deformation-driven shape correspondence via shape recognition]] — 部件对应的合理变形评分与连续形状流形参数化。\n",
+    "correspondence": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **几何语义对照**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 构造序列解耦与跨形状部件对应探索不同几何结构层级。\n- **形状方法对照**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — 部件对应的合理变形评分与连续形状流形参数化。\n",
+    "diffairfoil": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **方法比较**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — DPP 推动性能与多样性；潜空间扩散侧重生成流形与条件去噪。\n- **方法比较**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 连续条件质量驱动的 GAN 与去噪阶段条件引导是不同路径。\n- **方法比较**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — 二者均使用扩散，但一个用于潜空间翼型采样，一个为图像 DiT。\n- **几何表示比较**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — Grassmann 基底优化与学习潜空间扩散两种参数化。\n- **翼型生成比较**：[[Literature/Aerodynamic shape optimization of airfoils across rarefied to continuum regimes using deep reinforcement learning|Aerodynamic shape optimization of airfoils across rarefied to continuum regimes using deep reinforcement learning]] — DRL 的跨 Kn 设计策略与潜空间扩散采样目标不同。\n",
+    "lookahead": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]\n\n**重点关联**：\n\n- **方法推进**：[[Literature/Learning efficient navigation in vortical flow fields|Learning efficient navigation in vortical flow fields]] — 局部流速引导与对未来候选动作结果的前视编码。\n- **预测器用途类比**：[[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model]] — 前视环境预测用于决策与场代理用于查询是不同任务。\n",
+    "microswim": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]\n\n**重点关联**：\n\n- **流动感知对照**：[[Literature/Learning to soar in turbulent environments|Learning to soar in turbulent environments]] — 利用部分流动线索的 RL，运动器物理机制不同。\n- **流动导航比较**：[[Literature/Learning efficient navigation in vortical flow fields|Learning efficient navigation in vortical flow fields]] — 微粒 Q-learning 与连续游动器 V-RACER。\n",
+    "cokriging": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]] · [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]\n\n**重点关联**：\n\n- **多保真比较**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 统计相关性联合拟合与低保真预训练再微调。\n- **多保真比较**：[[Literature/Multi-fidelity aerodynamic data analysis by using composite neural network|Multi-fidelity aerodynamic data analysis by using composite neural network]] — Co-Kriging 与复合神经网络的融合机制不同。\n- **约束可靠性互补**：[[Literature/An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization|An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization]] — 从多保真拟合进一步考虑优化阶段的保守裕度。\n- **主动加点互补**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 已有响应建模与新样本/保真度选择形成流程互补。\n",
+    "field": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]\n\n**重点关联**：\n\n- **研究延展**：[[Literature/Learning to soar in turbulent environments|Learning to soar in turbulent environments]] — 仿真热气流学习向真实滑翔机热气流飞行验证演进。\n- **感知问题对照**：[[Literature/Learning efficient navigation in vortical flow fields|Learning efficient navigation in vortical flow fields]] — 热气流状态估计与涡流导航状态选择。\n",
+    "pod": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]] · [[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **搜索降维**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 优化算法闭环与设计空间降维可以互补。\n- **几何降维对照**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — 线性 POD 基底与 Grassmann/仿射解耦参数化。\n- **优化降维对照**：[[Literature/High-dimensional efficient global optimization using both random and supervised embeddings|High-dimensional efficient global optimization using both random and supervised embeddings]] — 物理形状 POD 与高维黑箱随机/监督嵌入不同。\n",
+    "egorse": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]\n\n**重点关联**：\n\n- **优化降维对照**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 物理形状 POD 与高维黑箱随机/监督嵌入不同。\n- **降维目标对照**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — 光滑形状流形与高维最优值搜索空间的目标不同。\n- **高维优化策略**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 嵌入降低 BO 维数与多保真采样降低评估成本。\n",
+    "vortical": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]\n\n**重点关联**：\n\n- **感知问题对照**：[[Literature/Glider soaring via reinforcement learning in the field|Glider soaring via reinforcement learning in the field]] — 热气流状态估计与涡流导航状态选择。\n- **流动导航比较**：[[Literature/Flow Navigation by Smart Microswimmers via Reinforcement Learning|Flow Navigation by Smart Microswimmers via Reinforcement Learning]] — 微粒 Q-learning 与连续游动器 V-RACER。\n- **方法推进**：[[Literature/Efficient navigation in vortical flows based on reinforcement learning and flow field prediction|Efficient navigation in vortical flows based on reinforcement learning and flow field prediction]] — 局部流速引导与对未来候选动作结果的前视编码。\n",
+    "soaring": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/流场导航与强化学习|流场导航与强化学习]]\n\n**重点关联**：\n\n- **研究延展**：[[Literature/Glider soaring via reinforcement learning in the field|Glider soaring via reinforcement learning in the field]] — 仿真热气流学习向真实滑翔机热气流飞行验证演进。\n- **控制任务比较**：[[Literature/Controlled gliding and perching through deep-reinforcement-learning|Controlled gliding and perching through deep-reinforcement-learning]] — 热气流翱翔与固定目标栖停的奖励、动力学不同。\n- **流动感知对照**：[[Literature/Flow Navigation by Smart Microswimmers via Reinforcement Learning|Flow Navigation by Smart Microswimmers via Reinforcement Learning]] — 利用部分流动线索的 RL，运动器物理机制不同。\n",
+    "composite": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]\n\n**重点关联**：\n\n- **多保真比较**：[[Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method|Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]] — Co-Kriging 与复合神经网络的融合机制不同。\n- **多保真比较**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 基于 transfer learning 与基于 composite mapping 的不同方案。\n",
+    "mfcnn": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]\n\n**重点关联**：\n\n- **数据策略对照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 预训练/微调思想相近，但模型输出与几何/工况分布不同。\n- **多保真比较**：[[Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method|Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]] — 统计相关性联合拟合与低保真预训练再微调。\n- **多保真比较**：[[Literature/Multi-fidelity aerodynamic data analysis by using composite neural network|Multi-fidelity aerodynamic data analysis by using composite neural network]] — 基于 transfer learning 与基于 composite mapping 的不同方案。\n- **优化闭环**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 多保真代理可服务于 surrogate optimization 外环。\n",
+    "padgan": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **方法承接**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — PaDGAN 的性能-多样性 DPP 被扩展为连续条件下的多解逆设计。\n- **方法比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — DPP 推动性能与多样性；潜空间扩散侧重生成流形与条件去噪。\n- **互补模块**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 生成候选分布与代理优化闭环处理不同环节。\n- **专题详解**：[[Literature/PaDGAN 与 PcDGAN：关系、差异与选择|PaDGAN 与 PcDGAN：关系、差异与选择]] — 对比 DPP 在优化型与条件逆设计中的作用。\n",
+    "padcomp": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **专题详解**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 两篇间的训练目标、质量语义与连续条件处理对照。\n- **专题详解**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — 对比 DPP 在优化型与条件逆设计中的作用。\n",
+    "pcdgan": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **方法承接**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — PaDGAN 的性能-多样性 DPP 被扩展为连续条件下的多解逆设计。\n- **方法比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — 连续条件质量驱动的 GAN 与去噪阶段条件引导是不同路径。\n- **问题对照**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 飞机概念生成比较主体实验未实现给定需求的硬条件逆设计。\n- **表示比较**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 连续性能条件生成与离散 CAD 拓扑/几何码本分层。\n- **专题详解**：[[Literature/PaDGAN 与 PcDGAN：关系、差异与选择|PaDGAN 与 PcDGAN：关系、差异与选择]] — 两篇间的训练目标、质量语义与连续条件处理对照。\n",
+    "hydro": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]] · [[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **方法比较**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — 扩散生成思想一致，去噪网络和输出对象分别为图像 latent 与水动力时间序列。\n- **输出类型对照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 非定常水动力时间序列生成与稳态翼面气动场预测。\n",
+    "surroopt": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]\n\n**重点关联**：\n\n- **互补模块**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — 生成候选分布与代理优化闭环处理不同环节。\n- **优化闭环**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 多保真代理可服务于 surrogate optimization 外环。\n- **优化策略对照**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 贝叶斯多保真策略与代理优化系统的样本选择环节对照。\n- **优化范式对照**：[[Literature/Aerodynamic Design via Control Theory|Aerodynamic Design via Control Theory]] — 梯度伴随优化与昂贵黑箱代理优化的前提不同。\n- **系统应用**：[[Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 通用 SBO 与 UAV 多学科代理优化流程。\n- **搜索降维**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 优化算法闭环与设计空间降维可以互补。\n",
+    "seqxyz": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **表示比较**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 两者都用序列表达工程几何，但 token 语义不同。\n- **表示原则**：[[Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness|How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness]] — 稀疏占用段编码与 token 关系复杂度的取舍。\n",
+    "mfbo": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]\n\n**重点关联**：\n\n- **主动加点互补**：[[Literature/Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method|Generation of surrogate-based aerodynamic model of an UCAV configuration using an adaptive co-Kriging method]] — 已有响应建模与新样本/保真度选择形成流程互补。\n- **决策互补**：[[Literature/An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization|An ensemble weighted average conservative multi-fidelity surrogate modeling method for engineering optimization]] — 选在哪里补点与约束裕度校准回答不同问题。\n- **优化策略对照**：[[Literature/SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN|SURROOPT A GENERIC SURROGATE-BASED OPTIMIZATION CODE FOR AERODYNAMIC AND MULTIDISCIPLINARY DESIGN]] — 贝叶斯多保真策略与代理优化系统的样本选择环节对照。\n- **高维优化策略**：[[Literature/High-dimensional efficient global optimization using both random and supervised embeddings|High-dimensional efficient global optimization using both random and supervised embeddings]] — 嵌入降低 BO 维数与多保真采样降低评估成本。\n",
+    "howfar": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **表示原则**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — token 接口是否预先固定关系会影响上下文建模。\n- **表示原则**：[[Literature/SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates|SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates]] — 稀疏占用段编码与 token 关系复杂度的取舍。\n- **理论互补**：[[Literature/transformer/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias|Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias]] — token 关系预编码与因果路由位置偏差是不同的表征问题。\n",
+    "position": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]\n\n**重点关联**：\n\n- **理论互补**：[[Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness|How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness]] — token 关系预编码与因果路由位置偏差是不同的表征问题。\n- **架构对照**：[[Literature/transformer/Star-Transformer|Star-Transformer]] — 稀疏信息路由与因果注意力的位置偏差不可混淆。\n",
+    "perceiver": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]\n\n**重点关联**：\n\n- **架构类比**：[[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model]] — latent 压缩 + output query；不意味着直接代码继承。\n- **算子比较**：[[Literature/transformer/Transolver|Transolver]] — 固定 bottleneck/query 与按物理状态动态聚合 slice 不同。\n- **专题索引**：[[Literature/transformer/Transformer架构创新论文关联与项目设计参考|Transformer架构创新论文关联与项目设计参考]] — 既有架构创新综述中更详细的 query/latent 分析。\n",
+    "smart": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]\n\n**重点关联**：\n\n- **方法比较**：[[Literature/transformer/Transolver|Transolver]] — 不规则网格物理 slice 与原始几何 latent / 任意 query。\n- **架构类比**：[[Literature/transformer/Perceiver IO|Perceiver IO]] — latent 压缩 + output query；不意味着直接代码继承。\n- **方法比较**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — mesh-free 物理查询与统一翼面网格训练/迁移。\n- **预测器用途类比**：[[Literature/Efficient navigation in vortical flows based on reinforcement learning and flow field prediction|Efficient navigation in vortical flows based on reinforcement learning and flow field prediction]] — 前视环境预测用于决策与场代理用于查询是不同任务。\n",
+    "dit": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]\n\n**重点关联**：\n\n- **方法比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — 二者均使用扩散，但一个用于潜空间翼型采样，一个为图像 DiT。\n- **方法比较**：[[Literature/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models|Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models]] — 扩散生成思想一致，去噪网络和输出对象分别为图像 latent 与水动力时间序列。\n- **条件注入对照**：[[Literature/transformer/Unisolver|Unisolver]] — adaLN 条件调制与 PDE 域级/点级条件分解可对比。\n- **条件机制参照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — AeroTransformer 的物理工况深层调制可与 DiT 方案对照。\n- **架构正交**：[[Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration|Uformer - A General U-Shaped Transformer for Image Restoration]] — 多尺度/局部注意力与条件调制是独立设计维度。\n",
+    "skexgen": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]] · [[Literature/Topics/整机设计与工程智能体|整机设计与工程智能体]]\n\n**重点关联**：\n\n- **表示比较**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 连续性能条件生成与离散 CAD 拓扑/几何码本分层。\n- **表示比较**：[[Literature/SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates|SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates]] — 两者都用序列表达工程几何，但 token 语义不同。\n- **几何语义对照**：[[Literature/Deformation-driven shape correspondence via shape recognition|Deformation-driven shape correspondence via shape recognition]] — 构造序列解耦与跨形状部件对应探索不同几何结构层级。\n- **表示原则**：[[Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness|How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness]] — token 接口是否预先固定关系会影响上下文建模。\n- **离散连续构型对照**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 整机配置变量与 CAD 拓扑/几何表达都需处理混合变量。\n",
+    "sato": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]\n\n**重点关联**：\n\n- **方法承接**：[[Literature/transformer/Transolver|Transolver]] — SATO 在 Transolver 的 Physics-Attention 上结合局部序列化注意力。\n- **局部-全局对照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 复杂车体的局部序列化与规则机翼的多尺度 patch。\n",
+    "star": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]\n\n**重点关联**：\n\n- **全局通信对照**：[[Literature/transformer/Transolver|Transolver]] — 单一 relay node 与多个 physics slice 都降低全连接成本，但归纳偏置不同。\n- **架构对照**：[[Literature/transformer/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias|Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias]] — 稀疏信息路由与因果注意力的位置偏差不可混淆。\n",
+    "aero": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]\n\n**重点关联**：\n\n- **条件机制参照**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — AeroTransformer 的物理工况深层调制可与 DiT 方案对照。\n- **物理代理对照**：[[Literature/transformer/Transolver|Transolver]] — 非结构网格算子与统一表面 patch 主干有不同数据假设。\n- **方法比较**：[[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model]] — mesh-free 物理查询与统一翼面网格训练/迁移。\n- **局部-全局对照**：[[Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles|Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles]] — 复杂车体的局部序列化与规则机翼的多尺度 patch。\n- **多尺度类比**：[[Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration|Uformer - A General U-Shaped Transformer for Image Restoration]] — 两者可用 U 形层级思想，任务/模块不同。\n- **数据策略对照**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 预训练/微调思想相近，但模型输出与几何/工况分布不同。\n",
+    "tfcomp": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]\n\n**重点关联**：\n\n- **专题索引**：[[Literature/transformer/Transolver|Transolver]] — 既有架构创新综述中更详细的物理注意力分析。\n- **专题索引**：[[Literature/transformer/Perceiver IO|Perceiver IO]] — 既有架构创新综述中更详细的 query/latent 分析。\n- **专题索引**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 既有架构创新综述中更详细的气动场代理组合分析。\n",
+    "transolver": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/气动代理与多保真学习|气动代理与多保真学习]]\n\n**重点关联**：\n\n- **方法承接**：[[Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles|Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles]] — SATO 在 Transolver 的 Physics-Attention 上结合局部序列化注意力。\n- **方法比较**：[[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model]] — 不规则网格物理 slice 与原始几何 latent / 任意 query。\n- **物理代理对照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 非结构网格算子与统一表面 patch 主干有不同数据假设。\n- **方法互补**：[[Literature/transformer/Unisolver|Unisolver]] — 物理注意力组织与 PDE 条件分层解决不同瓶颈。\n- **算子比较**：[[Literature/transformer/Perceiver IO|Perceiver IO]] — 固定 bottleneck/query 与按物理状态动态聚合 slice 不同。\n- **全局通信对照**：[[Literature/transformer/Star-Transformer|Star-Transformer]] — 单一 relay node 与多个 physics slice 都降低全连接成本，但归纳偏置不同。\n",
+    "uformer": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]\n\n**重点关联**：\n\n- **多尺度类比**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — 两者可用 U 形层级思想，任务/模块不同。\n- **架构正交**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — 多尺度/局部注意力与条件调制是独立设计维度。\n",
+    "unisolver": "\n## 跨文献关联导航（2026-10-15 整理）\n\n> [!note] 文献关系标注\n> “方法承接”或“研究延展”表示现有笔记可支持的脉络；“比较”“互补”“类比”仅用于研究组织，不声称作者直接引用或实验证实联合方案。\n\n**总览**：[[Literature/文献关系总览|文献关系总览]]\n\n**所属主题**：[[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]] · [[Literature/Topics/机翼生成器研究对照与证据边界|机翼生成器研究对照与证据边界]]\n\n**重点关联**：\n\n- **条件注入对照**：[[Literature/transformer/Scalable Diffusion Models with Transformers|Scalable Diffusion Models with Transformers]] — adaLN 条件调制与 PDE 域级/点级条件分解可对比。\n- **方法互补**：[[Literature/transformer/Transolver|Transolver]] — 物理注意力组织与 PDE 条件分层解决不同瓶颈。\n"
+  }
+}
