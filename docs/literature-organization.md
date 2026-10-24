@@ -19,5 +19,6 @@ When a figure materially explains the method, export it with `tools/extract-pdf-
 ## 当前笔记
 
 - [[Deformation-driven shape correspondence via shape recognition]]
+- [[Literature/Range-GAN Range-Constrained Generative Adversarial Network for Conditioned Design Synthesis]]
 - [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention]]
 - [[Literature/transformer/Does Transolver really need a Transformer]]
