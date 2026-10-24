@@ -19,3 +19,5 @@ When a figure materially explains the method, export it with `tools/extract-pdf-
 ## 当前笔记
 
 - [[Deformation-driven shape correspondence via shape recognition]]
+- [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention]]
+- [[Literature/transformer/Does Transolver really need a Transformer]]
