@@ -24,6 +24,8 @@ tags:
 | [[Literature/transformer/Star-Transformer|Star-Transformer]] | 邻接环 + 全局 relay | 稀疏化、局部与全局通信分工 | 文本任务验证，不是 PDE 算子 |
 | [[Literature/transformer/Perceiver IO|Perceiver IO]] | 固定 latent + 输出 query | 高维输入、结构化任意输出 | 不自带物理守恒和几何归纳偏置 |
 | [[Literature/transformer/Transolver|Transolver]] | 学习到的 physics slice | 不规则大量网格点的全局关系 | 必须从参数化几何构造合理的空间输入特征 |
+| [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] | 解耦 Q/K 投影并删除 slice-token self-attention | 检验 Physics-Attention 的必要组成 | 保留点—slice—点全局混合；六个 PDE 基准与工业气动结果不能跨设置直接比较 |
+| [[Literature/transformer/Does Transolver really need a Transformer|Does Transolver really need a Transformer?]] | NoTokenAttn 消融 + FlashSlice 融合内核 | 区分 token self-attention、slice/deslice 与逐点 MLP 的贡献 | 2026 年 arXiv 预印本；消融部分多为单种子，不能推广为所有 PDE 的定理 |
 | [[Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles|SATO]] | physics slice + serialized patch | 恢复局部边界/细节 | 序列化和局部邻域会影响分辨率行为 |
 | [[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART]] | 原始几何 latent + 独立空间 query | 免仿真网格输入、可分块查询 | 查询独立是特定架构性质，不能推广到所有解码器 |
 | [[Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration|Uformer]] | 多尺度局部窗口 | U-shaped 主干与局部先验 | 图像恢复背景，不直接证明非结构网格精度 |
@@ -71,3 +73,10 @@ flowchart LR
 ## 阅读顺序
 
 [[Literature/transformer/Perceiver IO|Perceiver IO]] → [[Literature/transformer/Transolver|Transolver]] → [[Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles|SATO]] / [[Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model|SMART]] → [[Literature/transformer/Unisolver|Unisolver]] / [[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|AeroTransformer]]，随后补 [[Literature/transformer/Scalable Diffusion Models with Transformers|DiT]]、[[Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration|Uformer]]。已有长篇综合分析见 [[Literature/transformer/Transformer架构创新论文关联与项目设计参考|Transformer 架构创新综述]]。
+
+
+## 新增证据链：Physics-Attention 是否真的需要 token self-attention？
+
+- [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]]：将 Physics-Attention 重写为线性注意力形式，分开 Q/K 投影后移除 slice-token self-attention；作者在六个 PDE 基准和 AirfRANS / ShapeNet-Car 上报告有竞争力的误差与较低计算量。
+- [[Literature/transformer/Does Transolver really need a Transformer|Does Transolver really need a Transformer?]]：在九个三维流体与工业气动配置上，发现 token self-attention 可由逐 token 线性映射替代，而删除 slice/deslice 或只在开头压缩一次会显著恶化误差；同时提出 FlashSlice 优化 slice/deslice 的显存成本。
+- **综合判断：** 目前较强的证据支持“slice/deslice 的全局通信与逐层更新比 slice-token self-attention 更关键”，而不是“Transolver 不需要全局交互”。这些论文没有证明所有 PDE、几何和训练预算下都可无损删除 token attention；应在目标任务上做配对消融，并同时测量误差、梯度、内存和 wall-clock。
