@@ -408,3 +408,14 @@ VAE 的离散潜空间近似、归一化流的后置分类器和扩散模型的�
 - **整机任务对照**：[[Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 多目标任务定制与无条件概念分布建模不同。
 - **离散连续构型对照**：[[Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks|SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks]] — 整机配置变量与 CAD 拓扑/几何表达都需处理混合变量。
 - **需求知识补充**：[[Literature/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design|DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design]] — 概念生成与航空知识/规则检索是不同模块。
+
+
+## 延伸阅读：从固定维飞机生成到真实跨拓扑模型（2026-10-25）
+
+本论文训练集中一架飞机对应固定格式的连续/离散表格特征，主要报告无条件采样。不能因为标题中含“design-requirement-driven”就认为它已解决任意约束的跨构型生成。
+
+- [[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT，ICML 2026]]：来自相关作者/研究谱系的更进一步工作，**明确用离散扩散先采样 144 种预定义 eVTOL 拓扑，再用拓扑 mask 生成每种结构对应的连续设计参数**。使用不同 SUAVE 数据集和验证任务，不能与本论文按同一误差排名。
+- [[Literature/GLUE Coordinating Pre-Trained Generative Models for System-Level Design|GLUE]]：不是生成拓扑，而是让已预训练的翼/机身/内部布置生成器协调接口和质量/升力等约束。
+- [[Literature/基于生成式模型的三维气动外形设计框架|跨外形点云 latent diffusion]]：几何表示不同，侧重在共享潜空间表示不同形状族，尚无明确 CAD 装配拓扑保证。
+
+综述、边界与后续实验建议见 [[Literature/Topics/跨布局飞行器生成与新型网络架构|跨布局飞行器生成与新型网络架构]]。
