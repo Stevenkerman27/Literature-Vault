@@ -13,9 +13,11 @@ tags:
 # Transformer 与物理场算子
 
 > [!abstract] 核心问题
-> 物理场具有高分辨率、不规则几何、长程耦合和工况依赖。下列论文分别回答：“**什么是 token、谁和谁做 attention、在哪里做多尺度、如何注入边界/工况、如何查询输出**？”同属 Transformer，不等于可直接互换的网络。
+> 物理场具有高分辨率、不规则几何、长程耦合和工况依赖。下列论文分别回答：“**什么是 token、谁和谁做 attention、在哪里做多尺度、如何注入边界/工况、如何查询输出**？”这里的模型有些使用 Transformer，有些只是相邻机制；不能直接按“Transformer”统一归类，也不能跨不同输入假设比较精度。
 
 返回 [[Literature/文献关系总览|文献关系总览]]；工程使用情境见 [[Literature/Topics/机翼生成器研究对照与证据边界|机翼生成器研究对照]]。
+
+**通用架构上位入口：** [[Literature/Topics/神经网络架构与高效序列建模|神经网络架构与高效序列建模]]。该页单独梳理 S4 → Mamba-1 → Mamba-2/SSD → Mamba-3、RetNet/GLA/Gated DeltaNet、Hyena、MiTA 和 WeightFormer；本页继续聚焦物理网格、位置/积分特征与局部/全局场预测。两种专题分类正交。
 
 ## 机制谱系（先看不同的计算单元）
 
@@ -99,3 +101,10 @@ flowchart LR
 
 > [!warning] 工程迁移边界
 > MiTA 的 2D pooling 对规则像素序列有效；非结构 CFD 网格的点序、面积/体积权重、局部尖峰/激波与跨分辨率一致性必须另行验证。当前只构成一个待测试的「全局低秩摘要 + 内容路由高频细节」设计假说，不是已被原文证实的气动算子结果。
+
+
+## 和 SSM/高效注意力的关系：哪些证据可以迁移？
+
+- **已验证于语言序列**：[[Literature/architectures/Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]]、[[Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality|Mamba-2/SSD]]、[[Literature/architectures/Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]] 和 [[Literature/architectures/Gated Delta Networks Improving Mamba2 with Delta Rule|Gated DeltaNet]] 强调递归状态与内容相关更新，但其因果序列假设不自动满足无序 CFD 网格的置换不变性。
+- **已验证于规则视觉 patch**：[[Literature/architectures/MambaVision A Hybrid Mamba-Transformer Vision Backbone|MambaVision]] 采用卷积/SSM/高层 Attention 混合。它与 SATO 的局部+全局分工属于**跨任务类比**，不是可直接复现的物理场结果。
+- **有直接物理场证据**：[[Literature/transformer/Transolver|Transolver]]、[[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 和 [[Literature/transformer/Does Transolver really need a Transformer|NoTokenAttn 消融]] 研究在点集上执行全局混合；不能用语言测试的 perplexity 替代局部物理量/积分力/几何梯度检验。
