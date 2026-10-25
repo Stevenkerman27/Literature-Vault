@@ -16,6 +16,10 @@ status: literature-note
 
 # Transformer 架构创新论文关联与项目设计参考
 
+> [!note] 专题版本边界（2026-10-25）
+> 本文是围绕早期 **Transformer 气动代理 + 条件几何生成** 两个应用目标整理的 11 篇相关研究，不是全部高效网络架构的总目录。S4 / Mamba / Mamba-2 / Mamba-3 / RetNet / GLA / Gated DeltaNet / Hyena 和 Fast-Weight Attention 的机制比较已单独整理到 [[Literature/Topics/神经网络架构与高效序列建模|神经网络架构与高效序列建模]]。保留旧正文供历史复查，避免把后来论文反向写成其原始知识范围。
+
+
 > [!abstract]
 > 本笔记围绕两个目标整理 11 篇论文：
 > 1. **性能导向的条件 Transformer Decoder**：根据目标性能/工况生成几何序列；
