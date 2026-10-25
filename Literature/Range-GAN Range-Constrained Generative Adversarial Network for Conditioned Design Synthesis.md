@@ -160,3 +160,14 @@ Range Loss 单独使用时，所有有效样本可能聚集在允许区间的一
 ## 参考资料
 
 - Nobari, Chen and Ahmed, *Range-Constrained Generative Adversarial Network: Design Synthesis Under Constraints Using Conditional Generative Adversarial Networks*, Journal of Mechanical Design, 2022. [论文](https://doi.org/10.1115/1.4052442) · [arXiv](https://arxiv.org/abs/2103.06230) · [官方代码与数据](https://github.com/ahnobari/Range-GAN)
+
+
+## 延伸到 Transformer / 跨布局生成（2026-10-25）
+
+Range-GAN 的“性能区间约束 + 自增强”只是在预训练三维潜空间内生成几何，并**不能自动解决任意离散拓扑或多组件接口合法性**。相邻研究：
+- [[Literature/基于扩散Transformer的多约束气动外形生成式设计|多约束 DiT]]：以条件 Fourier token 和条件随机丢弃应对不完整、任意组合的连续设计需求；
+- [[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]]：真正将拓扑与变长参数作为生成对象；
+- [[Literature/GLUE Coordinating Pre-Trained Generative Models for System-Level Design|GLUE]]：用可微几何和性能约束协调多个已冻结部件生成器；
+- [[Literature/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++]]：展示条件扩散 + Transolver 等气动代理 + 梯度精修和 CFD 回算。
+
+这些是**功能互补与后续研究方向**，不是这些论文已直接组合或验证统一架构。详见 [[Literature/Topics/跨布局飞行器生成与新型网络架构|跨布局专题]]。
