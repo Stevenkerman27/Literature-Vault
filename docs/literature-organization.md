@@ -23,3 +23,4 @@ When a figure materially explains the method, export it with `tools/extract-pdf-
 - [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention]]
 - [[Literature/transformer/Does Transolver really need a Transformer]]
 - [[Literature/transformer/Linear-Time Global Visual Modeling without Explicit Attention]]
+- [[Literature/transformer/Mixture-of-Top-k Attention Efficient Attention via Scalable Fast Weights]]
