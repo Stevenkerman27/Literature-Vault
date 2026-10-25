@@ -22,3 +22,4 @@ When a figure materially explains the method, export it with `tools/extract-pdf-
 - [[Literature/Range-GAN Range-Constrained Generative Adversarial Network for Conditioned Design Synthesis]]
 - [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention]]
 - [[Literature/transformer/Does Transolver really need a Transformer]]
+- [[Literature/transformer/Linear-Time Global Visual Modeling without Explicit Attention]]
