@@ -1300,3 +1300,16 @@ $$
 - **方法互补**：[[Literature/transformer/Unisolver|Unisolver]] — 物理注意力组织与 PDE 条件分层解决不同瓶颈。
 - **算子比较**：[[Literature/transformer/Perceiver IO|Perceiver IO]] — 固定 bottleneck/query 与按物理状态动态聚合 slice 不同。
 - **全局通信对照**：[[Literature/transformer/Star-Transformer|Star-Transformer]] — 单一 relay node 与多个 physics slice 都降低全连接成本，但归纳偏置不同。
+
+
+## Transolver 被用于生成式飞机设计了吗？近期 BWB 文献核查（2026-10-25）
+
+[[Literature/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++（MIT）]] 的 2026-05 v2 在 **12,492 个不同 BWB 几何各一个工况** 的公开 RANS 数据上比较五类代理。Transolver 被用于**从表面几何和工况预测局部压力/摩擦场**；独立的 conditional diffusion model 才负责生成九维 BWB planform，随后基于代理输出做梯度精修，并用 FUN3D 回算。
+
+因而：
+- 它是“Transolver 作为可微气动评价器参与生成优化闭环”的**直接证据**；
+- **不是**“Transolver 主干直接生成任意飞机拓扑”的证据；
+- 论文的 BWB 九维连续参数族与 [[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]] 所处理的离散 eVTOL 拓扑树在问题定义上不同；
+- 关于能否替换为 [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 或 NoTokenAttn 的判断仍需要在同一 BlendedNet++ 数据上独立训练验证。
+
+研究地图：[[Literature/Topics/跨布局飞行器生成与新型网络架构|跨布局飞行器生成与新型网络架构]]。
