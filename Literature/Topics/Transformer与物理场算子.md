@@ -15,7 +15,7 @@ tags:
 > [!abstract] 核心问题
 > 物理场具有高分辨率、不规则几何、长程耦合和工况依赖。下列论文分别回答：“**什么是 token、谁和谁做 attention、在哪里做多尺度、如何注入边界/工况、如何查询输出**？”这里的模型有些使用 Transformer，有些只是相邻机制；不能直接按“Transformer”统一归类，也不能跨不同输入假设比较精度。
 
-返回 [[Literature/文献关系总览|文献关系总览]]；工程使用情境见 [[Literature/Topics/机翼生成器研究对照与证据边界|机翼生成器研究对照]]。
+返回 [[Literature/文献关系总览|文献关系总览]]；场代理如何进入几何生成闭环见 [[Literature/Topics/跨布局飞行器生成与新型网络架构|跨布局专题]]；工程使用情境见 [[Literature/Topics/机翼生成器研究对照与证据边界|机翼生成器研究对照]]。
 
 **通用架构上位入口：** [[Literature/Topics/神经网络架构与高效序列建模|神经网络架构与高效序列建模]]。该页单独梳理 S4 → Mamba-1 → Mamba-2/SSD → Mamba-3、RetNet/GLA/Gated DeltaNet、Hyena、MiTA 和 WeightFormer；本页继续聚焦物理网格、位置/积分特征与局部/全局场预测。两种专题分类正交。
 
@@ -108,3 +108,12 @@ flowchart LR
 - **已验证于语言序列**：[[Literature/architectures/Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]]、[[Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality|Mamba-2/SSD]]、[[Literature/architectures/Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]] 和 [[Literature/architectures/Gated Delta Networks Improving Mamba2 with Delta Rule|Gated DeltaNet]] 强调递归状态与内容相关更新，但其因果序列假设不自动满足无序 CFD 网格的置换不变性。
 - **已验证于规则视觉 patch**：[[Literature/architectures/MambaVision A Hybrid Mamba-Transformer Vision Backbone|MambaVision]] 采用卷积/SSM/高层 Attention 混合。它与 SATO 的局部+全局分工属于**跨任务类比**，不是可直接复现的物理场结果。
 - **有直接物理场证据**：[[Literature/transformer/Transolver|Transolver]]、[[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 和 [[Literature/transformer/Does Transolver really need a Transformer|NoTokenAttn 消融]] 研究在点集上执行全局混合；不能用语言测试的 perplexity 替代局部物理量/积分力/几何梯度检验。
+
+
+## 生成式飞行器设计中，物理场代理不是生成器
+
+[[Literature/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++（MIT）]] 是一篇值得特别标注的交叉论文：Transolver、FiLMNet、PointNet、GraphUNet 和 GNOT 被用作局部压力/摩擦场预测模型，而**真正生成 9 维 BWB 参数的是条件扩散模型**。其后续的代理梯度优化与 FUN3D 回算进一步把生成与物理验证分开。2026-05-15 v2 有 12,492 个几何、各一个工况，注意不要继续把早期的 12,490 样本数或 6 类代理作为该版本结果。
+
+这种“代理神经算子 + 生成器”的组合和 [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 及 [[Literature/transformer/Does Transolver really need a Transformer|NoTokenAttn 消融]] 是**可比较的模型模块**，但后两篇尚未在 BlendedNet++ 相同任务上给出严格配对重训练结果。
+
+下一步值得测试：真实 \(C_p/C_f\)、积分 \(C_L/C_D/C_M\)、几何梯度与扩散生成样本的分布外精度；不仅仅比较场平均误差。候选基础架构待读清单见 [[Literature/待读论文清单|待读论文清单]]。
