@@ -22,9 +22,19 @@ When a figure materially explains the method, export it with `tools/extract-pdf-
 - [[Literature/Topics/神经网络架构与高效序列建模|神经网络架构与高效序列建模]]：S4、Mamba、SSD、RetNet、GLA、GDN、Hyena、MiTA、WeightFormer 等的机制关系。
 - [[Literature/Topics/Transformer与物理场算子|Transformer与物理场算子]]：具体 CFD/PDE 代理与几何表示接口。
 - [[Literature/Topics/几何表示与性能条件生成|几何表示与性能条件生成]]：CAD、翼型、布局条件生成与多样性。
+- [[Literature/Topics/跨布局飞行器生成与新型网络架构|跨布局飞行器生成与新型网络架构]]：将拓扑、形状、条件、气动代理和整机装配分成不同层。
+- [[Literature/待读论文清单|待读论文清单]]：高价值候选及阅读状态，不把待读混成已完成总结。
 
 新增论文应将链接放到最相关的专题；不要把“手工追加当前笔记”当作全量索引。
 
 ## 跨论文关系标注
 
 至少区分 **直接方法承接**、**有假设的数学等价**、**机制合流**、**可比较替代**、**项目未验证假说**，不得仅因两者都使用 Transformer/注意力就声称直接继承。详见 [[docs/literature-architecture-taxonomy-audit|架构分类审查]]。
+
+
+## 笔记完成度标识
+
+- `status: read`：已获得并检查相关原文全文，含方法与主要实验，仍不意味着已独立复现。
+- `status: abstract-and-metadata-reviewed`：论文正文方法尚有缺口，但已核对期刊摘要、图题或元数据；不得补写缺失的公式和数字。
+- `status: abstract-reviewed`：只核对公开摘要，必须明确尚待全文复核。
+- 未来待读论文统一写入 [[Literature/待读论文清单|待读论文清单]]，完成一篇再建立对应独立笔记。
