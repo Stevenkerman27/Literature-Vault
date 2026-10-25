@@ -340,3 +340,8 @@ MiTA 给出一种可以测试的“低频全局总结 + 局部/稀有重要细�
 - 官方 GitHub：https://github.com/QishuaiWen/MiTA
 - 作者官方示例提供 MiTA-DeiT、MiTA-ViT-5、MiTA-Segmenter；需要注意具体 FlashAttention 版本和 GPU 环境。
 - 本笔记的实验数字与公式据 v6 正文 Table 1–5、Appendix Table 6–7；不将早期 v1/v3 版本标题或结果混入最新版本。
+
+
+## 新增分类入口：与 SSM/递归记忆比较
+
+参见 [[Literature/Topics/神经网络架构与高效序列建模|神经网络架构与高效序列建模]]：[[Literature/architectures/Gated Linear Attention Transformers with Hardware-Efficient Training|GLA]] 与 [[Literature/architectures/Gated Delta Networks Improving Mamba2 with Delta Rule|Gated DeltaNet]] 将过去压入固定维矩阵状态；本论文 MiTA 仍通过少量可复用专家精确读取原始 Key/Value，属于**压缩 + 稀疏路由**的混合方案。相同 Fast-Weight 解释不等于相同存储/检索能力。
