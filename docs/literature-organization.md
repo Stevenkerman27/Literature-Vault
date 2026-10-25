@@ -6,7 +6,7 @@
 
 ## 约定
 
-- 路径：`Literature/<论文标题>.md`
+- 路径：既有笔记可在 Literature 根目录或历史 transformer 子目录；**通用序列/注意力/SSM 基础论文使用 Literature/architectures**；专题导航统一使用 Literature/Topics。旧笔记暂不大规模移动，以免破坏 Obsidian 链接和图片路径。
 - 文件开头使用 YAML front matter，至少包含 `title`、`authors`、`year`、`venue`、`doi`、`tags`、`status`、`source`。
 - 若已有真实本地原文 PDF，source 保存对应绝对路径；若原文未归档，在 source 明确写“未提供本地 PDF”，同时用 url / arxiv / doi 指向可核验原文。**禁止虚构本地路径**。作者、年份、会议/期刊和 DOI 均保存在 front matter，不在正文重复。
 - 正文使用中文总结；开头以 Obsidian `abstract` callout 提供原文摘要的翻译，并至少包含：问题与动机、方法、关键贡献、实验结果、局限与启发、关联。文献研究部分简化为3篇左右的核心相关文章并总结作者的脉络。需要完整总结论文方法论和实验设置，做到让人看总结的笔记就能明白具体实现和实验的setup。
