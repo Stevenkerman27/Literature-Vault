@@ -276,6 +276,11 @@ u_i=F(x_i,c;W_0+W_{\mathrm{dyn}}),
 
 与近期 Transolver 机制审视工作的关系是**概念互补，不是直接继承**：WeightFormer 认为全局输入可压缩为动态网络参数；[[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 与 [[Literature/transformer/Does Transolver really need a Transformer|Does Transolver really need a Transformer?]] 强调 slice/deslice 全局混合与 token self-attention 的功能应分开分析。二者值得用相同物理数据集对比，但不能据现有视觉结果直接判断优劣。
 
+## 9. 与 MiTA 的直接对照（2026-10-25 补充）
+
+- [[Literature/transformer/Mixture-of-Top-k Attention Efficient Attention via Scalable Fast Weights|MiTA]]（arXiv 首版 2026-02-01，NeurIPS 2026）比 WeightFormer 更早直接用「两层 Fast-Weight MLP」解释全注意力，并且进一步构造五维分类法。其算法保留压缩共享专家 + Top-k KV 稀疏专家的显式注意力；WeightFormer 则从全局统计直接生成动态线性层、卷积核。两者共享代数视角，但**不是同一替代结构，更不能按不同论文的视觉指标横向判定通用优劣**。
+- 关于“MLP 精确等价”的细节：MiTA 将 softmax 归一化吸收到第二层 \hat V(q) 中，因此这层有效权重也会依赖 query；若保留原 softmax，则它并非普通逐元素激活。该等价不意味着 attention 本身具备线性时间。
+
 ## 9. 核心相关研究脉络
 
 - **HyperNetworks**（Ha et al., 2016）：通过一个网络生成另一网络的权重，是输入/任务条件化参数生成的重要先例。本文并非最先提出动态权重，而是给出 attention 的代数重写并系统测试其替代方案。https://arxiv.org/abs/1609.09106
