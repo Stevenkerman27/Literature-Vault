@@ -281,7 +281,7 @@ u_i=F(x_i,c;W_0+W_{\mathrm{dyn}}),
 - [[Literature/transformer/Mixture-of-Top-k Attention Efficient Attention via Scalable Fast Weights|MiTA]]（arXiv 首版 2026-02-01，NeurIPS 2026）比 WeightFormer 更早直接用「两层 Fast-Weight MLP」解释全注意力，并且进一步构造五维分类法。其算法保留压缩共享专家 + Top-k KV 稀疏专家的显式注意力；WeightFormer 则从全局统计直接生成动态线性层、卷积核。两者共享代数视角，但**不是同一替代结构，更不能按不同论文的视觉指标横向判定通用优劣**。
 - 关于“MLP 精确等价”的细节：MiTA 将 softmax 归一化吸收到第二层 \hat V(q) 中，因此这层有效权重也会依赖 query；若保留原 softmax，则它并非普通逐元素激活。该等价不意味着 attention 本身具备线性时间。
 
-## 9. 核心相关研究脉络
+## 10. 核心相关研究脉络
 
 - **HyperNetworks**（Ha et al., 2016）：通过一个网络生成另一网络的权重，是输入/任务条件化参数生成的重要先例。本文并非最先提出动态权重，而是给出 attention 的代数重写并系统测试其替代方案。https://arxiv.org/abs/1609.09106
 - **Pay Attention to MLPs**（Liu et al., 2021，gMLP）：通过空间门控 MLP 进行序列交互，说明视觉/语言的全局混合不一定需要标准 self-attention。但 gMLP 的空间混合权重与本文动态生成的逐输入权重并不相同。https://arxiv.org/abs/2105.08050
@@ -294,3 +294,8 @@ u_i=F(x_i,c;W_0+W_{\mathrm{dyn}}),
 - 官方代码：https://github.com/LeapLabTHU/WeightFormer
 - 数据与全部精确数字见论文 Table 2、3、4、5、6、7，复杂度与基本推导见 Section 3–4。
 - 图 2 与图 4 采用 arXiv HTML 原始图片远程引用：尚无本地 PDF 实体，因此未声称完成本地资产提取。
+
+
+## 架构族导航
+
+通用长序列机制请看 [[Literature/Topics/神经网络架构与高效序列建模|神经网络架构与高效序列建模]]，该页将本论文与 [[Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality|Mamba-2 / SSD]]、[[Literature/architectures/Gated Linear Attention Transformers with Hardware-Efficient Training|GLA]] 和 [[Literature/transformer/Mixture-of-Top-k Attention Efficient Attention via Scalable Fast Weights|MiTA]] 区分为动态权重、状态压缩和稀疏路由三种不同机制。
