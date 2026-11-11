@@ -240,3 +240,28 @@ $$
 - [[Literature/Aerodynamic Shape Design Space Exploration with Deep Latent Diffusion Model|DiffGeo]]：可微能量引导的几何潜空间采样。
 - [[Literature/Topics/气动优化与设计空间探索|气动优化与设计空间探索]]。
 - [[Literature/Topics/跨布局飞行器生成与新型网络架构|跨布局飞行器生成与新型网络架构]]。
+
+
+## 13. 裁切图示（原论文关键页面）
+
+以下图片由上传的论文 PDF 对应页面裁切，保留在 vault 的 `assets` 目录中。
+
+### 图 2–3：Design Style 表示与映射（PDF 第 5 页）
+
+![[assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 02-03 - Design Style.png]]
+
+### 图 4：Style-space 设计示意（PDF 第 6 页）
+
+![[assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 04 - Style Space.png]]
+
+### 图 5–6：固定需求切片与 style 维度优化（PDF 第 7 页）
+
+![[assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 05-06 - Fixed Requirement Optimization.png]]
+
+### 图 9：飞机构型与性能变化（PDF 第 11 页）
+
+![[assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 09 - Aircraft Configuration and Performance.png]]
+
+### 图 11：物流网络构型变化（PDF 第 13 页）
+
+![[assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 11 - Logistics Network Configuration.png]]
