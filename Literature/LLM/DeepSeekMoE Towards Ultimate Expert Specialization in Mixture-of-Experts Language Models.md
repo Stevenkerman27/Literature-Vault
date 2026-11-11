@@ -1,10 +1,23 @@
 ---
 title: "DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models"
 authors:
-  - Daya Guo
-  - Dejian Yang
-  - Haowei Zhang
-  - et al.
+  - Damai Dai
+  - Chengqi Deng
+  - Chenggang Zhao
+  - R.X. Xu
+  - Huazuo Gao
+  - Deli Chen
+  - Jiashi Li
+  - Wangding Zeng
+  - Xingkai Yu
+  - Y. Wu
+  - Zhenda Xie
+  - Y.K. Li
+  - Panpan Huang
+  - Fuli Luo
+  - Chong Ruan
+  - Zhifang Sui
+  - Wenfeng Liang
 year: 2024
 venue: "ACL 2024 (Long Papers)"
 doi: "10.18653/v1/2024.acl-long.70"
