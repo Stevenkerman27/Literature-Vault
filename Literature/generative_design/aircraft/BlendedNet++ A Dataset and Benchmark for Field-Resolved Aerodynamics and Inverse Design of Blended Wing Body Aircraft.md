@@ -133,7 +133,7 @@ FiLMNet 将局部点特征 \((x,y,z,n_x,n_y,n_z)\) 传给 MLP，12 维广播条�
 
 - **方法组件直接使用**：[[Literature/transformer/Transolver|Transolver]] 是前向 surrogate 家族之一；本论文的生成扩散并非物理注意力模型。
 - **机制审视**：[[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 与 [[Literature/transformer/Does Transolver really need a Transformer|NoTokenAttn]] 质疑 slice-token self-attention 的必要性，但**尚未在本 BWB 数据上做公平复现**。
-- **不一样的跨布局问题**：[[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]] 显式生成离散拓扑/变长参数；BlendedNet++ 固定 BWB 族，只生成连续几何。
+- **不一样的跨布局问题**：[[Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]] 显式生成离散拓扑/变长参数；BlendedNet++ 固定 BWB 族，只生成连续几何。
 - **生成+物理回路**：[[PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN]]、[[Literature/Range-GAN Range-Constrained Generative Adversarial Network for Conditioned Design Synthesis|Range-GAN]] 处理条件与多样性；该文增加场级代理与高保真回算。
 
 ## 原文与数据

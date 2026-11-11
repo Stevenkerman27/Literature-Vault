@@ -22,7 +22,7 @@ tags: [literature, engineering-design, UAV, modular-generation, subsystem-coordi
 
 **GLUE 解决的不是“如何再训练一个更大的端到端飞机扩散模型”，而是“已经有分别训练好的机翼、机身和舱内布局生成器，如何在不重新训练它们的情况下生成接口协调且满足整机约束的设计”。**
 
-相比生成所有离散拓扑的 [[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]]，本文侧重**固定系统模板下的多子系统协同**。两者具有很强的系统架构互补性，却没有相互验证过的组合实验。
+相比生成所有离散拓扑的 [[Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]]，本文侧重**固定系统模板下的多子系统协同**。两者具有很强的系统架构互补性，却没有相互验证过的组合实验。
 
 ## 1. 总体思想与数学接口
 
@@ -130,7 +130,7 @@ S_i: z_i,c_i\mapsto x_i
 
 可将两种机制视为正交模块：
 
-1. 先利用 [[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]] 等对离散部件/连接关系生成拓扑；
+1. 先利用 [[Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]] 等对离散部件/连接关系生成拓扑；
 2. 根据拓扑激活不同数量的已训练 wing/fuselage/propulsor 生成器；
 3. 用带集合/图对称性、可处理变长部件的 GLUE-style 协调器提供共享系统 latent；
 4. 联合几何合法性、升阻、重量、力矩和任务约束，并经高保真真值复核。

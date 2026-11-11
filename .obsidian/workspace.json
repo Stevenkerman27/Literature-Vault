@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Literature/基于扩散Transformer的多约束气动外形生成式设计.md",
+                "file": "Literature/generative_design/aircraft/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "基于扩散Transformer的多约束气动外形生成式设计"
+              "title": "Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design"
             }
           }
         ],
@@ -211,10 +211,22 @@
       "bases:新建数据库": false
     }
   },
-  "active": "57b6506970b07af1",
+  "active": "71c017498fb30241",
   "lastOpenFiles": [
-    "Literature/基于生成式模型的三维气动外形设计框架.md",
+    "Literature/deepSPACE Generative AI for Configuration Design Space Exploration.md",
+    "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
+    "Literature/AI-Based Generative Algorithms applied to the design of Blended Wing Body Aircraft.md",
+    "Literature/assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 11 - Logistics Network Configuration.png",
+    "Literature/assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 09 - Aircraft Configuration and Performance.png",
+    "Literature/assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 05-06 - Fixed Requirement Optimization.png",
+    "Literature/assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 04 - Style Space.png",
+    "Literature/assets/deepSPACE Generative AI for Configuration Design Space Exploration/Figure 02-03 - Design Style.png",
+    "Literature/assets/deepSPACE Generative AI for Configuration Design Space Exploration",
+    "Literature/Configuration Selection via Self-Supervised Performance-Weighted Generative Neural Networks.md",
+    "Literature/Automated Parameterization for Aerodynamic Shape Optimization via Deep Geometric Learning.md",
+    "Literature/Aerodynamic Shape Design Space Exploration with Deep Latent Diffusion Model.md",
     "Literature/基于扩散Transformer的多约束气动外形生成式设计.md",
+    "Literature/基于生成式模型的三维气动外形设计框架.md",
     "Literature/LLM/Mamba Linear-Time Sequence Modeling with Selective State Spaces.md",
     "Literature/LLM/Mamba-3 Improved Sequence Modeling using State Space Principles.md",
     "Literature/LLM/MambaVision A Hybrid Mamba-Transformer Vision Backbone.md",
@@ -233,13 +245,6 @@
     "Literature/generative_design/aircraft/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models.md",
     "Literature/generative_design/aircraft/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft.md",
     "Literature/Aerodynamic Design via Control Theory.md",
-    "Literature/Deformation-driven shape correspondence via shape recognition.md",
-    "Literature/generative_design/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs.md",
-    "Literature/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models.md",
-    "Literature/agent-related/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework.md",
-    "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
-    "Literature/agent-related/Does Multi-Agent Debate Improve AI Feedback on Research Papers.md",
-    "Literature/agent-related/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design.md",
     "Literature/agent-related",
     "Literature/multi-fidility",
     "Literature/RL",
@@ -250,14 +255,8 @@
     "Literature/assets/SkexGen",
     "Literature/assets/Scalable Diffusion Models with Transformers/论文中图4_Patchify_重绘.png",
     "Literature/assets/Scalable Diffusion Models with Transformers/论文中图3_DiT架构_重绘.png",
-    "Literature/assets/Scalable Diffusion Models with Transformers",
     "Literature/assets/Uformer - A General U-Shaped Transformer for Image Restoration/论文中图2.svg",
     "Literature/assets/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias/论文中图3.png",
-    "Literature/assets/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias/论文中图2.png",
-    "Literature/assets/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias/论文中图1.png",
-    "Literature/assets/Star-Transformer/Figure3.png",
-    "Literature/assets/Star-Transformer/Figure2.png",
-    "Literature/assets/Star-Transformer/Figure1.png",
-    "Literature/assets/ucav-adaptive-co-kriging/co-kriging-overview-p003.png"
+    "Literature/assets/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias/论文中图2.png"
   ]
 }

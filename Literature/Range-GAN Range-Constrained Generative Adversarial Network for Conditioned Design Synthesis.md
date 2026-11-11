@@ -166,7 +166,7 @@ Range Loss 单独使用时，所有有效样本可能聚集在允许区间的一
 
 Range-GAN 的“性能区间约束 + 自增强”只是在预训练三维潜空间内生成几何，并**不能自动解决任意离散拓扑或多组件接口合法性**。相邻研究：
 - [[Literature/基于扩散Transformer的多约束气动外形生成式设计|多约束 DiT]]：以条件 Fourier token 和条件随机丢弃应对不完整、任意组合的连续设计需求；
-- [[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]]：真正将拓扑与变长参数作为生成对象；
+- [[Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]]：真正将拓扑与变长参数作为生成对象；
 - [[Literature/GLUE Coordinating Pre-Trained Generative Models for System-Level Design|GLUE]]：用可微几何和性能约束协调多个已冻结部件生成器；
 - [[BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++]]：展示条件扩散 + Transolver 等气动代理 + 梯度精修和 CFD 回算。
 

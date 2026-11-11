@@ -1309,7 +1309,7 @@ $$
 因而：
 - 它是“Transolver 作为可微气动评价器参与生成优化闭环”的**直接证据**；
 - **不是**“Transolver 主干直接生成任意飞机拓扑”的证据；
-- 论文的 BWB 九维连续参数族与 [[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]] 所处理的离散 eVTOL 拓扑树在问题定义上不同；
+- 论文的 BWB 九维连续参数族与 [[Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]] 所处理的离散 eVTOL 拓扑树在问题定义上不同；
 - 关于能否替换为 [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 或 NoTokenAttn 的判断仍需要在同一 BlendedNet++ 数据上独立训练验证。
 
 研究地图：[[Literature/Topics/跨布局飞行器生成与新型网络架构|跨布局飞行器生成与新型网络架构]]。
