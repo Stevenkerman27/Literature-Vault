@@ -6,7 +6,21 @@ authors:
   - Huanqi Cao
   - Chenggang Zhao
   - Chengqi Deng
-  - et al.
+  - Jiashi Li
+  - Damai Dai
+  - Huazuo Gao
+  - Mingyu Xu
+  - Kuai Yu
+  - Liang Zhao
+  - Shangyan Zhou
+  - Zhean Xu
+  - Zhengyan Zhang
+  - Wangding Zeng
+  - Shengding Hu
+  - Yuqing Wang
+  - Jingyang Yuan
+  - Lean Wang
+  - Wenfeng Liang
 year: 2026
 venue: "ICML 2026; Proceedings of Machine Learning Research 306"
 doi: "10.48550/arXiv.2512.24880"
