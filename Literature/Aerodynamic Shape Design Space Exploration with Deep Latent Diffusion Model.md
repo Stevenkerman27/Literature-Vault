@@ -135,7 +135,7 @@ $$
 
 ## 9. 文献关联
 
-- [[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]]：DiffGeo 的 2024 年会议前作。
+- [[Literature/generative_design/airfoil/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]]：DiffGeo 的 2024 年会议前作。
 - [[Literature/Topics/几何表示与性能条件生成]]：潜空间几何与能量条件生成。
 - [[Literature/Topics/跨布局飞行器生成与新型网络架构]]：跨布局组件数量与结构化整机生成的对照。
 - [[Literature/Physics-Regularized Generative Parameterization for Efficient Aerodynamic Shape Optimization]]：物理正则化生成参数化。
