@@ -152,9 +152,9 @@ Range Loss 单独使用时，所有有效样本可能聚集在允许区间的一
 
 ## 8. 相关文献
 
-- [[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]]：用 DPP 联合建模设计质量与多样性。
-- [[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]]：追求精确连续条件下的多解逆设计；Range-GAN 则允许条件为区间。
-- [[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]]：比较 VAE、归一化流与扩散模型的飞机概念生成，但主体实验是无条件生成，不应误认为已经实现严格需求约束。
+- [[PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]]：用 DPP 联合建模设计质量与多样性。
+- [[PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]]：追求精确连续条件下的多解逆设计；Range-GAN 则允许条件为区间。
+- [[A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]]：比较 VAE、归一化流与扩散模型的飞机概念生成，但主体实验是无条件生成，不应误认为已经实现严格需求约束。
 - [[Literature/Topics/几何表示与性能条件生成]]：连续条件生成、几何表示与多样性研究的专题入口。
 
 ## 参考资料
@@ -168,6 +168,6 @@ Range-GAN 的“性能区间约束 + 自增强”只是在预训练三维潜空�
 - [[Literature/基于扩散Transformer的多约束气动外形生成式设计|多约束 DiT]]：以条件 Fourier token 和条件随机丢弃应对不完整、任意组合的连续设计需求；
 - [[Literature/transformer/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design|MixeDiT–MaskeDiT]]：真正将拓扑与变长参数作为生成对象；
 - [[Literature/GLUE Coordinating Pre-Trained Generative Models for System-Level Design|GLUE]]：用可微几何和性能约束协调多个已冻结部件生成器；
-- [[Literature/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++]]：展示条件扩散 + Transolver 等气动代理 + 梯度精修和 CFD 回算。
+- [[BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++]]：展示条件扩散 + Transolver 等气动代理 + 梯度精修和 CFD 回算。
 
 这些是**功能互补与后续研究方向**，不是这些论文已直接组合或验证统一架构。详见 [[Literature/Topics/跨布局飞行器生成与新型网络架构|跨布局专题]]。

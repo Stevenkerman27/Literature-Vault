@@ -139,9 +139,9 @@ S_i: z_i,c_i\mapsto x_i
 
 ## 7. 文献关联
 
-- **直接上游部件生成**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN]]、[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN]] 等性能条件/多样性方法，提供领域子模型训练思想。
+- **直接上游部件生成**：[[PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN]]、[[PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN]] 等性能条件/多样性方法，提供领域子模型训练思想。
 - **系统约束相邻研究**：[[Literature/Range-GAN Range-Constrained Generative Adversarial Network for Conditioned Design Synthesis|Range-GAN]] 约束属性范围；GLUE 强调不同部件接口之间的耦合。
-- **物理评价互补**：[[Literature/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++]] 探索可微代理 + 生成优化，范围是单一 BWB 族。
+- **物理评价互补**：[[BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++]] 探索可微代理 + 生成优化，范围是单一 BWB 族。
 - **开放问题**：[Only Project Once: Projection-Adaptive Loss for Exact Constraint Satisfaction](https://arxiv.org/abs/2610.04572) 为后续等式约束修正提供新思路，已记录在 [[Literature/待读论文清单|待读论文清单]]，但尚未完整阅读或评估移植。
 
 ## 参考资料

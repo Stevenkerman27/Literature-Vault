@@ -78,9 +78,9 @@ Mamba-1 的状态转移可以按通道拥有更一般的对角矩阵；Mamba-2 �
 
 ## 相关研究
 
-- **直接前作**：[[Literature/architectures/Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]]。
-- **理论旁支**：[[Literature/architectures/Gated Linear Attention Transformers with Hardware-Efficient Training|GLA]] 与 [[Literature/architectures/Retentive Network A Successor to Transformer for Large Language Models|RetNet]] 使用可递推矩阵记忆与衰减。
-- **直接后继**：[[Literature/architectures/Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]]。
+- **直接前作**：[[Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]]。
+- **理论旁支**：[[Literature/architectures/Gated Linear Attention Transformers with Hardware-Efficient Training|GLA]] 与 [[Retentive Network A Successor to Transformer for Large Language Models|RetNet]] 使用可递推矩阵记忆与衰减。
+- **直接后继**：[[Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]]。
 - **跨任务比较**：[[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 为物理网格的低秩跨点混合，不应被当作 SSD 特例。
 
 官方论文：https://proceedings.mlr.press/v235/dao24a.html

@@ -1013,4 +1013,4 @@ SMART 可以看成给 latent bottleneck 加了三种空气动力学特化：
 - **方法比较**：[[Literature/transformer/Transolver|Transolver]] — 不规则网格物理 slice 与原始几何 latent / 任意 query。
 - **架构类比**：[[Literature/transformer/Perceiver IO|Perceiver IO]] — latent 压缩 + output query；不意味着直接代码继承。
 - **方法比较**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — mesh-free 物理查询与统一翼面网格训练/迁移。
-- **预测器用途类比**：[[Literature/Efficient navigation in vortical flows based on reinforcement learning and flow field prediction|Efficient navigation in vortical flows based on reinforcement learning and flow field prediction]] — 前视环境预测用于决策与场代理用于查询是不同任务。
+- **预测器用途类比**：[[Efficient navigation in vortical flows based on reinforcement learning and flow field prediction|Efficient navigation in vortical flows based on reinforcement learning and flow field prediction]] — 前视环境预测用于决策与场代理用于查询是不同任务。

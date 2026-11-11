@@ -74,7 +74,7 @@ S_t=S_{t-1}+
 ## 4. 局限与工程边界
 
 - 固定维矩阵状态仍可能遭遇多个相近 Key 的干扰；Delta 修正是定向写入机制，不等于永久精确数据库。
-- 与 Mamba-3 的后续比较应使用相同训练语料与架构设定。[[Literature/architectures/Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]] 是 2026 年另一个改进方向，不是本文作者已测试的模型。
+- 与 Mamba-3 的后续比较应使用相同训练语料与架构设定。[[Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]] 是 2026 年另一个改进方向，不是本文作者已测试的模型。
 - 对无序 CFD 网格，无论 Key 来自坐标还是物理特征，使用顺序递推都会引入点排列影响，需要新的对称机制。
 - 这篇主要是语言与长文本结果，不是雷诺数迁移、激波或可微气动计算的直接证据。
 
@@ -82,7 +82,7 @@ S_t=S_{t-1}+
 
 - **直接演进**：[[Literature/architectures/Gated Linear Attention Transformers with Hardware-Efficient Training|GLA]]（学习遗忘门控）+ DeltaNet 的 key-specific 写入 → Gated DeltaNet（本论文）。
 - **竞争/数学对照**：[[Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality|Mamba-2]] 有结构化状态对偶，GDN 在该基线上引入更有针对性的写入。
-- **直接后续比较**：[[Literature/architectures/Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]] 在共同数据预算下对比 GDN。
+- **直接后续比较**：[[Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]] 在共同数据预算下对比 GDN。
 - **与可微物理场的关系**：若要将长时间序列上的外力、控制和历史流场编码成紧凑状态，可作为候选；对稳态空间网格无需强行使用时序模型。
 
 原文：https://arxiv.org/html/2412.06464

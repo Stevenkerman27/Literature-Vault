@@ -146,9 +146,9 @@ RAE 2822 的优化目标为最小阻力，约束为 $C_l\ge0.824$、$C_m\ge-0.09
 
 **重点关联**：
 
-- **互补模块**：[[Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — 生成候选分布与代理优化闭环处理不同环节。
-- **优化闭环**：[[Literature/Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 多保真代理可服务于 surrogate optimization 外环。
-- **优化策略对照**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 贝叶斯多保真策略与代理优化系统的样本选择环节对照。
+- **互补模块**：[[PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs|PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs]] — 生成候选分布与代理优化闭环处理不同环节。
+- **优化闭环**：[[Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning|Multi-fidelity convolutional neural network surrogate model for aerodynamic optimization based on transfer learning]] — 多保真代理可服务于 surrogate optimization 外环。
+- **优化策略对照**：[[Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 贝叶斯多保真策略与代理优化系统的样本选择环节对照。
 - **优化范式对照**：[[Literature/Aerodynamic Design via Control Theory|Aerodynamic Design via Control Theory]] — 梯度伴随优化与昂贵黑箱代理优化的前提不同。
-- **系统应用**：[[Literature/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 通用 SBO 与 UAV 多学科代理优化流程。
+- **系统应用**：[[Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models|Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models]] — 通用 SBO 与 UAV 多学科代理优化流程。
 - **搜索降维**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 优化算法闭环与设计空间降维可以互补。

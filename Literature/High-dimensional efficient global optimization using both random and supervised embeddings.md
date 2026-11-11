@@ -375,4 +375,4 @@ HESBO 使用极稀疏的哈希嵌入：每个原始维度随机映射到一个�
 
 - **优化降维对照**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 物理形状 POD 与高维黑箱随机/监督嵌入不同。
 - **降维目标对照**：[[Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method|Data-driven surrogate model for aerodynamic design using separable shape tensor method]] — 光滑形状流形与高维最优值搜索空间的目标不同。
-- **高维优化策略**：[[Literature/Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 嵌入降低 BO 维数与多保真采样降低评估成本。
+- **高维优化策略**：[[Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization|Toward Accelerating Discovery via Physics-Driven and Interactive Multifidelity Bayesian Optimization]] — 嵌入降低 BO 维数与多保真采样降低评估成本。

@@ -1304,7 +1304,7 @@ $$
 
 ## Transolver 被用于生成式飞机设计了吗？近期 BWB 文献核查（2026-10-25）
 
-[[Literature/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++（MIT）]] 的 2026-05 v2 在 **12,492 个不同 BWB 几何各一个工况** 的公开 RANS 数据上比较五类代理。Transolver 被用于**从表面几何和工况预测局部压力/摩擦场**；独立的 conditional diffusion model 才负责生成九维 BWB planform，随后基于代理输出做梯度精修，并用 FUN3D 回算。
+[[BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++（MIT）]] 的 2026-05 v2 在 **12,492 个不同 BWB 几何各一个工况** 的公开 RANS 数据上比较五类代理。Transolver 被用于**从表面几何和工况预测局部压力/摩擦场**；独立的 conditional diffusion model 才负责生成九维 BWB planform，随后基于代理输出做梯度精修，并用 FUN3D 回算。
 
 因而：
 - 它是“Transolver 作为可微气动评价器参与生成优化闭环”的**直接证据**；

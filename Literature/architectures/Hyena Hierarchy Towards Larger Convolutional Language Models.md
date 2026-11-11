@@ -34,7 +34,7 @@ z^{(i+1)}=x^{(i)}\odot(h^{(i)}*z^{(i)}),
 
 ## 2. 为什么数据门控重要？
 
-纯 LTI 长卷积会把相同卷积滤波器作用于整个序列，缺乏“遇到当前 token 时按内容选择”的能力。Hyena 以多阶门控叠加序列传播，每一层都可以按当前特征调节经过长卷积的信号；与 [[Literature/architectures/Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]] 的输入相关 SSM 参数不同，Hyena 主要通过门控调制长卷积路径。
+纯 LTI 长卷积会把相同卷积滤波器作用于整个序列，缺乏“遇到当前 token 时按内容选择”的能力。Hyena 以多阶门控叠加序列传播，每一层都可以按当前特征调节经过长卷积的信号；与 [[Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]] 的输入相关 SSM 参数不同，Hyena 主要通过门控调制长卷积路径。
 
 ## 3. 实验设置与结果
 
@@ -60,6 +60,6 @@ z^{(i+1)}=x^{(i)}\odot(h^{(i)}*z^{(i)}),
 
 ### 关联
 
-[[Literature/architectures/MambaVision A Hybrid Mamba-Transformer Vision Backbone|MambaVision]] 选择在低层保留 CNN 局部归纳偏置；与 Hyena 一样说明效率不只来自稀疏化注意力。[[Literature/transformer/Mixture-of-Top-k Attention Efficient Attention via Scalable Fast Weights|MiTA]] 保留少量原始 KV 以精细检索，而 Hyena 不显式读取 KV 列表。
+[[MambaVision A Hybrid Mamba-Transformer Vision Backbone|MambaVision]] 选择在低层保留 CNN 局部归纳偏置；与 Hyena 一样说明效率不只来自稀疏化注意力。[[Literature/transformer/Mixture-of-Top-k Attention Efficient Attention via Scalable Fast Weights|MiTA]] 保留少量原始 KV 以精细检索，而 Hyena 不显式读取 KV 列表。
 
 原文：https://proceedings.mlr.press/v202/poli23a.html

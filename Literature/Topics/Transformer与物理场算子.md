@@ -105,14 +105,14 @@ flowchart LR
 
 ## 和 SSM/高效注意力的关系：哪些证据可以迁移？
 
-- **已验证于语言序列**：[[Literature/architectures/Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]]、[[Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality|Mamba-2/SSD]]、[[Literature/architectures/Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]] 和 [[Literature/architectures/Gated Delta Networks Improving Mamba2 with Delta Rule|Gated DeltaNet]] 强调递归状态与内容相关更新，但其因果序列假设不自动满足无序 CFD 网格的置换不变性。
-- **已验证于规则视觉 patch**：[[Literature/architectures/MambaVision A Hybrid Mamba-Transformer Vision Backbone|MambaVision]] 采用卷积/SSM/高层 Attention 混合。它与 SATO 的局部+全局分工属于**跨任务类比**，不是可直接复现的物理场结果。
+- **已验证于语言序列**：[[Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]]、[[Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality|Mamba-2/SSD]]、[[Mamba-3 Improved Sequence Modeling using State Space Principles|Mamba-3]] 和 [[Literature/architectures/Gated Delta Networks Improving Mamba2 with Delta Rule|Gated DeltaNet]] 强调递归状态与内容相关更新，但其因果序列假设不自动满足无序 CFD 网格的置换不变性。
+- **已验证于规则视觉 patch**：[[MambaVision A Hybrid Mamba-Transformer Vision Backbone|MambaVision]] 采用卷积/SSM/高层 Attention 混合。它与 SATO 的局部+全局分工属于**跨任务类比**，不是可直接复现的物理场结果。
 - **有直接物理场证据**：[[Literature/transformer/Transolver|Transolver]]、[[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 和 [[Literature/transformer/Does Transolver really need a Transformer|NoTokenAttn 消融]] 研究在点集上执行全局混合；不能用语言测试的 perplexity 替代局部物理量/积分力/几何梯度检验。
 
 
 ## 生成式飞行器设计中，物理场代理不是生成器
 
-[[Literature/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++（MIT）]] 是一篇值得特别标注的交叉论文：Transolver、FiLMNet、PointNet、GraphUNet 和 GNOT 被用作局部压力/摩擦场预测模型，而**真正生成 9 维 BWB 参数的是条件扩散模型**。其后续的代理梯度优化与 FUN3D 回算进一步把生成与物理验证分开。2026-05-15 v2 有 12,492 个几何、各一个工况，注意不要继续把早期的 12,490 样本数或 6 类代理作为该版本结果。
+[[BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft|BlendedNet++（MIT）]] 是一篇值得特别标注的交叉论文：Transolver、FiLMNet、PointNet、GraphUNet 和 GNOT 被用作局部压力/摩擦场预测模型，而**真正生成 9 维 BWB 参数的是条件扩散模型**。其后续的代理梯度优化与 FUN3D 回算进一步把生成与物理验证分开。2026-05-15 v2 有 12,492 个几何、各一个工况，注意不要继续把早期的 12,490 样本数或 6 类代理作为该版本结果。
 
 这种“代理神经算子 + 生成器”的组合和 [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 及 [[Literature/transformer/Does Transolver really need a Transformer|NoTokenAttn 消融]] 是**可比较的模型模块**，但后两篇尚未在 BlendedNet++ 相同任务上给出严格配对重训练结果。
 

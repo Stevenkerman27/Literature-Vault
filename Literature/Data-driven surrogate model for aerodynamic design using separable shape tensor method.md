@@ -99,5 +99,5 @@ LAS 表示是 Grassmann 流形上的点，不应直接以欧氏直线做 PCA 插
 
 - **几何降维对照**：[[Literature/Global aerodynamic design optimization based on data dimensionality reduction|Global aerodynamic design optimization based on data dimensionality reduction]] — 线性 POD 基底与 Grassmann/仿射解耦参数化。
 - **降维目标对照**：[[Literature/High-dimensional efficient global optimization using both random and supervised embeddings|High-dimensional efficient global optimization using both random and supervised embeddings]] — 光滑形状流形与高维最优值搜索空间的目标不同。
-- **几何表示比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — Grassmann 基底优化与学习潜空间扩散两种参数化。
+- **几何表示比较**：[[DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — Grassmann 基底优化与学习潜空间扩散两种参数化。
 - **形状方法对照**：[[Literature/Deformation-driven shape correspondence via shape recognition|Deformation-driven shape correspondence via shape recognition]] — 部件对应的合理变形评分与连续形状流形参数化。

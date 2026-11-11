@@ -32,7 +32,7 @@ tags: [literature, aircraft-design, topology-generation, eVTOL, discrete-diffusi
 
 ## 1. 与既有飞机生成研究的区别
 
-[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies...]] 比较 VAE、归一化流与扩散在**固定维窄体客机特征**上的采样，其主要实验甚至是无条件生成。这里将拓扑视为生成变量 \(\tau\)，连续变量 \(\theta\) 的维度 \(D_\tau\) 随飞机拓扑而改变；并对给定性能观测 \(x\) 直接做后验生成：
+[[A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies...]] 比较 VAE、归一化流与扩散在**固定维窄体客机特征**上的采样，其主要实验甚至是无条件生成。这里将拓扑视为生成变量 \(\tau\)，连续变量 \(\theta\) 的维度 \(D_\tau\) 随飞机拓扑而改变；并对给定性能观测 \(x\) 直接做后验生成：
 
 \[
 p(\tau,\theta\mid x)
@@ -134,7 +134,7 @@ M_{\tau,i}=1 \iff \text{第 }i\text{ 个参数存在}.
 
 ## 8. 与其他论文的关系
 
-- **本论文是明显更强的跨布局拓扑建模证据**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] 主要处理固定维、近似固定族的概念客机表格样本。
+- **本论文是明显更强的跨布局拓扑建模证据**：[[A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] 主要处理固定维、近似固定族的概念客机表格样本。
 - **另一种跨构型路线**：[[Literature/基于生成式模型的三维气动外形设计框架]] 共享三维点云潜空间并根据气动条件生成，**不显式枚举机翼/发动机拓扑树**。
 - **互补的整机模块协调**：[[Literature/GLUE Coordinating Pre-Trained Generative Models for System-Level Design|GLUE]] 连接已训练的机翼/机身/内部布局生成器，但其主要实验的拓扑仍固定。
 - **条件输入互补**：[[Literature/基于扩散Transformer的多约束气动外形生成式设计|多约束 DiT]] 在固定参数维的情况下处理缺失/任意组合条件，与拓扑变长 mask 回答不同问题。

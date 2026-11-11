@@ -64,7 +64,7 @@ o_t=q_t^\top S_t,
 
 ## 5. 与其他论文的联系
 
-- [[Literature/architectures/Retentive Network A Successor to Transformer for Large Language Models|RetNet]]：从位置尺度衰减向数据依赖门控扩展，是机制层面的延展，不一定是代码继承。
+- [[Retentive Network A Successor to Transformer for Large Language Models|RetNet]]：从位置尺度衰减向数据依赖门控扩展，是机制层面的延展，不一定是代码继承。
 - [[Literature/architectures/Gated Delta Networks Improving Mamba2 with Delta Rule|Gated DeltaNet]]：增加目标键的误差修正式写入，解决单纯外积写入的精度限制。
 - [[Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality|Mamba-2 / SSD]]：矩阵状态与结构化注意力的另一种实现。
 - [[Literature/transformer/Mixture-of-Top-k Attention Efficient Attention via Scalable Fast Weights|MiTA]]：GLA 将上下文压成固定维状态；MiTA 对部分原始 KV 进行精确访问，并保留压缩共享分支。

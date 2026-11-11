@@ -1605,7 +1605,7 @@ ImageNet 256/512 达到当时扩散模型 SOTA
 
 **重点关联**：
 
-- **方法比较**：[[Literature/DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — 二者均使用扩散，但一个用于潜空间翼型采样，一个为图像 DiT。
+- **方法比较**：[[DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization|DiffAirfoil An Efficient Novel Airfoil Sampler Based on Latent Space Diffusion Model for Aerodynamic Shape Optimization]] — 二者均使用扩散，但一个用于潜空间翼型采样，一个为图像 DiT。
 - **方法比较**：[[Literature/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models|Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models]] — 扩散生成思想一致，去噪网络和输出对象分别为图像 latent 与水动力时间序列。
 - **条件注入对照**：[[Literature/transformer/Unisolver|Unisolver]] — adaLN 条件调制与 PDE 域级/点级条件分解可对比。
 - **条件机制参照**：[[Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design|Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design]] — AeroTransformer 的物理工况深层调制可与 DiT 方案对照。

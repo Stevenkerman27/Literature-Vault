@@ -578,8 +578,8 @@ CAD as Language / Transformer sequence generation
 
 **重点关联**：
 
-- **表示比较**：[[Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 连续性能条件生成与离散 CAD 拓扑/几何码本分层。
+- **表示比较**：[[PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design|PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design]] — 连续性能条件生成与离散 CAD 拓扑/几何码本分层。
 - **表示比较**：[[Literature/SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates|SeqXY2SeqZ-Structure Learning for 3D Shapes by Sequentially Predicting 1D Occupancy Segments from 2D Coordinates]] — 两者都用序列表达工程几何，但 token 语义不同。
 - **几何语义对照**：[[Literature/Deformation-driven shape correspondence via shape recognition|Deformation-driven shape correspondence via shape recognition]] — 构造序列解耦与跨形状部件对应探索不同几何结构层级。
 - **表示原则**：[[Literature/transformer/How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness|How Far Should Tokenization Go - Predictive Effectiveness and Relational Losslessness]] — token 接口是否预先固定关系会影响上下文建模。
-- **离散连续构型对照**：[[Literature/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 整机配置变量与 CAD 拓扑/几何表达都需处理混合变量。
+- **离散连续构型对照**：[[A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs]] — 整机配置变量与 CAD 拓扑/几何表达都需处理混合变量。

@@ -13,15 +13,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Literature/基于生成式模型的三维气动外形设计框架.md",
+                "file": "Literature/RL/Learning efficient navigation in vortical flow fields.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "基于生成式模型的三维气动外形设计框架"
+              "title": "Learning efficient navigation in vortical flow fields"
+            }
+          },
+          {
+            "id": "207b9453e4984c62",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Literature/RL/Learning to soar in turbulent environments.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Learning to soar in turbulent environments"
+            }
+          },
+          {
+            "id": "57b6506970b07af1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Literature/基于扩散Transformer的多约束气动外形生成式设计.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "基于扩散Transformer的多约束气动外形生成式设计"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -182,53 +211,53 @@
       "bases:新建数据库": false
     }
   },
-  "active": "894d3a9325d7ebcc",
+  "active": "57b6506970b07af1",
   "lastOpenFiles": [
-    "Literature/Topics/气动代理与多保真学习.md",
-    "Literature/Topics/神经网络架构与高效序列建模.md",
-    "Literature/Topics/Transformer与物理场算子.md",
-    "Literature/Topics/整机设计与工程智能体.md",
-    "Literature/Topics/气动优化与设计空间探索.md",
-    "Literature/Topics/流场导航与强化学习.md",
-    "Literature/Topics/跨布局飞行器生成与新型网络架构.md",
-    "Literature/Topics/几何表示与性能条件生成.md",
-    "Literature/Topics/机翼生成器研究对照与证据边界.md",
-    "Literature/PaDGAN 与 PcDGAN：关系、差异与选择.md",
-    "Literature/PcDGAN - A Continuous Conditional Diverse Generative Adversarial Network For Inverse Design.md",
-    "Literature/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs.md",
-    "Literature/Aerodynamic Design via Control Theory.md",
-    "Literature/待读论文清单.md",
-    "Literature/基于扩散Transformer的多约束气动外形生成式设计.md",
     "Literature/基于生成式模型的三维气动外形设计框架.md",
-    "Literature/文献关系总览.md",
-    "Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design.md",
-    "Literature/transformer/Perceiver IO.md",
-    "Literature/transformer/Transolver.md",
-    "Literature/transformer/Transformer架构创新论文关联与项目设计参考.md",
-    "Literature/transformer/Scalable Diffusion Models with Transformers.md",
-    "Literature/transformer/SkexGen - Autoregressive Generation of CAD Construction Sequences with Disentangled Codebooks.md",
-    "Literature/transformer/SMART - Scalable Mesh-free Aerodynamic Simulations from Raw Geometries using a Transformer-based Surrogate Model.md",
-    "Literature/transformer/Spatially-aware transformer operator for real-time aerodynamic evaluations of arbitrary three-dimensional vehicles.md",
-    "Literature/transformer/Uformer - A General U-Shaped Transformer for Image Restoration.md",
+    "Literature/基于扩散Transformer的多约束气动外形生成式设计.md",
+    "Literature/LLM/Mamba Linear-Time Sequence Modeling with Selective State Spaces.md",
+    "Literature/LLM/Mamba-3 Improved Sequence Modeling using State Space Principles.md",
+    "Literature/LLM/MambaVision A Hybrid Mamba-Transformer Vision Backbone.md",
+    "Literature/LLM/Retentive Network A Successor to Transformer for Large Language Models.md",
+    "Literature/LLM/Efficiently Modeling Long Sequences with Structured State Spaces.md",
+    "Literature/transformer/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias.md",
+    "Literature/transformer/Linear-Time Global Visual Modeling without Explicit Attention.md",
+    "Literature/architectures/Gated Delta Networks Improving Mamba2 with Delta Rule.md",
+    "Literature/architectures/Gated Linear Attention Transformers with Hardware-Efficient Training.md",
+    "Literature/architectures/Hyena Hierarchy Towards Larger Convolutional Language Models.md",
+    "Literature/architectures/Locality-aware Surrogates for Gradient-based Black-box Optimization.md",
+    "Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality.md",
+    "Literature/architectures/When May a Model Replace the Experiment Audits Licenses and the Price of Trust in Surrogate-Driven Design.md",
+    "Literature/LLM",
+    "Literature/generative_design/aircraft/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs.md",
+    "Literature/generative_design/aircraft/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models.md",
+    "Literature/generative_design/aircraft/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft.md",
+    "Literature/Aerodynamic Design via Control Theory.md",
+    "Literature/Deformation-driven shape correspondence via shape recognition.md",
+    "Literature/generative_design/PaDGAN - A Generative Adversarial Network for Performance Augmented Diverse Designs.md",
+    "Literature/Predicting unsteady hydrodynamic performance of seaplanes based on diffusion models.md",
+    "Literature/agent-related/Aerodynamic Design and Optimization via a Specialized Agentic Generative AI Framework.md",
+    "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
+    "Literature/agent-related/Does Multi-Agent Debate Improve AI Feedback on Research Papers.md",
+    "Literature/agent-related/DR-RAG Domain-Rule-based Retrieval-Augmented Generation for aviation digital model design.md",
+    "Literature/agent-related",
+    "Literature/multi-fidility",
+    "Literature/RL",
+    "Literature/generative_design/airfoil",
+    "Literature/generative_design/aircraft",
+    "Literature/generative_design",
     "Literature/assets/SkexGen/README.txt",
     "Literature/assets/SkexGen",
     "Literature/assets/Scalable Diffusion Models with Transformers/论文中图4_Patchify_重绘.png",
     "Literature/assets/Scalable Diffusion Models with Transformers/论文中图3_DiT架构_重绘.png",
     "Literature/assets/Scalable Diffusion Models with Transformers",
-    "Literature/assets/Transolver",
-    "Literature/assets/Uformer - A General U-Shaped Transformer for Image Restoration/论文中图2_来源说明.txt",
     "Literature/assets/Uformer - A General U-Shaped Transformer for Image Restoration/论文中图2.svg",
-    "Literature/assets/Uformer - A General U-Shaped Transformer for Image Restoration",
     "Literature/assets/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias/论文中图3.png",
     "Literature/assets/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias/论文中图2.png",
     "Literature/assets/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias/论文中图1.png",
-    "Literature/assets/Lost in the Middle at Birth - An Exact Theory of Transformer Position Bias",
     "Literature/assets/Star-Transformer/Figure3.png",
     "Literature/assets/Star-Transformer/Figure2.png",
     "Literature/assets/Star-Transformer/Figure1.png",
-    "Literature/assets/Star-Transformer",
-    "Literature/assets/ucav-adaptive-co-kriging/co-kriging-overview-p003.png",
-    "Literature/assets/ucav-adaptive-co-kriging",
-    "Literature/assets/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design"
+    "Literature/assets/ucav-adaptive-co-kriging/co-kriging-overview-p003.png"
   ]
 }
