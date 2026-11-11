@@ -5,7 +5,18 @@ authors:
   - Nidhi Bhatia
   - Roger Waleffe
   - Rasoul Shafipour
-  - et al.
+  - Tomer Asida
+  - Abhinav Khattar
+  - Nave Assaf
+  - Maximilian Golub
+  - Joey Guman
+  - Tiyasa Mitra
+  - Ritchie Zhao
+  - Ritika Borkar
+  - Ran Zilberstein
+  - Mostofa Patwary
+  - Mohammad Shoeybi
+  - Bita Rouhani
 year: 2026
 venue: "arXiv preprint"
 doi: "10.48550/arXiv.2601.18089"
