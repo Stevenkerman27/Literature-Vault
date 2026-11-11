@@ -26,18 +26,18 @@ tags: [literature, aerodynamic-design, latent-diffusion, generative-design, shap
 
 给定模板网格 $\hat M=\{\hat V,E\}$，其中顶点和连接关系固定，MLP 读取 latent $z$ 与模板顶点坐标，预测顶点位移：
 
-$
+$$
 \delta v=f_\Theta(z,\hat v),\qquad
 M=\{\hat V+f_\Theta(z,\hat V),E\}.
-$
+$$
 
 因此，几何表示的顶点数和连接关系由模板决定；模型学习的是模板上的连续形变，而不是新组件或新连接拓扑。
 
 LSM 的重建目标为双向 Chamfer Distance（CD，倒角距离）加 latent 二范数正则：
 
-$
+$$
 \mathcal L_{LSM}=\mathcal L_{CD}(V,S)+w_z\|z\|^2.
-$
+$$
 
 实现参数：latent 维数 $d=256$；解码 MLP 4 层，隐藏宽度 [256, 256, 512, 512]；LSM 权重 Adam 学习率 $5\times10^{-4}$，每个 latent code 学习率 $10^{-3}$，正则权重 $w_z=10^{-4}$。
 
@@ -51,20 +51,20 @@ Latent Space Diffusion Model（LSDM）在 LSM 学到的 latent code 分布上训
 
 给定可微目标或约束，作者定义能量函数：
 
-$
+$$
 E(V)=\|O(V)\|^2+
 \sum_i\rho_i\|C_i^E(V)\|^2+
 \sum_j\gamma_j\|\max(0,C_j^I(V))\|^2.
-$
+$$
 
 在每个反向扩散步骤，将能量对当前 latent 的梯度加入 score，引导采样朝低能量区域移动：
 
-$
+$$
 \nabla_{z^t}\log\hat p(z^t)
 =
 -\frac{1}{\sqrt{1-\bar\alpha_t}}g_\phi(z^t,t)
 -\xi\nabla_{z^t}E(z^t).
-$
+$$
 
 这使几何条件可以在推理阶段替换或组合，不需要为每种新条件重训基础扩散模型。对难以在有限扩散步数内满足的条件，作者提出 enhanced conditional sampling：完成一次引导去噪后，将 latent 重新加噪到指定时间步，再重复引导采样。2D 实验使用 3 次增强循环、重加噪级别 $T^*=300$；3D 扭转分布引导使用 $T^*=650$。
 
