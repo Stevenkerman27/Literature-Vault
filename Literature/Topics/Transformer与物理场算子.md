@@ -117,3 +117,17 @@ flowchart LR
 这种“代理神经算子 + 生成器”的组合和 [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 及 [[Literature/transformer/Does Transolver really need a Transformer|NoTokenAttn 消融]] 是**可比较的模型模块**，但后两篇尚未在 BlendedNet++ 相同任务上给出严格配对重训练结果。
 
 下一步值得测试：真实 \(C_p/C_f\)、积分 \(C_L/C_D/C_M\)、几何梯度与扩散生成样本的分布外精度；不仅仅比较场平均误差。候选基础架构待读清单见 [[Literature/待读论文清单|待读论文清单]]。
+
+## 容量、表示维度与统计充分性（待读研究线，2026-11-13）
+
+Transolver 的 Physics-Attention slice 数量与多翼 B 架构的 GlobalSheetInteraction latent 数量是两个不同的表示瓶颈。前者压缩面元物理状态，后者在每层交换 1–3 个翼面摘要。它们都不能仅凭名义 token 数或单一熵指标判断是否充分。
+
+待读理论线索集中维护于 [[Literature/待读论文清单#F. 神经算子容量、表示维度与信息论：GRASS Transolver 专题|GRASS Transolver 容量与信息论待读组]]：
+
+- **有效维度**：Roy & Vetterli 的 Effective Rank 将协方差谱归一化后计算熵指数；Chun et al.（ICLR 2026）提醒 PR 等维度估计对有限样本量敏感。项目应用时需按翼数分层、报告样本量敏感性，不把低 ERank 直接解释为模型欠拟合或过拟合。
+- **IB 与高维 MI**：Saxe et al. 讨论普遍“拟合—压缩”叙事的适用边界；Kawaguchi et al. 给出 IB 与泛化误差的理论联系，但明确 IB 不是唯一或必要路径；Butakov et al. 研究通过有损压缩估计高维表示互信息。三者结论互补，不能简化成“互信息越低越好”。
+- **算子学习误差与数据复杂度**：Subedi & Tewari 的统计综述和 Kovachki et al. 的 n-width 数据复杂度分析帮助区分近似、统计、优化与离散化误差，说明模型参数扩张不能替代足够且有代表性的几何/工况样本。
+- **模型缩放**：Bahri et al. 分析参数/数据规模与 population loss 的缩放区域；其框架可用于拟合 GRASS 自己的容量曲线，不应照搬语言模型的幂律指数。
+
+**项目假设 / 待实验验证：** 将 ERank、PR、slice 条件分配熵、面积加权 slice 占用熵与 1/2/3-wing 验证误差、CL/CDi/CMy、局部场误差及几何输入梯度联合分析，才能判断 latent/slice 是否冗余或不足。具体实验按 GRASS-plane 的 [四阶段容量协议](https://github.com/Stevenkerman27/GRASS-plane/blob/master/docs/transolver_capacity_protocol.md) 执行；本节不把待读论文结论写成已验证的 GRASS 结果。
+
