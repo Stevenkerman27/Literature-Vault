@@ -204,6 +204,8 @@ v=\frac{\partial\psi}{\partial x}
 =\pi A\cos[\pi f(x,t)]\sin(\pi y)\frac{\partial f}{\partial x}.
 $$
 
+**通俗解释（上述 double gyre 方程组）：** $\psi$ 是流函数，用它对空间坐标求导就得到水平方向速度 $u$ 和竖直方向速度 $v$；$f(x,t)$ 随时间周期变化，因而两个涡旋会左右摆动，用来测试导航策略是否适应非定常流场。
+
 本文使用无量纲长度 $L=1$，参数为
 
 $$
