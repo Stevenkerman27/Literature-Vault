@@ -29,20 +29,24 @@ Mamba 原型使用沿 token 顺序的递归状态，因果短卷积用于局部�
 
 可把混合后的基本输出概括为：
 
-\[
+$$
 u=\operatorname{SiLU}(\operatorname{Conv}(X_x)),\quad
 v=\operatorname{SiLU}(\operatorname{Conv}(X_z)),
-\]
+$$
 
-\[
+**通俗解释：** 输入被分成两路并各自经过卷积和激活：一路准备交给 Mamba 扫描，另一路保留用于旁路融合。
+
+$$
 z=\operatorname{OutProj}([\operatorname{SelectiveScan}(u);v]).
-\]
+$$
+
+**通俗解释：** 把扫描结果与旁路特征拼接，再经过输出投影；因此图像特征既经过序列建模，也保留直接传递的信息。
 
 这是简化结构表达；具体投影和 reshape 参见论文 Algorithm 1。
 
 ## 2. 四阶段 Macro Architecture
 
-- Stem：两个 stride-2 的 3×3 CNN，将原图降采样为约 \(H/4\times W/4\)。
+- Stem：两个 stride-2 的 3×3 CNN，将原图降采样为约 $H/4\times W/4$。
 - Stage 1–2：卷积残差块，在高分辨率阶段高效提取局部特征。
 - Stage 3–4：Token mixer block，分别使用 MambaVision Mixer 和 Self-Attention。每个阶段前半的 block 使用 MambaVision，后半使用自注意力。
 - 各阶段通过 stride-2 卷积下采样，形成尺度层级。

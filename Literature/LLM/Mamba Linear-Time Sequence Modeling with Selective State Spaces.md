@@ -24,27 +24,33 @@ updated: 2026-10-25
 
 普通离散状态空间模型：
 
-\[
+$$
 h_t=\bar A h_{t-1}+\bar Bx_t,\qquad
 y_t=Ch_t .
-\]
+$$
 
-[[Efficiently Modeling Long Sequences with Structured State Spaces|S4]] 中 \(\bar A,\bar B,C\) 固定，因此整个序列对应一个固定卷积核。Mamba 改为：
+**通俗解释：** 这是普通状态空间模型：每一步用旧记忆加上新输入更新隐藏状态，再从状态产生输出。
 
-\[
+[[Efficiently Modeling Long Sequences with Structured State Spaces|S4]] 中 $\bar A,\bar B,C$ 固定，因此整个序列对应一个固定卷积核。Mamba 改为：
+
+$$
 B_t=s_B(x_t),\quad C_t=s_C(x_t),\quad
 \Delta_t=\operatorname{softplus}(s_\Delta(x_t)),
-\]
+$$
 
-并由 \(\Delta_t,A,B_t\) 离散化得到 \(\bar A_t,\bar B_t\)：
+**通俗解释：** Mamba 根据当前输入动态生成写入、读取和时间步长参数；遇到不同内容时，记住和忽略的信息也会不同。
 
-\[
+并由 $\Delta_t,A,B_t$ 离散化得到 $\bar A_t,\bar B_t$：
+
+$$
 h_t=\bar A_t h_{t-1}+\bar B_t x_t,\qquad y_t=C_t h_t .
-\]
+$$
 
-- \(\Delta_t\) 控制时间尺度/忘记率；
-- \(B_t\) 决定当前输入以什么方向写入状态；
-- \(C_t\) 决定如何从状态读取输出。
+**通俗解释：** 最终仍然按顺序更新记忆，但每一步使用的状态转移、写入和读取系数随输入改变，因此能进行选择性记忆。
+
+- $\Delta_t$ 控制时间尺度/忘记率；
+- $B_t$ 决定当前输入以什么方向写入状态；
+- $C_t$ 决定如何从状态读取输出。
 
 **输入选择性**使当前 token 可以影响未来长距离的信息传播。固定参数卷积无法直接实现这种效果，因为现在的核取决于完整输入序列。
 
@@ -56,7 +62,7 @@ h_t=\bar A_t h_{t-1}+\bar B_t x_t,\qquad y_t=C_t h_t .
 
 ### 2.2 Hardware-aware Selective Scan
 
-不能再把卷积核一次性缓存，作者采用并行 scan 处理按时间变化的线性递推，使用内核融合、减少高带宽显存（HBM）读写、重计算中间状态等策略。形式上可递归处理每一步，也可通过结合律作树形并行扫描。算法最终复杂度随长度 \(L\) 线性增长。
+不能再把卷积核一次性缓存，作者采用并行 scan 处理按时间变化的线性递推，使用内核融合、减少高带宽显存（HBM）读写、重计算中间状态等策略。形式上可递归处理每一步，也可通过结合律作树形并行扫描。算法最终复杂度随长度 $L$ 线性增长。
 
 ### 2.3 Mamba Block
 

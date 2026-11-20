@@ -21,37 +21,45 @@ updated: 2026-10-25
 
 ## 1. 方程：连续 ODE、离散递推和卷积同一算子
 
-用输入 \(u(t)\)、隐藏状态 \(x(t)\) 和输出 \(y(t)\) 写连续模型：
+用输入 $u(t)$、隐藏状态 $x(t)$ 和输出 $y(t)$ 写连续模型：
 
-\[
+$$
 x'(t)=Ax(t)+Bu(t), \quad y(t)=Cx(t)+Du(t).
-\]
+$$
 
-经时间步长 \(\Delta\) 离散，得到：
+**通俗解释：** 隐藏状态像一份持续更新的记忆：新输入改变记忆，输出则是从当前记忆中读到的信息。
 
-\[
+经时间步长 $\Delta$ 离散，得到：
+
+$$
 x_k=\bar A x_{k-1}+\bar B u_k,\qquad
 y_k=Cx_k+Du_k .
-\]
+$$
+
+**通俗解释：** 计算机按离散步处理序列；上一时刻的记忆乘以状态转移矩阵，再加上当前输入的贡献，得到新记忆。
 
 忽略直接项，可将循环展开成卷积核：
 
-\[
+$$
 \bar K=(C\bar B,C\bar A\bar B,\dots,C\bar A^{L-1}\bar B),
 \qquad y=\bar K*u .
-\]
+$$
 
-只要参数 \(A,B,C,\Delta\) 对时间固定（Linear Time-Invariant，LTI），整段序列可用快速卷积并行处理；自回归推理可缓存固定大小状态。这是与必须维护不断增长 KV cache 的标准 causal softmax attention 的不同之处。
+**通俗解释：** 如果状态更新规则不随时间变，所有历史输入对输出的作用可以预先合成一个卷积核，训练时就不必逐步循环计算。
+
+只要参数 $A,B,C,\Delta$ 对时间固定（Linear Time-Invariant，LTI），整段序列可用快速卷积并行处理；自回归推理可缓存固定大小状态。这是与必须维护不断增长 KV cache 的标准 causal softmax attention 的不同之处。
 
 ## 2. 为什么 S4 需要 NPLR？
 
 HiPPO（High-order Polynomial Projection Operators）给出用于压缩连续历史的结构化状态矩阵，但直接计算长卷积核代价高且数值不稳定。S4 使用：
 
-\[
+$$
 A=V(\Lambda-PQ^*)V^*
-\]
+$$
 
-即将 \(A\) 写成可对角化的正规部分与低秩修正，并通过 Woodbury 恒等式与 Cauchy kernel 计算频域传递函数。方法关键是**避免直接为每个时间步计算高次矩阵幂**，又保留 HiPPO 初始化的长程记忆归纳偏置。
+**通俗解释：** 将难计算的状态矩阵拆成易处理的对角部分和小规模低秩修正，从而更高效、稳定地计算长序列影响。
+
+即将 $A$ 写成可对角化的正规部分与低秩修正，并通过 Woodbury 恒等式与 Cauchy kernel 计算频域传递函数。方法关键是**避免直接为每个时间步计算高次矩阵幂**，又保留 HiPPO 初始化的长程记忆归纳偏置。
 
 NPLR、Cauchy 核和稳定离散化是论文真实创新，不是简单地“把 Attention 换成一维卷积”。
 
@@ -72,7 +80,7 @@ NPLR、Cauchy 核和稳定离散化是论文真实创新，不是简单地“把
 
 ## 相关文献
 
-- **直接技术后继**：[[Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]] 引入输入依赖的 \(\Delta,B,C\)，牺牲固定卷积核而获得选择性。
+- **直接技术后继**：[[Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]] 引入输入依赖的 $\Delta,B,C$，牺牲固定卷积核而获得选择性。
 - **理论桥梁**：[[Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality|Mamba-2 / SSD]] 将特殊 SSM 写成结构化 masked attention。
 - **机制对照**：[[Literature/architectures/Hyena Hierarchy Towards Larger Convolutional Language Models|Hyena]] 同样利用长卷积，但额外叠加数据依赖门控。
 

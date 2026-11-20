@@ -116,4 +116,4 @@ flowchart LR
 
 这种“代理神经算子 + 生成器”的组合和 [[Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention|LinearNO]] 及 [[Literature/transformer/Does Transolver really need a Transformer|NoTokenAttn 消融]] 是**可比较的模型模块**，但后两篇尚未在 BlendedNet++ 相同任务上给出严格配对重训练结果。
 
-下一步值得测试：真实 \(C_p/C_f\)、积分 \(C_L/C_D/C_M\)、几何梯度与扩散生成样本的分布外精度；不仅仅比较场平均误差。候选基础架构待读清单见 [[Literature/待读论文清单|待读论文清单]]。
+下一步值得测试：真实 $C_p/C_f$、积分 $C_L/C_D/C_M$、几何梯度与扩散生成样本的分布外精度；不仅仅比较场平均误差。候选基础架构待读清单见 [[Literature/待读论文清单|待读论文清单]]。

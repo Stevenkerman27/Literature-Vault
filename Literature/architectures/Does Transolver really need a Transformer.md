@@ -42,7 +42,7 @@ Transolver 中包含三种机制：全分辨率点流、slice/deslice 全局耦�
 ## 4. 局限与适用边界
 
 - 这是**物理场算子**的表达能力结论，不是离散飞机拓扑或生成分布的通用逼近定理。
-- ANO 的理论宽度 \(J(\epsilon)\) 随精度要求可能无界；定理不保证 GRASS 当前固定 slice 数和有限 hidden size 已处于有效逼近区间。
+- ANO 的理论宽度 $J(\epsilon)$ 随精度要求可能无界；定理不保证 GRASS 当前固定 slice 数和有限 hidden size 已处于有效逼近区间。
 - 九个 benchmark 的结果不能直接证明 GRASS 的整机 Transolver 在不同布局、不同翼面数、不同物理标签质量下也有同样结论。
 - 本文没有证明 attention 对所有数据集都无用；它证明的是在所研究的 Transolver 结构与任务中，attention 可被常数 mixing 替代而不明显损害精度。
 
