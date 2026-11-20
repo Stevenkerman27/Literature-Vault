@@ -1,0 +1,17 @@
+name: Obsidian math syntax
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
+      - "tools/check_obsidian_math.py"
+      - ".github/workflows/obsidian-math.yml"
+  workflow_dispatch:
+
+jobs:
+  validate-math:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check math delimiters
+        run: python3 tools/check_obsidian_math.py
