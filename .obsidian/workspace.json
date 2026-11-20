@@ -27,20 +27,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Literature/RL/Learning to soar in turbulent environments.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Learning to soar in turbulent environments"
-            }
-          },
-          {
-            "id": "57b6506970b07af1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "Literature/generative_design/aircraft/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design.md",
                 "mode": "source",
                 "source": false
@@ -50,7 +36,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -211,8 +197,16 @@
       "bases:新建数据库": false
     }
   },
-  "active": "71c017498fb30241",
+  "active": "207b9453e4984c62",
   "lastOpenFiles": [
+    "Literature/transformer/Towards a Foundation-Model Paradigm for Aerodynamic Prediction in Three-dimensional Design.md",
+    "Literature/architectures/When May a Model Replace the Experiment Audits Licenses and the Price of Trust in Surrogate-Driven Design.md",
+    "Literature/architectures/Locality-aware Surrogates for Gradient-based Black-box Optimization.md",
+    "Literature/architectures/Hyena Hierarchy Towards Larger Convolutional Language Models.md",
+    "Literature/RL/Learning to soar in turbulent environments.md",
+    "Literature/Topics/3D物体扩散生成方法与几何表示综述.md",
+    "Literature/transformer/Transolver Is a Linear Transformer Revisiting Physics-Attention Through the Lens of Linear Attention.md",
+    "Literature/generative_design/aircraft/Do Diffusion Models Dream of Electric Planes Discrete and Continuous Simulation-Based Inference for Aircraft Design.md",
     "Literature/deepSPACE Generative AI for Configuration Design Space Exploration.md",
     "Literature/Data-driven surrogate model for aerodynamic design using separable shape tensor method.md",
     "Literature/AI-Based Generative Algorithms applied to the design of Blended Wing Body Aircraft.md",
@@ -236,15 +230,8 @@
     "Literature/transformer/Linear-Time Global Visual Modeling without Explicit Attention.md",
     "Literature/architectures/Gated Delta Networks Improving Mamba2 with Delta Rule.md",
     "Literature/architectures/Gated Linear Attention Transformers with Hardware-Efficient Training.md",
-    "Literature/architectures/Hyena Hierarchy Towards Larger Convolutional Language Models.md",
-    "Literature/architectures/Locality-aware Surrogates for Gradient-based Black-box Optimization.md",
     "Literature/architectures/Transformers are SSMs Generalized Models and Efficient Algorithms Through Structured State Space Duality.md",
-    "Literature/architectures/When May a Model Replace the Experiment Audits Licenses and the Price of Trust in Surrogate-Driven Design.md",
     "Literature/LLM",
-    "Literature/generative_design/aircraft/A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs.md",
-    "Literature/generative_design/aircraft/Advanced UAV Design Optimization Through Deep Learning-Based Surrogate Models.md",
-    "Literature/generative_design/aircraft/BlendedNet++ A Dataset and Benchmark for Field-Resolved Aerodynamics and Inverse Design of Blended Wing Body Aircraft.md",
-    "Literature/Aerodynamic Design via Control Theory.md",
     "Literature/agent-related",
     "Literature/multi-fidility",
     "Literature/RL",
