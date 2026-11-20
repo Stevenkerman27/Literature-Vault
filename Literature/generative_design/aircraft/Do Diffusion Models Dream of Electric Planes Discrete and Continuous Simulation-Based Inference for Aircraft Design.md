@@ -32,31 +32,35 @@ tags: [literature, aircraft-design, topology-generation, eVTOL, discrete-diffusi
 
 ## 1. 与既有飞机生成研究的区别
 
-[[A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies...]] 比较 VAE、归一化流与扩散在**固定维窄体客机特征**上的采样，其主要实验甚至是无条件生成。这里将拓扑视为生成变量 \(\tau\)，连续变量 \(\theta\) 的维度 \(D_\tau\) 随飞机拓扑而改变；并对给定性能观测 \(x\) 直接做后验生成：
+[[A comparison of methodologies for generating design-requirement-driven conceptual aircraft designs|A comparison of methodologies...]] 比较 VAE、归一化流与扩散在**固定维窄体客机特征**上的采样，其主要实验甚至是无条件生成。这里将拓扑视为生成变量 $\tau$，连续变量 $\theta$ 的维度 $D_\tau$ 随飞机拓扑而改变；并对给定性能观测 $x$ 直接做后验生成：
 
-\[
+$$
 p(\tau,\theta\mid x)
 =p(\theta\mid\tau,x)\,p(\tau\mid x).
-\]
+$$
+
+**通俗解释：** 先判断在目标性能下哪些飞机布局更可能出现，再在选定布局内生成其连续尺寸；两步合起来就是完整的设计后验。
 
 这正是跨布局的关键数学分解。
 
 ## 2. 数据和设计对象
 
 - eVTOL 概念级设计由树状概率程序采样，包含最多两片主翼、平尾、垂尾、翼上升力旋翼组、前向推进器和可选机鼻推进器等。
-- 按组件是否存在，可形成 **144 种拓扑**；性能观测向量 \(x\) 维数为 **10**，含升阻、质量和电池状态等高层性能。
+- 按组件是否存在，可形成 **144 种拓扑**；性能观测向量 $x$ 维数为 **10**，含升阻、质量和电池状态等高层性能。
 - 最大连续参数槽位在不同章节的记法不同：方法正文的**有效最大连续参数为 126**，Simformer 固定 token 模板中**最大槽位为 136**；不能把两个数字混同。具体一个拓扑只激活其相应参数。
 - 原始符号程序采样 **300,000** 个候选，经过几何/结构检查、稳定性判断与 SUAVE 求解收敛筛选，留下 **30,276** 个有效样本。
 - SUAVE 属于概念级分析工具，主要依赖低阶气动/经验关系，**不是高保真 RANS 或整机试飞真实性验证**。作者明确指出，在罕见拓扑和强分离流动下误差会更大；训练集也仍包括实际无法飞行的非常规设计。
 
-## 3. 模型 A：MixeDiT 产生拓扑 \(\tau\)
+## 3. 模型 A：MixeDiT 产生拓扑 $\tau$
 
 MixeDiT（Mixed Diffusion Transformer）同时接收离散拓扑和连续性能变量的扩散状态：
 
-\[
+$$
 (\mathbf p_\tau,\epsilon_x)
 =s_\phi(\tau_{t_\tau},x_{t_x},t_\tau,t_x).
-\]
+$$
+
+**通俗解释：** 网络同时处理带噪的离散拓扑和性能观测，分别输出拓扑类别信息与连续噪声估计。
 
 主要设计：
 1. 拓扑采用 Riemannian Diffusion Language Modeling（RDLM）的连续流形表示，将离散分布嵌入概率单纯形/几何空间，最终通过 argmax 还原离散类别。
@@ -64,33 +68,37 @@ MixeDiT（Mixed Diffusion Transformer）同时接收离散拓扑和连续性能�
 3. 将离散与连续数据联合建模；若某项性能已知，则对该项条件保持不扩散，通过指定条件从模型中采样相应拓扑。
 4. Transformer 负责不同构型 token 与不同观测维度的依赖建模；这里的关键创新是**混合离散/连续分布建模**，不是新型物理注意力算子。
 
-## 4. 模型 B：MaskeDiT 在给定拓扑下生成 \(\theta\)
+## 4. 模型 B：MaskeDiT 在给定拓扑下生成 $\theta$
 
 MaskeDiT 基于 Simformer 的 Transformer 扩散思想，将单个飞机的连续参数表示为一组变量 token。传统 Simformer 假定这些 token 全都存在；作者引入拓扑存在掩码：
 
-\[
+$$
 M_\tau\in\{0,1\}^{d_{\max}},
 \qquad
 M_{\tau,i}=1 \iff \text{第 }i\text{ 个参数存在}.
-\]
+$$
 
-**条件掩码** \(M_C\) 另行表示哪些性能/参数已知，控制观测量与目标量之间的信息传播。两类掩码均用于 self-attention 以及训练损失：不存在的组件**不贡献 loss**。
+**通俗解释：** 掩码中的 1 表示这一构型确实有该参数，0 表示不存在；因此不同飞机可以共用固定槽位的模型。
+
+**条件掩码** $M_C$ 另行表示哪些性能/参数已知，控制观测量与目标量之间的信息传播。两类掩码均用于 self-attention 以及训练损失：不存在的组件**不贡献 loss**。
 
 模型在每个训练 step 随机采样条件集合（联合、似然、后验或 Bernoulli 选择），用有效 token 上的归一化去噪均方误差训练：
 
-\[
+$$
 \mathcal L=
 \frac{\sum_iM_i\|\epsilon_{\omega,i}-\epsilon_i\|^2}{\sum_iM_i}.
-\]
+$$
+
+**通俗解释：** 只计算真实存在参数的预测误差，再除以有效参数数目；不会因某种布局缺少零件而被无意义的空槽惩罚。
 
 实际文中使用带条件掩码的 score/noise matching 和 EMA，推理使用反向随机微分方程的 Euler–Maruyama 离散积分。**掩码只是使不存在变量不参与，而非保证生成飞机的全部连续几何约束自动成立**。
 
 ## 5. 两阶段完整生成
 
-1. 用户提供全部或部分高层性能 \(x^*\)；
-2. MixeDiT 采样 \(\tau\sim p(\tau\mid x^*)\)；
-3. 根据 \(\tau\) 生成存在参数 mask；
-4. MaskeDiT 采样 \(\theta\sim p(\theta\mid\tau,x^*)\)；
+1. 用户提供全部或部分高层性能 $x^*$；
+2. MixeDiT 采样 $\tau\sim p(\tau\mid x^*)$；
+3. 根据 $\tau$ 生成存在参数 mask；
+4. MaskeDiT 采样 $\theta\sim p(\theta\mid\tau,x^*)$；
 5. 按树状数据模型解码构型，并对隐藏截面进行必要的随机补全；
 6. 使用 SUAVE 和几何/结构规则重新评价，比较后验预测与条件的匹配。
 
@@ -100,7 +108,7 @@ M_{\tau,i}=1 \iff \text{第 }i\text{ 个参数存在}.
 
 ### 拓扑条件分布
 
-作者令除总质量外的观测保持均值，改变质量为均值 \(\pm2\sigma\)：
+作者令除总质量外的观测保持均值，改变质量为均值 $\pm2\sigma$：
 - 高质量组**91.6%** 生成样本含第二片翼；
 - 低质量组仅 **0.4%** 含第二片翼。
 

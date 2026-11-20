@@ -38,27 +38,29 @@ updated: 2026-10-24
 
 原始 Transolver 的 Physics-Attention 每层执行以下操作：
 
-1. 从当前点特征计算每个点属于 \(G\) 个 slice 的软权重。
-2. 按权重对全分辨率点特征加权平均，形成 \(G\) 个 slice token。
+1. 从当前点特征计算每个点属于 $G$ 个 slice 的软权重。
+2. 按权重对全分辨率点特征加权平均，形成 $G$ 个 slice token。
 3. 在 slice token 之间执行 self-attention。
 4. 把更新后的 slice token 广播回所有点，并与原点特征做残差连接。
 5. 在全分辨率点特征上执行逐点两层 MLP，再进入下一层。
 
-关键结构有两个：slice 权重每层根据当前特征重新计算；同一组权重同时用于 slice 和 deslice。点级表示并不会永久压缩到 \(G\) 个 token，而是贯穿整个网络。
+关键结构有两个：slice 权重每层根据当前特征重新计算；同一组权重同时用于 slice 和 deslice。点级表示并不会永久压缩到 $G$ 个 token，而是贯穿整个网络。
 
 ## 理论视角：slice/deslice 是低秩非局部算子
 
-在连续域中，可以把 slice 权重视为一组数据依赖的函数 \(s_g(x)\)，满足 \(\sum_g s_g(x)=1\)。slice 先对全域特征积分聚合，deslice 再把聚合结果映射回空间位置。因此一层可写成类似：
+在连续域中，可以把 slice 权重视为一组数据依赖的函数 $s_g(x)$，满足 $\sum_g s_g(x)=1$。slice 先对全域特征积分聚合，deslice 再把聚合结果映射回空间位置。因此一层可写成类似：
 
-\[
+$$
 (\mathcal{K}v)(x)=
 \sum_{g,h=1}^{G}
 s_g(x) A_{gh}
 \frac{\int_\Omega s_h(y)v(y)\,d\mu(y)}
 {\int_\Omega s_h(y)\,d\mu(y)}.
-\]
+$$
 
-其中 \(A\) 是作用于 slice token 的核心映射。完整 Transolver 中，\(A\) 由 token self-attention 产生；NoTokenAttn 变体将其替换为常数核心和逐 token 的可学习通道映射，token 之间不再互相读取，但所有点仍可经由 slice/deslice 交换全局信息。
+**通俗解释：** 每个输出位置先按 slice 权重收集各区域的平均特征，再经矩阵 A 混合并映射回来；即使不用 token 间注意力，也能借 slice 实现全局信息交换。
+
+其中 $A$ 是作用于 slice token 的核心映射。完整 Transolver 中，$A$ 由 token self-attention 产生；NoTokenAttn 变体将其替换为常数核心和逐 token 的可学习通道映射，token 之间不再互相读取，但所有点仍可经由 slice/deslice 交换全局信息。
 
 这一区分非常重要：**删除 token self-attention 并没有删除非局部性。** 每个点的输出仍然依赖全域点对 slice 汇总的贡献，再通过 deslice 读取这些汇总量。
 
@@ -78,7 +80,7 @@ s_g(x) A_{gh}
 | FrozenSlice | 所有层复用第一层的 slice 权重 | 是否必须每层重新计算 slice 权重 |
 | SliceOnce | 只 slice 一次，随后在压缩 token 上运行 Transformer，最后 deslice 一次 | 是否能像 latent bottleneck 模型那样永久压缩点表示 |
 
-主干使用 8 层、隐藏宽度 256、8 个 head、每个 head 32 个 slice、MLP ratio 为 2、GELU 激活且不使用 dropout，完整模型约 3.87M 参数。所有变体使用同一数据流程和相同训练步数；Baseline 与 NoTokenAttn 使用三个随机种子，其余消融通常使用一个种子。指标为最佳验证集相对 \(L^1\) 误差，按样本和输出组归一化后平均，越低越好。
+主干使用 8 层、隐藏宽度 256、8 个 head、每个 head 32 个 slice、MLP ratio 为 2、GELU 激活且不使用 dropout，完整模型约 3.87M 参数。所有变体使用同一数据流程和相同训练步数；Baseline 与 NoTokenAttn 使用三个随机种子，其余消融通常使用一个种子。指标为最佳验证集相对 $L^1$ 误差，按样本和输出组归一化后平均，越低越好。
 
 ## 实验设置
 
@@ -88,7 +90,7 @@ s_g(x) A_{gh}
 - **SHIFT-Wing surface / volume**：跨几何与变化来流条件的跨声速机翼表面或体积场预测。
 - **DrivAerNet++ surface / volume**：固定来流条件下的汽车表面或体积场。
 - **SHIFT-SUV surface / volume**：固定工况，主要考察几何变化对表面或体积场的影响。
-- **DrivAerML surface / volume**：工业汽车气动，单个体积样本可达约 \(1.3\times10^8\) 个点。
+- **DrivAerML surface / volume**：工业汽车气动，单个体积样本可达约 $1.3\times10^8$ 个点。
 
 预测输出包括压力、速度向量或壁面剪切向量。对大网格数据，训练时每次取随机点子集；作者测得评估指标受子采样影响的相对变化不超过 0.18%，远小于各架构消融带来的误差变化。
 
@@ -118,9 +120,9 @@ MlpOnly 的误差达到完整模型的 1.04–5.6 倍。即使将逐点 MLP 加�
 
 ### 3. 只在开头做一次 slice/deslice：最差
 
-SliceOnce 的误差达到完整模型的 2.2–6.8 倍，且在九个配置中均明显变差。它保留了 token self-attention，参数量甚至更大，却把后续网络深度限制在压缩后的 \(G\) 个 token 中，失去全分辨率点流与每层反复全局交互的能力。
+SliceOnce 的误差达到完整模型的 2.2–6.8 倍，且在九个配置中均明显变差。它保留了 token self-attention，参数量甚至更大，却把后续网络深度限制在压缩后的 $G$ 个 token 中，失去全分辨率点流与每层反复全局交互的能力。
 
-作者从理论上将这解释为非局部信息预算的差异：每层都进行 slice/deslice 时，各层可以基于更新后的特征重新汇总信息；SliceOnce 则只通过一次 \(G\times c\) 的压缩瓶颈传递全局信息。
+作者从理论上将这解释为非局部信息预算的差异：每层都进行 slice/deslice 时，各层可以基于更新后的特征重新汇总信息；SliceOnce 则只通过一次 $G\times c$ 的压缩瓶颈传递全局信息。
 
 ### 4. 是否必须每层重算 slice 权重？
 
@@ -141,7 +143,7 @@ Hu 等人的 [[Literature/transformer/Transolver Is a Linear Transformer Revisit
 
 ## FlashSlice：优化全局混合的实现成本
 
-论文同时提出 FlashSlice，用 Triton 融合内核流式执行 slice/deslice，不把完整 \(N\times G\) 的权重张量写入高带宽显存（HBM）。内核在点块中临时计算 membership 权重，并在反向传播中重算，换取更低显存占用。作者报告：
+论文同时提出 FlashSlice，用 Triton 融合内核流式执行 slice/deslice，不把完整 $N\times G$ 的权重张量写入高带宽显存（HBM）。内核在点块中临时计算 membership 权重，并在反向传播中重算，换取更低显存占用。作者报告：
 
 - 标准配置训练加速约 1.35–1.7 倍，显存最多减少 25%。
 - 大 slice 数设置下训练可加速约 4–6.5 倍，显存减少 85–96%。

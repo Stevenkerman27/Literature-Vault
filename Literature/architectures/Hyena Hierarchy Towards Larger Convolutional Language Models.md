@@ -21,16 +21,18 @@ updated: 2026-10-25
 
 ## 1. Hyena Operator
 
-给定长度 \(L\) 的输入序列 \(x\)，先用多路线性投影产生数据控制信号 \(v,x^{(1)},x^{(2)},\ldots\)。交替执行：
+给定长度 $L$ 的输入序列 $x$，先用多路线性投影产生数据控制信号 $v,x^{(1)},x^{(2)},\ldots$。交替执行：
 
-\[
+$$
 z^{(0)}=v,\qquad
 z^{(i+1)}=x^{(i)}\odot(h^{(i)}*z^{(i)}),
-\]
+$$
 
-其中 \(*\) 表示全序列卷积，\(\odot\) 为逐元素 gating，\(h^{(i)}\) 为由隐式网络产生的长滤波器。这是一种**概念性简化写法**：原文还包含短卷积、顺序安排、位置编码、门控和 output projection 等实现细节。
+**通俗解释：** 先用长卷积从整段序列收集信息，再由当前输入产生的门控逐元素筛选；重复多层即可建立长距离依赖。
 
-长卷积核通常由隐式 MLP 按相对位置索引生成，而不需直接训练长度为 \(L\) 的稠密向量。计算卷积可以使用 FFT，量级通常为 \(O(L\log L)\)；即使不显式构造 \(L^2\) 注意力矩阵，所需滤波器仍然依赖序列长度。
+其中 $*$ 表示全序列卷积，$\odot$ 为逐元素 gating，$h^{(i)}$ 为由隐式网络产生的长滤波器。这是一种**概念性简化写法**：原文还包含短卷积、顺序安排、位置编码、门控和 output projection 等实现细节。
+
+长卷积核通常由隐式 MLP 按相对位置索引生成，而不需直接训练长度为 $L$ 的稠密向量。计算卷积可以使用 FFT，量级通常为 $O(L\log L)$；即使不显式构造 $L^2$ 注意力矩阵，所需滤波器仍然依赖序列长度。
 
 ## 2. 为什么数据门控重要？
 
@@ -49,7 +51,7 @@ z^{(i+1)}=x^{(i)}\odot(h^{(i)}*z^{(i)}),
 |---|---|---|
 | [[Literature/architectures/Efficiently Modeling Long Sequences with Structured State Spaces|S4]] | 时不变 SSM 对应的卷积 | 没有输入依赖的核心状态系数 |
 | Hyena | 隐式生成的长卷积 | 多级逐位置乘法门控 |
-| [[Literature/architectures/Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]] | 输入依赖状态更新 | \(\Delta_t,B_t,C_t\) 选择性 |
+| [[Literature/architectures/Mamba Linear-Time Sequence Modeling with Selective State Spaces|Mamba]] | 输入依赖状态更新 | $\Delta_t,B_t,C_t$ 选择性 |
 | Standard Attention | Query–Key 对每个历史 token 的相似度 | Query 内容直接检索历史 |
 
 ## 5. 对物理场和工程生成的边界

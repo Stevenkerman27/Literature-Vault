@@ -21,42 +21,50 @@ updated: 2026-10-25
 
 ## 1. 三种矩阵记忆更新
 
-令 Key 为 \(k_t\in\mathbb R^{d_k}\)，Value 为 \(v_t\in\mathbb R^{d_v}\)，矩阵状态为 \(S_t\in\mathbb R^{d_v\times d_k}\)。
+令 Key 为 $k_t\in\mathbb R^{d_k}$，Value 为 $v_t\in\mathbb R^{d_v}$，矩阵状态为 $S_t\in\mathbb R^{d_v\times d_k}$。
 
 **普通线性注意力外积累加**：
 
-\[
+$$
 S_t=S_{t-1}+v_tk_t^\top .
-\]
+$$
+
+**通俗解释：** 最简单的线性记忆每一步都把新的 Key–Value 外积叠加进去，但旧记录不会按内容自动被覆盖。
 
 问题：旧 Key–Value 可能不断叠加，难以改写。
 
 **Mamba-2 式标量门控遗忘**（简化）：
 
-\[
+$$
 S_t=\alpha_tS_{t-1}+v_tk_t^\top .
-\]
+$$
+
+**通俗解释：** 乘以 α 后再写入新信息，等于整体降低旧记忆的权重；缺点是好坏信息一起衰减。
 
 问题：遗忘是全局性的，可能一起抹去仍有价值的信息。
 
 **Delta Rule**：
 
-\[
+$$
 S_t=S_{t-1}+
 \beta_t(v_t-S_{t-1}k_t)k_t^\top .
-\]
+$$
 
-其中 \(S_{t-1}k_t\) 是旧状态对该 Key 的当前预测；本次只写入预测误差，而不是把新 Value 整体叠加。可以理解为 Key 定位的定向记忆修正。
+**通俗解释：** 先用旧记忆预测当前 Key 应有的 Value，只把预测误差写回去，相当于对指定键做精准纠错。
+
+其中 $S_{t-1}k_t$ 是旧状态对该 Key 的当前预测；本次只写入预测误差，而不是把新 Value 整体叠加。可以理解为 Key 定位的定向记忆修正。
 
 **Gated DeltaNet**：
 
-\[
+$$
 \boxed{S_t=\alpha_tS_{t-1}
 +\beta_t(v_t-\alpha_tS_{t-1}k_t)k_t^\top}.
-\]
+$$
 
-它结合全局遗忘系数 \(\alpha_t\) 与 Key 定位的覆盖力度 \(\beta_t\)。这与原文的
-\(S_t=S_{t-1}[\alpha_t(I-\beta_t k_tk_t^\top)]+\beta_tv_tk_t^\top\)
+**通俗解释：** 这一步先用 α 控制总体遗忘，再用 β 决定对当前 Key 改写多少；结合了记忆清理和定向更新。
+
+它结合全局遗忘系数 $\alpha_t$ 与 Key 定位的覆盖力度 $\beta_t$。这与原文的
+$S_t=S_{t-1}[\alpha_t(I-\beta_t k_tk_t^\top)]+\beta_tv_tk_t^\top$
 是同一式子。实际网络还包含归一化、输入投影和残差等模块。
 
 ## 2. 为什么还需要专用训练算法？
