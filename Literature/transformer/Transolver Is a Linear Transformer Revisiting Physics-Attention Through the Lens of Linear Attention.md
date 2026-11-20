@@ -35,7 +35,7 @@ updated: 2026-10-24
 
 ## 问题与动机
 
-Transolver 的 Physics-Attention 通过 \(N\) 个网格点与 \(M\) 个 slice 之间的软分配降低全局交互的成本，其中通常 \(M\ll N\)。原始模块先把点特征聚合成 \(M\) 个 slice token，再在这 \(M\) 个 token 上执行标准自注意力，最后将更新后的 token 广播回 \(N\) 个点。
+Transolver 的 Physics-Attention 通过 $N$ 个网格点与 $M$ 个 slice 之间的软分配降低全局交互的成本，其中通常 $M\ll N$。原始模块先把点特征聚合成 $M$ 个 slice token，再在这 $M$ 个 token 上执行标准自注意力，最后将更新后的 token 广播回 $N$ 个点。
 
 作者提出两个问题：
 
@@ -48,64 +48,78 @@ Transolver 的 Physics-Attention 通过 \(N\) 个网格点与 \(M\) 个 slice �
 
 ### 1. 重写原始 Physics-Attention
 
-令点特征为 \(H\in\mathbb{R}^{N\times C}\)，slice 数为 \(M\)。原始 Transolver 先计算点到 slice 的权重：
+令点特征为 $H\in\mathbb{R}^{N\times C}$，slice 数为 $M$。原始 Transolver 先计算点到 slice 的权重：
 
-\[
+$$
 W=\operatorname{Softmax}_{M}(\operatorname{Linear}^{Q/K}(H)),
 \qquad W\in\mathbb{R}^{N\times M}.
-\]
+$$
 
-将特征投影为 \(V=\operatorname{Linear}^{V}(H)\)，再通过加权平均聚合成 slice token：
+**通俗解释：** 把 N 个网格点映射到 M 个 slice 的软权重，数值越大就表示这个点越属于对应的 slice。
 
-\[
+将特征投影为 $V=\operatorname{Linear}^{V}(H)$，再通过加权平均聚合成 slice token：
+
+$$
 Z=D^{-1}W^\top V,\qquad
 D=\operatorname{diag}(W^\top\mathbf{1}).
-\]
+$$
 
-原始模块随后计算 \(Z'=\operatorname{SelfAttention}(Z)\)，再反切片：
+**通俗解释：** 先按权重对所有点的特征求平均，形成少量 slice token；D 负责除以每个 slice 的权重总量，避免点数不同造成尺度偏差。
 
-\[
+原始模块随后计算 $Z'=\operatorname{SelfAttention}(Z)$，再反切片：
+
+$$
 H'=WZ'.
-\]
+$$
+
+**通俗解释：** 把处理后的 slice 信息按原权重分发回每个网格点，恢复点级预测。
 
 因此原始模块的结构可以概括为：
 
-\[
+$$
 H\;(N\text{ 个点})
 \rightarrow Z\;(M\text{ 个 slice})
 \rightarrow \operatorname{SelfAttention}(Z)
 \rightarrow H'\;(N\text{ 个点}).
-\]
+$$
+
+**通俗解释：** 整个模块先把大量点压缩为少量 slice，在 slice 上处理全局关系，再展开回点，因此避免直接在 N 个点之间做全连接注意力。
 
 ### 2. 广义化：分开学习 Q 与 K 的投影
 
-作者将原来共享的投影拆为独立的 \(\operatorname{Linear}^{Q}\) 和 \(\operatorname{Linear}^{K}\)，分别构造：
+作者将原来共享的投影拆为独立的 $\operatorname{Linear}^{Q}$ 和 $\operatorname{Linear}^{K}$，分别构造：
 
-\[
+$$
 \varphi(Q)=\operatorname{Softmax}_{M}(\operatorname{Linear}^{Q}(H)),
-\]
+$$
 
-\[
+**通俗解释：** 独立的 Query 投影决定每个输出点要从哪些 slice 读取信息。
+
+$$
 \psi^\top(K)=
 \operatorname{Softmax}_{N}(\operatorname{Linear}^{K}(H)^\top).
-\]
+$$
 
-这里 \(\varphi(Q)\in\mathbb{R}^{N\times M}\)，而 \(\psi^\top(K)\in\mathbb{R}^{M\times N}\)。两侧分别在 slice 维和点维归一化，解除原始 slice/deslice 的共享权重约束。作者认为这种不对称的归一化和独立投影有助于形成更丰富的权重模式。
+**通俗解释：** 独立的 Key 投影决定各输入点向哪些 slice 汇总信息；它与读取权重不再被强制绑定。
+
+这里 $\varphi(Q)\in\mathbb{R}^{N\times M}$，而 $\psi^\top(K)\in\mathbb{R}^{M\times N}$。两侧分别在 slice 维和点维归一化，解除原始 slice/deslice 的共享权重约束。作者认为这种不对称的归一化和独立投影有助于形成更丰富的权重模式。
 
 ### 3. 简化：删除 slice-token self-attention
 
 在解除对称约束后，作者移除 slice token 之间的 self-attention，得到：
 
-\[
+$$
 \boxed{
 \operatorname{LinearNO}(H)=
 \varphi(Q)\left[\psi^\top(K)\operatorname{Linear}^{V}(H)\right]
 }
-\]
+$$
 
-计算顺序是先计算 \(M\times N\) 与 \(N\times C\) 的乘积，再将 \(M\times C\) 的 latent 表示映射回 \(N\times C\)。它没有 \(M\times M\) 的 token self-attention 矩阵。
+**通俗解释：** 先把全体点压成 M 个全局摘要，再直接映射回 N 个点；去掉 slice 间自注意力，仍保留通过摘要汇集信息的能力。
 
-在 \(M\) 固定时，原始 Physics-Attention 的主要复杂度可写为 \(O(NM+M^2)\)，LinearNO 则为 \(O(NM)\)。这里“线性”指关于网格点数 \(N\) 的复杂度；若 \(M\) 随 \(N\) 增长，仍不能无条件称为对所有维度均线性。
+计算顺序是先计算 $M\times N$ 与 $N\times C$ 的乘积，再将 $M\times C$ 的 latent 表示映射回 $N\times C$。它没有 $M\times M$ 的 token self-attention 矩阵。
+
+在 $M$ 固定时，原始 Physics-Attention 的主要复杂度可写为 $O(NM+M^2)$，LinearNO 则为 $O(NM)$。这里“线性”指关于网格点数 $N$ 的复杂度；若 $M$ 随 $N$ 增长，仍不能无条件称为对所有维度均线性。
 
 ![论文中图 2：Physics-Attention 与 LinearNO 的结构对比](https://arxiv.org/html/2511.06294v3/pipeline.png)
 
@@ -113,7 +127,7 @@ H\;(N\text{ 个点})
 
 ## 理论解释
 
-作者证明，在网格逐步细化、采样点服从空间测度、特征函数有界等假设下，LinearNO 在概率意义上收敛到连续积分核算子的 Monte Carlo 近似。直觉上，\(\psi^\top(K)V\) 聚合全域信息，\(\varphi(Q)\) 决定每个输出点如何读取 latent 汇总。
+作者证明，在网格逐步细化、采样点服从空间测度、特征函数有界等假设下，LinearNO 在概率意义上收敛到连续积分核算子的 Monte Carlo 近似。直觉上，$\psi^\top(K)V$ 聚合全域信息，$\varphi(Q)$ 决定每个输出点如何读取 latent 汇总。
 
 该结果支持 LinearNO 属于神经算子（Neural Operator）范畴，并解释其离散化行为；**它不是有限样本下的误差上界，也不意味着对任意几何、网格或工况都优于 Transolver**。
 
@@ -121,9 +135,9 @@ H\;(N\text{ 个点})
 
 ### 1. 六个标准 PDE 基准
 
-论文使用 Airfoil、Pipe、Plasticity、Navier–Stokes（NS）、Darcy 与 Elasticity 六个标准任务。网格规模从 Elasticity 的 972 个点，到 Burgers 的 16,384 个点不等；Airfoil、Pipe、Plasticity 采用结构网格，NS、Darcy、Burgers 使用笛卡尔网格，Elasticity 使用非结构网格。主文表格报告相对 \(L^2\) 误差，越低越好。
+论文使用 Airfoil、Pipe、Plasticity、Navier–Stokes（NS）、Darcy 与 Elasticity 六个标准任务。网格规模从 Elasticity 的 972 个点，到 Burgers 的 16,384 个点不等；Airfoil、Pipe、Plasticity 采用结构网格，NS、Darcy、Burgers 使用笛卡尔网格，Elasticity 使用非结构网格。主文表格报告相对 $L^2$ 误差，越低越好。
 
-| 任务 | Transolver 相对 \(L^2\) | LinearNO 相对 \(L^2\) |
+| 任务 | Transolver 相对 $L^2$ | LinearNO 相对 $L^2$ |
 |---|---:|---:|
 | Airfoil | 0.0053 | **0.0049** |
 | Pipe | 0.0030 | **0.0024** |
@@ -136,30 +150,30 @@ H\;(N\text{ 个点})
 
 ### 2. 工业级气动任务
 
-作者进一步测试 AirfRANS 与 ShapeNet-Car，既预测物体表面与周围流场，也评估积分气动系数。表中数值来自论文的相对 \(L^2\) 误差；\(\rho\) 为 Spearman 秩相关系数，越接近 1 表示设计排序越一致。
+作者进一步测试 AirfRANS 与 ShapeNet-Car，既预测物体表面与周围流场，也评估积分气动系数。表中数值来自论文的相对 $L^2$ 误差；$\rho$ 为 Spearman 秩相关系数，越接近 1 表示设计排序越一致。
 
 | 数据集 / 指标 | Transolver | LinearNO |
 |---|---:|---:|
 | AirfRANS，体积场 | 0.0023 | **0.0011** |
 | AirfRANS，表面场 | 0.0085 | **0.0077** |
-| AirfRANS，升力系数 \(C_L\) | 0.1230 | **0.0491** |
-| AirfRANS，升力排序 \(\rho_L\) | 0.9978 | **0.9992** |
+| AirfRANS，升力系数 $C_L$ | 0.1230 | **0.0491** |
+| AirfRANS，升力排序 $\rho_L$ | 0.9978 | **0.9992** |
 | ShapeNet-Car，体积场 | 0.0221 | **0.0194** |
 | ShapeNet-Car，表面场 | 0.0785 | **0.0754** |
-| ShapeNet-Car，阻力系数 \(C_D\) | 0.0117 | **0.0106** |
-| ShapeNet-Car，阻力排序 \(\rho_D\) | 0.9914 | **0.9925** |
+| ShapeNet-Car，阻力系数 $C_D$ | 0.0117 | **0.0106** |
+| ShapeNet-Car，阻力排序 $\rho_D$ | 0.9914 | **0.9925** |
 
 作者还在 AirfRANS 上设置了训练与测试的雷诺数（Reynolds number）和迎角范围差异，考察分布外泛化。此结果仍属于特定数据集划分与物理模型生成的数据分布，不能等同于对真实飞行试验或任意新构型的验证。
 
 ### 3. 计算效率
 
-在六个标准 PDE 任务上，作者报告 LinearNO 平均减少 **40.0% 参数量**和 **36.2% FLOPs（浮点运算量）**。这一效率提升来自删除 slice token 之间的 \(M\times M\) 自注意力，并让聚合与反聚合以线性注意力形式直接相乘，而不是来自移除点到 slice 的全局混合。
+在六个标准 PDE 任务上，作者报告 LinearNO 平均减少 **40.0% 参数量**和 **36.2% FLOPs（浮点运算量）**。这一效率提升来自删除 slice token 之间的 $M\times M$ 自注意力，并让聚合与反聚合以线性注意力形式直接相乘，而不是来自移除点到 slice 的全局混合。
 
 ## 消融实验：哪些机制真正有用？
 
 论文的关键消融是：即使保留原始 Physics-Attention 的共享投影，删除 slice self-attention 也常常不损害准确率；因此“必须先解绑 Q/K，才能去掉 slice attention”的解释并不充分。作者报告，去掉 slice attention 在多数设置中会改善误差；但改善幅度依任务而变，不能概括为每个任务都必然更好。
 
-作者的两步消融表明，**仅做投影解绑并不稳定地产生全部收益，解绑与删除 self-attention 的组合效果最好**。在六个基准上，完整 LinearNO 的相对 \(L^2\) 误差分别为 0.0049、0.0024、0.0011、0.0699、0.0050 和 0.0050。
+作者的两步消融表明，**仅做投影解绑并不稳定地产生全部收益，解绑与删除 self-attention 的组合效果最好**。在六个基准上，完整 LinearNO 的相对 $L^2$ 误差分别为 0.0049、0.0024、0.0011、0.0699、0.0050 和 0.0050。
 
 ## 关键贡献
 
@@ -172,7 +186,7 @@ H\;(N\text{ 个点})
 
 - **不是“slice/deslice 没用”。** LinearNO 仍然需要全局聚合与反聚合；它删除的是 slice token 之间的 self-attention。
 - **投影解绑的解释并非最终定论。** 2026 年后续论文在九个三维流体与气动基准上进一步控制“是否使用 token attention”和“是否共享投影”两个因素，发现共享投影、无 token attention 的版本同样可以接近基线。见 [[Literature/transformer/Does Transolver really need a Transformer|Does Transolver really need a Transformer?]]。
-- **复杂度声明有条件。** \(O(NM)\) 依赖 slice 数 \(M\) 的取值；此外，真实训练时间还受点级特征、MLP、内存读写与实现影响。
+- **复杂度声明有条件。** $O(NM)$ 依赖 slice 数 $M$ 的取值；此外，真实训练时间还受点级特征、MLP、内存读写与实现影响。
 - **跨论文误差不可直接横比。** 数据划分、输入特征、训练预算与指标不同；应优先比较同一论文内、相同设置下的消融。
 - **对气动设计的意义是结构假设，不是自动成立的结论。** 需要在目标几何、工况、积分气动力和梯度质量上重新验证。
 

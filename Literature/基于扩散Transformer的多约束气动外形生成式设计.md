@@ -22,24 +22,28 @@ tags: [literature, aircraft-generative-design, diffusion-transformer, DiT, missi
 ## 1. 模型输入输出
 
 - 输入：初始噪声/带噪连续几何参数、扩散时间步、提供的若干目标条件。
-- 条件示例：升阻比 \(L/D\)、弹径和翼根弦长等来自不同量纲的工程标量；在推理时允许不完整。
+- 条件示例：升阻比 $L/D$、弹径和翼根弦长等来自不同量纲的工程标量；在推理时允许不完整。
 - 输出：连续参数化的飞行器气动外形变量，并非三维 CAD 实体、直接的网格点云或 CFD 场。
-- 核心：Diffusion Transformer 负责去噪并建立几何 token 与条件 token 之间的交互。官网摘要未提供具体 \(\epsilon\)-prediction 或 \(v\)-prediction 头定义，不能仅凭 DiT 名称推定。
+- 核心：Diffusion Transformer 负责去噪并建立几何 token 与条件 token 之间的交互。官网摘要未提供具体 $\epsilon$-prediction 或 $v$-prediction 头定义，不能仅凭 DiT 名称推定。
 
 ## 2. Multi-frequency Fourier Feature Embedder
 
 标准 Fourier 特征编码可写成（**以下是方法族示意，不是论文精确频率取值**）：
 
-\[
+$$
 \gamma(c)=[\sin(2\pi f_1c),\cos(2\pi f_1c),\ldots,\sin(2\pi f_mc),\cos(2\pi f_mc)].
-\]
+$$
+
+**通俗解释：** 把每个标量条件转换为多组不同频率的正弦、余弦特征，让网络更容易区分数值的细微变化和非线性关系。
 
 本文的条件不是全部先相加到扩散时间嵌入，而是成为 token 序列的一部分：
 
-\[
+$$
 X_{\mathrm{DiT}}
 =[X_{\mathrm{geometry\ noise}};\,E(c_1);\ldots;E(c_k)].
-\]
+$$
+
+**通俗解释：** 几何噪声 token 与每条已知性能条件的编码一起作为 Transformer 输入；模型能分别关注各个条件。
 
 这让 Self-Attention 能够根据不同几何变量对不同性能条件分配关注，而不强迫所有条件经一次全局加和后丢失独立性。作者在官方摘要中指出，它避免传统加法式条件融合中条件归一化和时间嵌入的相互干扰。
 
@@ -51,9 +55,11 @@ X_{\mathrm{DiT}}
 
 在概念层面，训练允许模型近似学习
 
-\[
+$$
 p_\theta(x_{\mathrm{shape}}\mid\{c_i:i\in\mathcal O\}),\quad\mathcal O\subseteq\{1,\dots,k\}.
-\]
+$$
+
+**通俗解释：** 给定若干可用条件时，模型学习符合这些条件的形状分布；条件集合可以是全部，也可以只是一部分。
 
 该技术与 classifier-free guidance 有共享的随机无条件训练思想，但本文还增加逐项条件丢弃；不能直接把二者当作同一个算法。论文声称推理阶段可使用任意数量与组合的给定条件，并产出匹配目标的外形参数，但还需要全文的成功率和真值复核才能评价在严格工程公差下的能力。
 

@@ -28,33 +28,37 @@ tags:
 ---
 
 > [!abstract] 摘要译述（依据 arXiv v6）
-> 标准 Self-Attention 可以解释为两层 fast-weight 多层感知机（Multi-Layer Perceptron，MLP）：权重来自当前序列的 Key/Value，隐藏层宽度等于上下文 token 数 \(N\)，因此难以扩展至长序列。以此为出发点，论文把高效注意力统一为两类 fast-weight 扩展策略：Routing（路由，只读取一部分原始权重）和 Compression（压缩，将大量原始权重提炼成小型共享模块）；提出涵盖策略、专家类型、专家数量、专家构造和路由拓扑的五维分类。新方法 Mixture-of-Top-k Attention（MiTA）先通过少量 landmark queries 探测全体 Key/Value，将其聚合为一个全局共享专家，同时为每个 landmark 检索 top-k 的原始 Key/Value，构成可变形且可复用的稀疏专家；各原始 query 一直访问共享专家，另外稀疏访问所选专家。在 ImageNet-1K、ADE20K 和 Long Range Arena 上验证了准确率与运行效率，并分析了 token-pruning 现象与不同注意力算法之间的迁移。
+> 标准 Self-Attention 可以解释为两层 fast-weight 多层感知机（Multi-Layer Perceptron，MLP）：权重来自当前序列的 Key/Value，隐藏层宽度等于上下文 token 数 $N$，因此难以扩展至长序列。以此为出发点，论文把高效注意力统一为两类 fast-weight 扩展策略：Routing（路由，只读取一部分原始权重）和 Compression（压缩，将大量原始权重提炼成小型共享模块）；提出涵盖策略、专家类型、专家数量、专家构造和路由拓扑的五维分类。新方法 Mixture-of-Top-k Attention（MiTA）先通过少量 landmark queries 探测全体 Key/Value，将其聚合为一个全局共享专家，同时为每个 landmark 检索 top-k 的原始 Key/Value，构成可变形且可复用的稀疏专家；各原始 query 一直访问共享专家，另外稀疏访问所选专家。在 ImageNet-1K、ADE20K 和 Long Range Arena 上验证了准确率与运行效率，并分析了 token-pruning 现象与不同注意力算法之间的迁移。
 
 # 一句话结论
 
-**MiTA 将 Attention 解释为“输入生成的一次性 MLP”，但其算法创新并不是替换成普通 MLP，而是把长度为 \(N\) 的动态 Key/Value 权重拆成：全局压缩的共享专家 + \(m\) 个由内容决定的 top-k 稀疏专家，然后让查询只读其中很小一部分。**
+**MiTA 将 Attention 解释为“输入生成的一次性 MLP”，但其算法创新并不是替换成普通 MLP，而是把长度为 $N$ 的动态 Key/Value 权重拆成：全局压缩的共享专家 + $m$ 个由内容决定的 top-k 稀疏专家，然后让查询只读其中很小一部分。**
 
-这是与 [[Literature/transformer/Linear-Time Global Visual Modeling without Explicit Attention|WeightFormer]] 不同的 fast-weight 路线：MiTA **仍然执行真实的注意力**，只是把每个 query 访问的 Key/Value 缩减为 \(m+ks\) 个，而 WeightFormer 用全局统计直接预测卷积/MLP 的参数。MiTA 在 2026-02-01 首次公开，WeightFormer 直到 2026-05 才公开，因而如果检索关键词是“一次性 MLP 权重”，MiTA 更早且更直接命中这种说法。
+这是与 [[Literature/transformer/Linear-Time Global Visual Modeling without Explicit Attention|WeightFormer]] 不同的 fast-weight 路线：MiTA **仍然执行真实的注意力**，只是把每个 query 访问的 Key/Value 缩减为 $m+ks$ 个，而 WeightFormer 用全局统计直接预测卷积/MLP 的参数。MiTA 在 2026-02-01 首次公开，WeightFormer 直到 2026-05 才公开，因而如果检索关键词是“一次性 MLP 权重”，MiTA 更早且更直接命中这种说法。
 
 ## 1. 核心数学观察：Self-Attention 相当于 Fast-Weight MLP
 
-令一个 query 为 \(q\in\mathbb R^d\)，序列的 Key/Value 按列排成 \(K,V\in\mathbb R^{d\times N}\)。标准注意力：
+令一个 query 为 $q\in\mathbb R^d$，序列的 Key/Value 按列排成 $K,V\in\mathbb R^{d\times N}$。标准注意力：
 
-\[
+$$
 \operatorname{Attn}(q,K,V)
 =V\,\operatorname{softmax}\!\left(K^\top q/\sqrt d\right).
-\]
+$$
+
+**通俗解释：** 一个 Query 与所有 Key 比相似度，再用归一化权重混合对应的 Value；成本随参与比较的 token 数增长。
 
 普通两层 MLP 写成：
 
-\[
+$$
 \operatorname{MLP}_\sigma(x)
 =W_2\,\sigma(W_1^\top x+b_1)+b_2.
-\]
+$$
+
+**通俗解释：** 普通两层 MLP 先线性映射、过非线性函数，再线性映射；作者用它来类比注意力中的临时权重。
 
 将 Attention 的 Softmax 归一化展开：
 
-\[
+$$
 \operatorname{Attn}(q,K,V)
 =
 \underbrace{\frac{V}{\sum_{j=1}^N
@@ -62,14 +66,16 @@ tags:
 \exp\!\left(
 \underbrace{K^\top/\sqrt d}_{\widehat K^\top}
 q\right).
-\]
+$$
 
-此时类似一个两层网络：输入是 \(q\)，第一层权重来自 \(K\)，第二层权重来自 \(V\)，隐藏单元数是 \(N\)，非线性可写为指数函数。
+**通俗解释：** 把 Softmax 的分母显式写出来后，可把注意力看成以全部 Key 作为第一层权重、以 Value 作为第二层权重的动态网络。
+
+此时类似一个两层网络：输入是 $q$，第一层权重来自 $K$，第二层权重来自 $V$，隐藏单元数是 $N$，非线性可写为指数函数。
 
 > [!important] 等价关系的严格边界
-> \(\widehat V(q)\) 含有 Softmax 分母，因此**会依赖当前 query**。若不吸收分母，则非线性应理解为跨隐藏单元耦合的 Softmax，而不是普通逐元素激活。这是对 Attention 运算的一种代数重写，不应误写为“存在一套不依赖 query 的普通固定 ReLU-MLP 参数使两者恒等”。“一次性”只表示 Key/Value 形成的有效权重随当前上下文而变；长期训练参数 \(W_Q,W_K,W_V\) 仍然共享且持续存在。
+> $\widehat V(q)$ 含有 Softmax 分母，因此**会依赖当前 query**。若不吸收分母，则非线性应理解为跨隐藏单元耦合的 Softmax，而不是普通逐元素激活。这是对 Attention 运算的一种代数重写，不应误写为“存在一套不依赖 query 的普通固定 ReLU-MLP 参数使两者恒等”。“一次性”只表示 Key/Value 形成的有效权重随当前上下文而变；长期训练参数 $W_Q,W_K,W_V$ 仍然共享且持续存在。
 >
-> 对所有 \(N\) 个 query 运行上述 \(N\)-宽度网络，仍需 \(O(N^2d)\) 量级计算。**仅把 Attention 称作 MLP 不会自动降低复杂度。**
+> 对所有 $N$ 个 query 运行上述 $N$-宽度网络，仍需 $O(N^2d)$ 量级计算。**仅把 Attention 称作 MLP 不会自动降低复杂度。**
 
 ## 2. 五维 Fast-Weight Scaling 分类
 
@@ -78,110 +84,128 @@ q\right).
 | 维度 | 要回答的问题 | 代表取值 |
 |---|---|---|
 | Scaling strategy | 通过什么降低动态权重开销？ | Compression、Routing、两者组合 |
-| Expert count | 需要多少组可重用快权重？ | 1、\(m\)、\(N\) |
+| Expert count | 需要多少组可重用快权重？ | 1、$m$、$N$ |
 | Expert type | 每组快权重对应什么计算模块？ | Linear、MLP、任意状态更新模块 |
 | Expert construction | 如何从原始 Key/Value 构造专家？ | 核化、投影、空间局部块、内容检索、test-time training |
-| Routing topology | 原始 query 与专家如何连边？ | 全部共享、块级路由、逐 query 路由、\(N\)-to-\(m\) |
+| Routing topology | 原始 query 与专家如何连边？ | 全部共享、块级路由、逐 query 路由、$N$-to-$m$ |
 
 ### Compression（压缩）
 
-例如 Linear Attention / Agent Attention / Linformer：不让每个 query 访问全部 \(N\) 对 Key/Value，而是把上下文表示为小尺寸的全局模块。优点是全局统计保留且查询成本低；问题是可能丢掉细节，尤其是少数重要 token。
+例如 Linear Attention / Agent Attention / Linformer：不让每个 query 访问全部 $N$ 对 Key/Value，而是把上下文表示为小尺寸的全局模块。优点是全局统计保留且查询成本低；问题是可能丢掉细节，尤其是少数重要 token。
 
 ### Routing（路由）
 
 例如 MoBA、窗口化 Sparse Attention、per-query Top-k Attention：只允许 query 读取被选中的原始 Key/Value。优点是保留被访问 token 的精细原值；局限是只访问局部子集，可能缺少全局摘要。此外：
 
 - 固定连续块（rigid block expert）依赖位置先验，不一定与语义相关。
-- 每个 query 都单独从全体 \(N\) 个 token 计算 Top-k，虽然最终只读取 \(k\) 个，预筛选仍可能昂贵，并产生 \(N\) 套很难复用的索引。
+- 每个 query 都单独从全体 $N$ 个 token 计算 Top-k，虽然最终只读取 $k$ 个，预筛选仍可能昂贵，并产生 $N$ 套很难复用的索引。
 
 ### MiTA 的组合动机
 
-用 \(m\ll N\) 个 Landmark Query 建立**可复用、内容相关的 Top-k 专家**，又始终给每个 query 提供压缩后的全局信息，组合两个策略的优点。
+用 $m\ll N$ 个 Landmark Query 建立**可复用、内容相关的 Top-k 专家**，又始终给每个 query 提供压缩后的全局信息，组合两个策略的优点。
 
 ![论文中图1：Fast-Weight 扩展与 Routing、Compression 两条路线](https://arxiv.org/html/2602.01219v6/fast_weight_scaling_v5.png)
 
-*论文中图 1：原始全注意力产生宽度随 \(N\) 增长的动态网络；图右表示按块 Routing（MoBA）与共享模块 Compression（TTT）的两种扩展方法。图片直接引用 arXiv 原图。*
+*论文中图 1：原始全注意力产生宽度随 $N$ 增长的动态网络；图右表示按块 Routing（MoBA）与共享模块 Compression（TTT）的两种扩展方法。图片直接引用 arXiv 原图。*
 
 ## 3. MiTA 算法：Landmark、共享专家、可变形专家
 
-设原始输入长度为 \(N\)，Landmark Query 数为 \(m\)，每个专家包含 \(k\) 对原始 Key/Value，某 query 访问 \(s\) 个稀疏专家。
+设原始输入长度为 $N$，Landmark Query 数为 $m$，每个专家包含 $k$ 对原始 Key/Value，某 query 访问 $s$ 个稀疏专家。
 
 ### Step 1：从 Query 提取 Landmark Queries
 
 在视觉任务上，沿空间均匀划分窗口，对 Query 做平均池化：
 
-\[
+$$
 \widetilde Q=\operatorname{AdaptiveAvgPool}(Q,m)
 \in\mathbb R^{d\times m}.
-\]
+$$
+
+**通俗解释：** Landmark Query 是少量区域的平均表示：用 m 个代表性‘提问’代替每个位置都独立做全局搜索。
 
 每个 Landmark Query 是对一个原始区域的粗汇总，但随后检索到的 Key/Value **不受该区域限制**；这正是专家“可变形”（Deformable）的含义。
 
 ### Step 2：每个 Landmark 在全局 Key 中检索 Top-k
 
-\[
+$$
 S=K^\top\widetilde Q/\sqrt d
 \in\mathbb R^{N\times m},
 \qquad
 I_i=\operatorname{TopK}(S_{:,i},k).
-\]
+$$
 
-对第 \(i\) 个 Landmark：
+**通俗解释：** 每个 Landmark 与全部 Key 比分，选出得分最高的 k 个索引；这些索引指出它最想读取的原始位置。
 
-\[
+对第 $i$ 个 Landmark：
+
+$$
 K^{(i)}=K_{:,I_i},\qquad
 V^{(i)}=V_{:,I_i}\in\mathbb R^{d\times k}.
-\]
+$$
 
-共得到 \(m\) 个内容依赖的 Top-k 专家。与给每个原始 query 建一组 Top-k 不同，**这个 Top-k 集合由多个 query 共享**；所建专家数从 \(N\) 缩为 \(m\)。
+**通俗解释：** 依照刚才选出的索引，取出对应的 Key 和 Value，组成一个可由多个 Query 复用的稀疏专家。
+
+共得到 $m$ 个内容依赖的 Top-k 专家。与给每个原始 query 建一组 Top-k 不同，**这个 Top-k 集合由多个 query 共享**；所建专家数从 $N$ 缩为 $m$。
 
 ### Step 3：Landmark 同时压缩全局信息
 
 每个 Landmark 对全部 Key/Value 做 Cross-Attention：
 
-\[
+$$
 \widetilde v_i
 =\operatorname{Attn}(\widetilde q_i,K,V).
-\]
+$$
+
+**通俗解释：** 每个 Landmark 先阅读全局信息，生成一个浓缩的 Value，用于后面廉价地提供全局背景。
 
 共享专家使用：
 
-\[
+$$
 \widetilde{\mathcal E}(q)
 =\operatorname{Attn}(q,\widetilde Q,\widetilde V).
-\]
+$$
 
-这里 \(\widetilde Q\) 在最终注意力中充当**压缩后的 Key**，\(\widetilde V\) 充当压缩后的 Value。计算 Landmark 对全部 Key 的相似度可以复用 Step 2 中的 \(S\)。
+**通俗解释：** 最终 Query 可以从少量 Landmark 的汇总结果读取全局信息，不必重新访问所有原始 token。
 
-### Step 4：每个原始 Query 选择 \(s\) 个稀疏专家
+这里 $\widetilde Q$ 在最终注意力中充当**压缩后的 Key**，$\widetilde V$ 充当压缩后的 Value。计算 Landmark 对全部 Key 的相似度可以复用 Step 2 中的 $S$。
 
-对 query \(q\)，用 \(q^\top\widetilde Q\) 作为 Router 的 logits。记其 Top-s 个专家编号为 \(e_1(q),\ldots,e_s(q)\)。
+### Step 4：每个原始 Query 选择 $s$ 个稀疏专家
+
+对 query $q$，用 $q^\top\widetilde Q$ 作为 Router 的 logits。记其 Top-s 个专家编号为 $e_1(q),\ldots,e_s(q)$。
 
 最终构造：
 
-\[
+$$
 K^*=[\widetilde Q,\ K^{(e_1(q))},\ldots,K^{(e_s(q))}],
-\]
+$$
 
-\[
+**通俗解释：** 把压缩后的全局 Key 与选中的稀疏 Key 拼接，构成当前 Query 实际要访问的 Key 集合。
+
+$$
 V^*=[\widetilde V,\ V^{(e_1(q))},\ldots,V^{(e_s(q))}],
-\]
+$$
 
-\[
+**通俗解释：** Value 也用相同顺序拼接，确保每个被选中的 Key 都对应正确的内容。
+
+$$
 \boxed{
 \operatorname{MiTA}(q)
 =
 \operatorname{Attn}(q,K^*,V^*)
 }.
-\]
+$$
+
+**通俗解释：** 最终仍执行一次标准的注意力归一化，只不过输入换成了共享全局摘要和少量稀疏原始位置。
 
 所以一个 query 实际只访问：
 
-\[
+$$
 \boxed{m+ks\ \text{对 Key/Value}}
-\]
+$$
 
-而不是全部 \(N\) 对。**作者不是先分别计算共享专家和稀疏专家的独立输出再简单平均**，而是将两组 Key/Value 拼接，在同一 Softmax 中进行最终注意力；实现时可利用 online Softmax 和 FlashAttention 分开计算后精确合成。
+**通俗解释：** 每个 Query 只需访问 m 个全局摘要以及 s 组各 k 个原始 Key–Value；因此访问量从 N 降为 m+ks。
+
+而不是全部 $N$ 对。**作者不是先分别计算共享专家和稀疏专家的独立输出再简单平均**，而是将两组 Key/Value 拼接，在同一 Softmax 中进行最终注意力；实现时可利用 online Softmax 和 FlashAttention 分开计算后精确合成。
 
 ![MiTA 方法概览：官方仓库图](https://raw.githubusercontent.com/QishuaiWen/MiTA/main/figures/mita.png)
 
@@ -191,23 +215,25 @@ V^*=[\widetilde V,\ V^{(e_1(q))},\ldots,V^{(e_s(q))}],
 
 ImageNet-1K 分类中，作者选取：
 
-\[
+$$
 m=25,\quad k=25,\quad s=1.
-\]
+$$
 
-224×224 输入、16×16 Patch 大致对应 \(N=196\) 个 patch token，每个 query 只访问 \(25+25=50\) 对。语义分割采用 \(m=k=49\)，每个 query 读取 98 对，显著少于完整注意力的 1024 或 1600 对。长序列 LRA 任务采用 \(m=k=128,s=1\)，每个 query 读取 256 对。
+**通俗解释：** 这个实验设置用 25 个 Landmark、每组检索 25 个位置，并给每个 Query 分配 1 组稀疏专家。
+
+224×224 输入、16×16 Patch 大致对应 $N=196$ 个 patch token，每个 query 只访问 $25+25=50$ 对。语义分割采用 $m=k=49$，每个 query 读取 98 对，显著少于完整注意力的 1024 或 1600 对。长序列 LRA 任务采用 $m=k=128,s=1$，每个 query 读取 256 对。
 
 ### 复杂度和实现瓶颈
 
-固定 \(m,k,s\) 时：
+固定 $m,k,s$ 时：
 
-- Landmark 检索/全局压缩：\(O(Nmd)\)；
-- 每个原始 query 的共享专家 + 路由专家注意力：\(O(N(m+ks)d)\)；
+- Landmark 检索/全局压缩：$O(Nmd)$；
+- 每个原始 query 的共享专家 + 路由专家注意力：$O(N(m+ks)d)$；
 - Router 查询匹配与 Top-k 索引还涉及排序、gather 与内存访问。
 
-因此随着 \(N\) 增长，这些主体算术运算关于 \(N\) 近似线性。**不能忽略 Landmark 对全体 token 的 \(Nm\) 次筛选，也不能假设 \(m,k\) 随 \(N\) 增大时仍严格线性。** 论文明确指出随机 gather 的访存可能使实现变成 memory-bound；为了加速，将 query 按专家编号分组，执行变长批次 FlashAttention。
+因此随着 $N$ 增长，这些主体算术运算关于 $N$ 近似线性。**不能忽略 Landmark 对全体 token 的 $Nm$ 次筛选，也不能假设 $m,k$ 随 $N$ 增大时仍严格线性。** 论文明确指出随机 gather 的访存可能使实现变成 memory-bound；为了加速，将 query 按专家编号分组，执行变长批次 FlashAttention。
 
-论文当前主要实现 \(s=1\)；任一 query 都访问共享专家 + 一个稀疏专家，\(s>1\) 是架构允许、但没有充分实证覆盖的扩展。
+论文当前主要实现 $s=1$；任一 query 都访问共享专家 + 一个稀疏专家，$s>1$ 是架构允许、但没有充分实证覆盖的扩展。
 
 ## 4. 实验配置与主要结果
 
@@ -267,13 +293,13 @@ Long Range Arena 含 ListOps（2K）、Text（4K）、Retrieval（4K）、Image�
 | Compression + Routing（默认） | **71.1%** |
 | 只有 Compression | 70.3% |
 | 只有 Routing | 70.8% |
-| \(m=16,k=16\) | 70.0% |
-| \(m=25,k=25\)（默认） | 71.1% |
-| \(m=25,k=36\) | **71.7%** |
-| \(m=36,k=25\) | 71.2% |
-| \(m=36,k=36\) | **71.7%** |
+| $m=16,k=16$ | 70.0% |
+| $m=25,k=25$（默认） | 71.1% |
+| $m=25,k=36$ | **71.7%** |
+| $m=36,k=25$ | 71.2% |
+| $m=36,k=36$ | **71.7%** |
 
-作者认为路由分支比压缩分支更关键：相对压缩-only，路由-only 有较高准确率；但两者结合又优于单独使用一种。提高 \(k\) 的增益通常高于等量提高 \(m\)，支持先确定 \(mk/N\) 的预算，再探索 \(k>m\) 的建议。
+作者认为路由分支比压缩分支更关键：相对压缩-only，路由-only 有较高准确率；但两者结合又优于单独使用一种。提高 $k$ 的增益通常高于等量提高 $m$，支持先确定 $mk/N$ 的预算，再探索 $k>m$ 的建议。
 
 Landmark 选择方式：2D 平均池化（71.1%）优于随机选择（70.6%）、可学习参数（66.3%）和卷积（67.0%）；Token Merging（ToMe）略高（71.3%），但会增加实现复杂性与预处理成本。
 
@@ -293,13 +319,13 @@ Landmark 选择方式：2D 平均池化（71.1%）优于随机选择（70.6%）�
 
 1. 在 Fast-Weight 视角下，用五维分类统一组织 Routing、Compression 及其混合的高效注意力。
 2. 将固定块专家替换为 Landmark 通过全局 Key 评分产生的 **Query-aware deformable Top-k 专家**。
-3. 使 Top-k KV 集合由 \(N\) 个 query 独有变成 \(m\) 个专家共享，同时始终保留全局压缩分支。
+3. 使 Top-k KV 集合由 $N$ 个 query 独有变成 $m$ 个专家共享，同时始终保留全局压缩分支。
 4. 给出具体 FlashAttention/online Softmax 实现与 ImageNet、ADE20K、LRA 的实证，并考察隐式剪枝与算法替换的泛化。
 
 ### 不应该过度解读的结论
 
 - **不是“标准注意力完全被证明多余”。** MiTA 依然在两个分支上运行注意力，其输出仍由 Query–Key 相似度控制；只是访问更少 Key/Value。
-- **不是无条件线性。** Landmark–全序列评分需要 \(Nm\) 次点积，最终访问 \(m+ks\) 对；只有当 \(m,k,s\) 受控时才具备所述规模优势。
+- **不是无条件线性。** Landmark–全序列评分需要 $Nm$ 次点积，最终访问 $m+ks$ 对；只有当 $m,k,s$ 受控时才具备所述规模优势。
 - **不是任意任务的精确替代。** MiTA 近似完整 Attention 的信息访问；ImageNet 原生模型、语义分割和微调实验里确有可观测的准确率损失。
 - **存在不规则内存访问。** Top-k gather、Expert 分组、长度不同的 FlashAttention 与分支合并会产生实际开销，算术 FLOPs 不能完全代表训练/推理速度。
 - **没有大语言模型逐 token decoding 实验。** 论文在 Limitations 中明确指出计算预算限制了 LLM decode 阶段验证。
