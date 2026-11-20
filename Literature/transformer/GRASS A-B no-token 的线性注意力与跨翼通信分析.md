@@ -36,19 +36,27 @@ tags: [neural-operator, linear-attention, cross-wing-interaction, rank, GRASS]
 
 聚合与回传：
 
-$$T=D^{-1}S^T A_a X,\qquad Y=S\,\mathrm{ChannelMap}(T).$$
+$$
+T=D^{-1}S^T A_a X,\qquad Y=S\,\mathrm{ChannelMap}(T).
+$$
 
 源码中的 value 投影、token_map、output 投影都是通道方向仿射变换，不混合不同 slice。把它们合并，含多头及偏置的精确表达为：
 
-$$Y=\sum_h K_h(X)X M_h+\mathbf1 b^T,\qquad K_h=S_hD_h^{-1}S_h^T A_a.$$
+$$
+Y=\sum_h K_h(X)X M_h+\mathbf1 b^T,\qquad K_h=S_hD_h^{-1}S_h^T A_a.
+$$
 
 这里 M_h 是各通道矩阵的乘积。token_map 可以吸收到每头 value 投影，偏置同步合并；这保持前向函数，却不保证优化轨迹、正则化或训练速度相同。
 
 ### 冻结当前路由后的空间核性质
 
-$$\operatorname{rank}(K_h)\le m,\quad K_h\mathbf1=\mathbf1,\quad a^TK_h=a^T,$$
+$$
+\operatorname{rank}(K_h)\le m,\quad K_h\mathbf1=\mathbf1,\quad a^TK_h=a^T,
+$$
 
-$$A_aK_h=(A_aS_h)D_h^{-1}(A_aS_h)^T\succeq0.$$
+$$
+A_aK_h=(A_aS_h)D_h^{-1}(A_aS_h)^T\succeq0.
+$$
 
 因此 a_i K_ij=a_j K_ji；A_a^{1/2}K_hA_a^{-1/2} 为半正定对称矩阵。这个共享读写的核具有面积加权平均性质，但通常不是幂等投影。
 
@@ -58,7 +66,9 @@ $$A_aK_h=(A_aS_h)D_h^{-1}(A_aS_h)^T\succeq0.$$
 
 按翼将 S 分块为 S_1,…,S_W。第 v 翼到第 u 翼的混合核为：
 
-$$K_{uv}=S_uD_G^{-1}S_v^TA_v,\qquad D_G=\sum_w\operatorname{diag}(S_w^Ta_w).$$
+$$
+K_{uv}=S_uD_G^{-1}S_v^TA_v,\qquad D_G=\sum_w\operatorname{diag}(S_w^Ta_w).
+$$
 
 通常 K_uv 非零，且不同接收面元有不同的行。全局每个 slice 的平均，等于各翼同编号局部 slice 平均按其 slice 面积质量加权后的结果。删除 slice-token 自注意力，并未删除这种跨翼聚合。
 
@@ -66,7 +76,9 @@ $$K_{uv}=S_uD_G^{-1}S_v^TA_v,\qquad D_G=\sum_w\operatorname{diag}(S_w^Ta_w).$$
 
 每片翼先运行共享参数的完整局部 MeshBlock（包括注意力、残差与逐点前馈）：
 
-$$\widetilde H_w=F(H_w).$$
+$$
+\widetilde H_w=F(H_w).
+$$
 
 各翼局部注意力核都是 S_w D_w^{-1}S_w^T A_w；在全机面元空间上，这一阶段是块对角通信。
 
@@ -74,11 +86,17 @@ $$\widetilde H_w=F(H_w).$$
 
 源码先形成 U=P Htilde，每翼只有一个 d 维向量。随后：
 
-$$L(U)=L_0+\operatorname{MHA}(\operatorname{LN}_lL_0,\operatorname{LN}_sU,\operatorname{LN}_sU),$$
+$$
+L(U)=L_0+\operatorname{MHA}(\operatorname{LN}_lL_0,\operatorname{LN}_sU,\operatorname{LN}_sU),
+$$
 
-$$C(U)=U+\operatorname{MHA}(\operatorname{LN}_sU,\operatorname{LN}_lL(U),\operatorname{LN}_lL(U)),$$
+$$
+C(U)=U+\operatorname{MHA}(\operatorname{LN}_sU,\operatorname{LN}_lL(U),\operatorname{LN}_lL(U)),
+$$
 
-$$\boxed{H_B^+=F_{local}(H)+R\,C(PF_{local}(H)).}$$
+$$
+\boxed{H_B^+=F_{local}(H)+R\,C(PF_{local}(H)).}
+$$
 
 MHA 是 Multi-Head Attention（多头注意力）。L_0 是默认8个可学习 latent。B no-token 仍保留上述两次跨翼 MHA；no-token 只作用于翼内 slice-token 自注意力。
 
@@ -98,9 +116,13 @@ B 跨翼模块接收的总信息只有 Wd 个标量。8个latent是在每翼压�
 
 固定面积及分组，对 u≠v，记 p_v 为第v翼归一化面积向量：
 
-$$J^B_{u\leftarrow v}=(\mathbf1_{N_u}\otimes I_d)\frac{\partial C_u}{\partial U_v}(p_v^T\otimes I_d)J_{F_v},$$
+$$
+J^B_{u\leftarrow v}=(\mathbf1_{N_u}\otimes I_d)\frac{\partial C_u}{\partial U_v}(p_v^T\otimes I_d)J_{F_v},
+$$
 
-$$\boxed{\operatorname{rank}(J^B_{u\leftarrow v})\le d.}$$
+$$
+\boxed{\operatorname{rank}(J^B_{u\leftarrow v})\le d.}
+$$
 
 这包括 B 一个完整局部层后的全局交换，且是单层边界处的结论。它不是“秩为1”，不是多层网络的深度无关上界，也不是对全部几何变量端到端 Jacobian 的无条件声明。真实几何变化还会改变面积、输入编码和各层状态。
 
@@ -126,7 +148,9 @@ GRASS B 的第一次读取确实使用固定 L_0；但第二次注意力的 key/
 
 用两个翼各两个点，面积全为1，固定路由：
 
-$$S=\begin{bmatrix}.9&.1\\.1&.9\\.9&.1\\.1&.9\end{bmatrix},\quad v=(0,0,1,-1)^T.$$
+$$
+S=\begin{bmatrix}.9&.1\\.1&.9\\.9&.1\\.1&.9\end{bmatrix},\quad v=(0,0,1,-1)^T.
+$$
 
 A 的 K=SS^T/2 给第一个翼的输出 (0.32,-0.32)。第二个翼的均值是0，但不同位置的正负扰动仍通过不同 slice 传给第一个翼。
 
