@@ -12,7 +12,7 @@ FENCE = re.compile(r"^\s*(?:>\s*)?(\x60{3,}|~{3,})")
 BAD_INLINE = re.compile(r"(?<!\\)\\\(")
 BAD_DISPLAY = re.compile(r"(?<!\\)\\\[")
 BARE_ENV = re.compile(r"\\begin\{(?:equation|align|gather|multline)\*?\}")
-CURRENCY = re.compile(r"(?<!\\)\$\d+(?:\.\d+)?(?=\s|$|[,，。.;；|])")
+CURRENCY = re.compile(r"(?<!\\)\$\d+(?:\.\d+)?(?![\d.])(?=\s|$|[,，。.;；|])")
 BACKTICKS = re.compile(r"\x60+[^\x60\n]*\x60+")
 DOLLARS = re.compile(r"(?<!\\)\$")
 
@@ -66,8 +66,11 @@ def inspect(path: Path) -> tuple[list[str], int]:
         if BARE_ENV.search(line):
             errors.append(f"{path}:{number}: LaTeX 数学环境应放进独立的 $$ 公式块")
         # Do not interpret ordinary dollar amounts (e.g. $1.87) as math delimiters.
-        without_currency = CURRENCY.sub("", line)
-        if len(DOLLARS.findall(without_currency)) % 2:
+        dollar_count = len(DOLLARS.findall(line))
+        # A numeric math formula such as $2.5^\\circ$ is NOT a price.
+        # Only disregard an unpaired dollar when the entire token is a price.
+        is_currency = dollar_count == 1 and bool(CURRENCY.search(line))
+        if dollar_count % 2 and not is_currency:
             errors.append(f"{path}:{number}: 行内 $ 分隔符数量不成对")
 
     if in_display:
